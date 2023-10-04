@@ -15,11 +15,15 @@ public class contratoAlquiler {
     private LocalDate fechaInicio;
     private LocalDate fechaRealizacion;
     private final String marca = "La43";
-    private int idVendedor;
+    private Vendedor idVendedor;
     
     public contratoAlquiler(){};
 
-    public contratoAlquiler(Inquilino idInquilino, PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, LocalDate fechaInicio, LocalDate fechaRealizacion, int idVendedor) {
+    public contratoAlquiler(Inquilino idInquilino, 
+            PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, 
+            LocalDate fechaInicio, LocalDate fechaRealizacion, 
+            Vendedor idVendedor) {
+        
         this.idInquilino = idInquilino;
         this.idPropiedadInmueble = idPropiedadInmueble;
         this.fechaFinal = fechaFinal;
@@ -28,6 +32,21 @@ public class contratoAlquiler {
         this.idVendedor = idVendedor;
     }
 
+    public contratoAlquiler(int idContratoAlquiler, Inquilino idInquilino, 
+            PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, 
+            LocalDate fechaInicio, LocalDate fechaRealizacion, 
+            Vendedor idVendedor) {
+        
+        this.idContratoAlquiler = idContratoAlquiler;
+        this.idInquilino = idInquilino;
+        this.idPropiedadInmueble = idPropiedadInmueble;
+        this.fechaFinal = fechaFinal;
+        this.fechaInicio = fechaInicio;
+        this.fechaRealizacion = fechaRealizacion;
+        this.idVendedor = idVendedor;
+    }
+
+    
     public int getIdContratoAlquiler() {
         return idContratoAlquiler;
     }
@@ -76,11 +95,11 @@ public class contratoAlquiler {
         this.fechaRealizacion = fechaRealizacion;
     }
 
-    public int getIdVendedor() {
+    public Vendedor getIdVendedor() {
         return idVendedor;
     }
 
-    public void setIdVendedor(int idVendedor) {
+    public void setIdVendedor(Vendedor idVendedor) {
         this.idVendedor = idVendedor;
     }
 
