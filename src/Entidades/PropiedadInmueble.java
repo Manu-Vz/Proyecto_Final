@@ -9,6 +9,6 @@ package Entidades;
  *
  * @author manuv
  */
-public class propiedadData {
+public class PropiedadInmueble {
     
 }
