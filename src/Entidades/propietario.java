@@ -10,13 +10,17 @@ package Entidades;
  * @author pcdlc
  */
 public class propietario {
-  
+  private int idpropetario;
    private String nombre;
    private String apellido;
     private int dni;
     private String domicilio;
    private int telefono;
     
+   
+   public propietario(){
+       
+   }
     
     public propietario (String nombre, String apellido, int dni, int telefono){
         
@@ -24,6 +28,24 @@ public class propietario {
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
+        this.domicilio = domicilio;
+    }
+    
+    public propietario (int idPropetario , String nombre, String apellido, int dni, int telefono){
+       this.idpropetario = idpropetario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.domicilio = domicilio;
+    }
+
+    public int getIdpropetario() {
+        return idpropetario;
+    }
+
+    public void setIdpropetario(int idpropetario) {
+        this.idpropetario = idpropetario;
     }
 
     public String getNombre() {
@@ -66,6 +88,13 @@ public class propietario {
         this.telefono = telefono;
     }
     
-}
     
+    
+    
+
+ @Override
+public String toString() {
+    return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + "]";
+} 
+}
     
