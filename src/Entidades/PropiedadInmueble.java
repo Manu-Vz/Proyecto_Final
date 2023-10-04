@@ -11,7 +11,7 @@ package Entidades;
  */
 public class PropiedadInmueble {
     private int idPropiedadInmueble;
-    private propietario propietario;
+    private Propietario propietario;
     private String accedibilidad;
     private String caracteristicasString;
     private String direccion;
@@ -24,7 +24,7 @@ public class PropiedadInmueble {
     
     public PropiedadInmueble(){}
 
-    public PropiedadInmueble(propietario propietario, String accedibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
+    public PropiedadInmueble(Propietario propietario, String accedibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
         this.propietario = propietario;
         this.accedibilidad = accedibilidad;
         this.caracteristicasString = caracteristicasString;
@@ -37,7 +37,7 @@ public class PropiedadInmueble {
         this.disponibilidad = disponibilidad;
     }
 
-    public PropiedadInmueble(int idPropiedadInmueble, propietario propietario, String accedibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
+    public PropiedadInmueble(int idPropiedadInmueble, Propietario propietario, String accedibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
         this.idPropiedadInmueble = idPropiedadInmueble;
         this.propietario = propietario;
         this.accedibilidad = accedibilidad;
@@ -59,11 +59,11 @@ public class PropiedadInmueble {
         this.idPropiedadInmueble = idPropiedadInmueble;
     }
 
-    public propietario getPropietario() {
+    public Propietario getPropietario() {
         return propietario;
     }
 
-    public void setPropietario(propietario propietario) {
+    public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
 
