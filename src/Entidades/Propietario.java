@@ -9,8 +9,8 @@ package Entidades;
  *
  * @author pcdlc
  */
-public class propietario {
-  private int idpropetario;
+public class Propietario {
+  private int idPropietario;
    private String nombre;
    private String apellido;
     private int dni;
@@ -18,11 +18,11 @@ public class propietario {
    private int telefono;
     
    
-   public propietario(){
+   public Propietario(){
        
    }
     
-    public propietario (String nombre, String apellido, int dni, int telefono){
+    public Propietario (String nombre, String apellido, int dni, int telefono){
         
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,8 +31,8 @@ public class propietario {
         this.domicilio = domicilio;
     }
     
-    public propietario (int idPropetario , String nombre, String apellido, int dni, int telefono){
-       this.idpropetario = idpropetario;
+    public Propietario (int idPropetario , String nombre, String apellido, int dni, int telefono){
+       this.idPropietario = idPropietario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -41,11 +41,11 @@ public class propietario {
     }
 
     public int getIdpropetario() {
-        return idpropetario;
+        return idPropietario;
     }
 
     public void setIdpropetario(int idpropetario) {
-        this.idpropetario = idpropetario;
+        this.idPropietario = idPropietario;
     }
 
     public String getNombre() {
