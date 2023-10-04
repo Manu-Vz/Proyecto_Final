@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class contratoAlquiler {
     private int idContratoAlquiler;
-    private int idInquilino;
+    private Inquilino idInquilino;
     private PropiedadInmueble idPropiedadInmueble;
     private LocalDate fechaFinal;
     private LocalDate fechaInicio;
@@ -19,7 +19,7 @@ public class contratoAlquiler {
     
     public contratoAlquiler(){};
 
-    public contratoAlquiler(int idInquilino, PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, LocalDate fechaInicio, LocalDate fechaRealizacion, int idVendedor) {
+    public contratoAlquiler(Inquilino idInquilino, PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, LocalDate fechaInicio, LocalDate fechaRealizacion, int idVendedor) {
         this.idInquilino = idInquilino;
         this.idPropiedadInmueble = idPropiedadInmueble;
         this.fechaFinal = fechaFinal;
@@ -36,11 +36,11 @@ public class contratoAlquiler {
         this.idContratoAlquiler = idContratoAlquiler;
     }
 
-    public int getIdInquilino() {
+    public Inquilino getIdInquilino() {
         return idInquilino;
     }
 
-    public void setIdInquilino(int idInquilino) {
+    public void setIdInquilino(Inquilino idInquilino) {
         this.idInquilino = idInquilino;
     }
 
