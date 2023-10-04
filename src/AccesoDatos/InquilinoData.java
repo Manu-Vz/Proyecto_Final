@@ -99,7 +99,7 @@ public class InquilinoData {
         }
         
         
-        return null;
+        return listado;
     }
     
 }
