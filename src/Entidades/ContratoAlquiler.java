@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * @author manuv
  */
 
-public class ContratoAlquiler {
+public class contratoAlquiler {
     private int idContratoAlquiler;
     private Inquilino idInquilino;
     private PropiedadInmueble idPropiedadInmueble;
@@ -17,9 +17,9 @@ public class ContratoAlquiler {
     private final String marca = "La43";
     private Vendedor idVendedor;
     
-    public ContratoAlquiler(){};
+    public contratoAlquiler(){};
 
-    public ContratoAlquiler(Inquilino idInquilino, 
+    public contratoAlquiler(Inquilino idInquilino, 
             PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, 
             LocalDate fechaInicio, LocalDate fechaRealizacion, 
             Vendedor idVendedor) {
@@ -32,7 +32,7 @@ public class ContratoAlquiler {
         this.idVendedor = idVendedor;
     }
 
-    public ContratoAlquiler(int idContratoAlquiler, Inquilino idInquilino, 
+    public contratoAlquiler(int idContratoAlquiler, Inquilino idInquilino, 
             PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, 
             LocalDate fechaInicio, LocalDate fechaRealizacion, 
             Vendedor idVendedor) {
