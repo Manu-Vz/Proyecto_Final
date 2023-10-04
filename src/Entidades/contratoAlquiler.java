@@ -83,5 +83,10 @@ public class contratoAlquiler {
     public void setIdVendedor(int idVendedor) {
         this.idVendedor = idVendedor;
     }
+
+    @Override
+    public String toString() {
+        return "contratoAlquiler{" + "idContratoAlquiler=" + idContratoAlquiler + ", idInquilino=" + idInquilino + ", idPropiedadInmueble=" + idPropiedadInmueble + ", fechaFinal=" + fechaFinal + ", fechaInicio=" + fechaInicio + ", fechaRealizacion=" + fechaRealizacion + ", marca=" + marca + ", idVendedor=" + idVendedor + '}';
+    }
     
 }
