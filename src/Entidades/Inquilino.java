@@ -10,7 +10,7 @@ package Entidades;
  */
 public class Inquilino {
     private int idInquilino;
-    private int cuit;
+    private String cuit;
     private String nombre;
     private String apellido;
     private String lugarTrabajo;
@@ -20,7 +20,7 @@ public class Inquilino {
     public Inquilino() {
     }
 
-    public Inquilino(int cuit, String nombre, String apellido, String lugarTrabajo, int dniGarante, String nombreGarante) {
+    public Inquilino(String cuit, String nombre, String apellido, String lugarTrabajo, int dniGarante, String nombreGarante) {
         this.cuit = cuit;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -29,7 +29,7 @@ public class Inquilino {
         this.nombreGarante = nombreGarante;
     }
 
-    public Inquilino(int idInquilino, int cuit, String nombre, String apellido, String lugarTrabajo, int dniGarante, String nombreGarante) {
+    public Inquilino(int idInquilino, String cuit, String nombre, String apellido, String lugarTrabajo, int dniGarante, String nombreGarante) {
         this.idInquilino = idInquilino;
         this.cuit = cuit;
         this.nombre = nombre;
@@ -47,11 +47,11 @@ public class Inquilino {
         this.idInquilino = idInquilino;
     }
 
-    public int getCuit() {
+    public String getCuit() {
         return cuit;
     }
 
-    public void setCuit(int cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
 
