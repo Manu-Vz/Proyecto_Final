@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Entidades;
-import java.util.ArrayList;
+
 /**
  *
  * @author pcdlc
@@ -16,17 +16,14 @@ public class propietario {
     private int dni;
     private String domicilio;
    private int telefono;
-    private ArrayList<String> nombresLocales;
     
-    public propietario (String nombre, String apellido, String dni, String telefono){
+    
+    public propietario (String nombre, String apellido, int dni, int telefono){
         
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
-        this.nombresLocales = new ArrayList<>(); 
-        
-    
     }
 
     public String getNombre() {
@@ -45,11 +42,11 @@ public class propietario {
         this.apellido = apellido;
     }
 
-    public int getDNI() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDNI(int dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -68,20 +65,7 @@ public class propietario {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
-
-    public ArrayList<String> getNombresLocales() {
-        return nombresLocales;
-    }
-
-    public void setNombresLocales(ArrayList<String> nombresLocales) {
-        this.nombresLocales = nombresLocales;
-    }
     
-   @Override
-    public String toString() {
-        return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono="
-                + telefono + ", nombresLocales=" + nombresLocales + "]"; {
-        
-    }
+}
     
-
+    
