@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author manuv
+ * @author Abel
  */
 public class InquilinoData {
     
@@ -100,6 +100,30 @@ public class InquilinoData {
         
         
         return listado;
+    }
+    
+    
+    public Inquilino buscoInquilino(int id){
+        Inquilino inq=new Inquilino();
+        String sql="SELECT * FROM inquilino WHERE idInquilino=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+               inq.setIdInquilino(rs.getInt(1));
+               inq.setCuit(rs.getString("cuit"));
+               inq.setNombre(rs.getString("nonbre"));
+               inq.setApellido(rs.getString("apellido"));
+               inq.setLugarTrabajo(rs.getString("lugarTrabajo"));
+               inq.setDniGarante(rs.getInt("dniGarante"));
+               inq.setNombreGarante(rs.getString("nombreGarante"));
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos "+e.getMessage());
+        }
+        return inq;
     }
     
 }

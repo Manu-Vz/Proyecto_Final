@@ -1,6 +1,15 @@
 package AccesoDatos;
 
+
+import Entidades.Propietario;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.mariadb.jdbc.Connection;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,4 +23,72 @@ public class PropietarioData {
         con = Conectar.getConectar();
     }
     
+    public void agrearPropiedad(Propietario prop){
+        String sql="ISERT INTO propietario (dni,nombre,apellido,domucilio,telefono)"
+                + "VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, prop.getDni());
+            ps.setString(2, prop.getNombre());
+            ps.setString(3, prop.getApellido());
+            ps.setString(4, prop.getDomicilio());
+            ps.setInt(5, prop.getTelefono());
+            ps.executeUpdate();
+            ResultSet rs=ps.getGeneratedKeys();
+            if(rs.next()){
+                prop.setIdPropietario(1);
+                JOptionPane.showMessageDialog(null, "El propietario se ha agregado correctamente");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar el propietario "+e.getMessage());
+        }
+    }
+    
+    
+    public void modificarPropietario(Propietario prop){
+        String cadena="UPDATE propietario SET dni=?, nombre=?, apellido=?, domicilio=?, telefono=? WHERE idPropietario=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(cadena);
+            ps.setInt(1, prop.getDni());
+            ps.setString(2, prop.getNombre());
+            ps.setString(3, prop.getApellido());
+            ps.setString(4, prop.getDomicilio());
+            ps.setInt(5, prop.getTelefono());
+            ps.setInt(6, prop.getIdPropietario());
+            int valor =ps.executeUpdate();
+            if(valor>0){
+                JOptionPane.showMessageDialog(null, "Se ha actualizado el propietario");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el propietario "+e.getMessage());
+        }
+    }
+    
+    public List<Propietario> listarPropietario(){
+        List<Propietario> listado=new ArrayList();
+        Propietario temp=null;
+        String sql="SELECT * FROM propietario";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                //dni,nombre,apellido,domucilio,telefono
+                temp=new Propietario();
+                temp.setIdPropietario(rs.getInt(1));
+                temp.setDni(rs.getInt(2));
+                temp.setNombre(rs.getString("nombre"));
+                temp.setApellido(rs.getString("apellido"));
+                temp.setDomicilio(rs.getString("domicilio"));
+                temp.setTelefono(rs.getInt("telefono"));
+                listado.add(temp);
+            }
+            ps.close();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro al acceder a la base de datos "+e.getMessage());
+        }
+        return listado;
+    }
 }
