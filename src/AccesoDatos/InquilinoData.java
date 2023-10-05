@@ -113,7 +113,7 @@ public class InquilinoData {
             if(rs.next()){
                inq.setIdInquilino(rs.getInt(1));
                inq.setCuit(rs.getString("cuit"));
-               inq.setNombre(rs.getString("nonbre"));
+               inq.setNombre(rs.getString("nombre"));
                inq.setApellido(rs.getString("apellido"));
                inq.setLugarTrabajo(rs.getString("lugarTrabajo"));
                inq.setDniGarante(rs.getInt("dniGarante"));

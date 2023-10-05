@@ -94,6 +94,7 @@ public class VendedorData {
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
+                temp=new Vendedor();
                 temp.setIdVendedor(rs.getInt(1));
                 temp.setNombre(rs.getString(2));
                 temp.setApellido(rs.getString(3));

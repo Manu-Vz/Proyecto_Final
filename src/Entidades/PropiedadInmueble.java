@@ -12,7 +12,7 @@ package Entidades;
 public class PropiedadInmueble {
     private int idPropiedadInmueble;
     private Propietario propietario;
-    private String accedibilidad;
+    private String accesibilidad;
     private String caracteristicasString;
     private String direccion;
     private EstadoLocal estadoLocal;
@@ -24,9 +24,9 @@ public class PropiedadInmueble {
     
     public PropiedadInmueble(){}
 
-    public PropiedadInmueble(Propietario propietario, String accedibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
+    public PropiedadInmueble(Propietario propietario, String accesibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
         this.propietario = propietario;
-        this.accedibilidad = accedibilidad;
+        this.accesibilidad = accesibilidad;
         this.caracteristicasString = caracteristicasString;
         this.direccion = direccion;
         this.estadoLocal = estadoLocal;
@@ -37,10 +37,10 @@ public class PropiedadInmueble {
         this.disponibilidad = disponibilidad;
     }
 
-    public PropiedadInmueble(int idPropiedadInmueble, Propietario propietario, String accedibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
+    public PropiedadInmueble(int idPropiedadInmueble, Propietario propietario, String accesibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
         this.idPropiedadInmueble = idPropiedadInmueble;
         this.propietario = propietario;
-        this.accedibilidad = accedibilidad;
+        this.accesibilidad = accesibilidad;
         this.caracteristicasString = caracteristicasString;
         this.direccion = direccion;
         this.estadoLocal = estadoLocal;
@@ -67,12 +67,12 @@ public class PropiedadInmueble {
         this.propietario = propietario;
     }
 
-    public String getAccedibilidad() {
-        return accedibilidad;
+    public String getAccesibilidad() {
+        return accesibilidad;
     }
 
-    public void setAccedibilidad(String accedibilidad) {
-        this.accedibilidad = accedibilidad;
+    public void setAccesibilidad(String accesibilidad) {
+        this.accesibilidad = accesibilidad;
     }
 
     public String getCaracteristicasString() {
@@ -141,7 +141,7 @@ public class PropiedadInmueble {
 
     @Override
     public String toString() {
-        return "PropiedadInmueble{" + "idPropiedadInmueble=" + idPropiedadInmueble + ", propietario=" + propietario + ", accedibilidad=" + accedibilidad + ", caracteristicasString=" + caracteristicasString + ", direccion=" + direccion + ", estadoLocal=" + estadoLocal + ", precioTrazado=" + precioTrazado + ", inspector=" + inspector + ", tipoLocal=" + tipoLocal + ", zona=" + zona + ", disponibilidad=" + disponibilidad + '}';
+        return "PropiedadInmueble{" + "idPropiedadInmueble=" + idPropiedadInmueble + ", propietario=" + propietario + ", accesibilidad=" + accesibilidad + ", caracteristicasString=" + caracteristicasString + ", direccion=" + direccion + ", estadoLocal=" + estadoLocal + ", precioTrazado=" + precioTrazado + ", inspector=" + inspector + ", tipoLocal=" + tipoLocal + ", zona=" + zona + ", disponibilidad=" + disponibilidad + '}';
     }
     
     

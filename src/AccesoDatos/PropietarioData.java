@@ -24,7 +24,7 @@ public class PropietarioData {
     }
     
     public void agrearPropiedad(Propietario prop){
-        String sql="ISERT INTO propietario (dni,nombre,apellido,domucilio,telefono)"
+        String sql="INSERT INTO propietario (dni,nombre,apellido,domicilio,telefono)"
                 + "VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -91,4 +91,27 @@ public class PropietarioData {
         }
         return listado;
     }
+    
+    public Propietario buscopPropietario(int id){
+        Propietario elprop=new Propietario();
+        String sql="SELECT * FROM propietario WHERE idPropietario=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+               elprop.setIdPropietario(rs.getInt(1));
+               elprop.setNombre(rs.getString("nombre"));
+               elprop.setApellido(rs.getString("apellido"));
+               elprop.setDni(rs.getInt("dni"));
+               elprop.setDomicilio(rs.getString("domicilio"));
+               elprop.setTelefono(rs.getInt("telefono"));
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos "+e.getMessage());
+        }
+        return elprop;
+    }
+    
 }
