@@ -9,41 +9,44 @@ import java.time.LocalDate;
 
 public class ContratoAlquiler {
     private int idContratoAlquiler;
-    private Inquilino idInquilino;
-    private PropiedadInmueble idPropiedadInmueble;
+    private Inquilino inquilino;
+    private PropiedadInmueble propiedadInmueble;
     private LocalDate fechaFinal;
     private LocalDate fechaInicio;
     private LocalDate fechaRealizacion;
     private final String marca = "La43";
-    private Vendedor idVendedor;
+    private Vendedor vendedor;
+    private EstadoContrato estado;
     
     public ContratoAlquiler(){};
 
-    public ContratoAlquiler(Inquilino idInquilino, 
-            PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, 
+    public ContratoAlquiler(Inquilino inquilino, 
+            PropiedadInmueble PropiedadInmueble, LocalDate fechaFinal, 
             LocalDate fechaInicio, LocalDate fechaRealizacion, 
-            Vendedor idVendedor) {
+            Vendedor vendedor, EstadoContrato estado) {
         
-        this.idInquilino = idInquilino;
-        this.idPropiedadInmueble = idPropiedadInmueble;
+        this.inquilino = inquilino;
+        this.propiedadInmueble = PropiedadInmueble;
         this.fechaFinal = fechaFinal;
         this.fechaInicio = fechaInicio;
         this.fechaRealizacion = fechaRealizacion;
-        this.idVendedor = idVendedor;
+        this.vendedor = vendedor;
+        this.estado = estado;
     }
 
-    public ContratoAlquiler(int idContratoAlquiler, Inquilino idInquilino, 
-            PropiedadInmueble idPropiedadInmueble, LocalDate fechaFinal, 
+    public ContratoAlquiler(int idContratoAlquiler, Inquilino inquilino, 
+            PropiedadInmueble PropiedadInmueble, LocalDate fechaFinal, 
             LocalDate fechaInicio, LocalDate fechaRealizacion, 
-            Vendedor idVendedor) {
+            Vendedor vendedor, EstadoContrato estado) {
         
         this.idContratoAlquiler = idContratoAlquiler;
-        this.idInquilino = idInquilino;
-        this.idPropiedadInmueble = idPropiedadInmueble;
+        this.inquilino = inquilino;
+        this.propiedadInmueble = PropiedadInmueble;
         this.fechaFinal = fechaFinal;
         this.fechaInicio = fechaInicio;
         this.fechaRealizacion = fechaRealizacion;
-        this.idVendedor = idVendedor;
+        this.vendedor = vendedor;
+        this.estado = estado;
     }
 
     
@@ -55,20 +58,20 @@ public class ContratoAlquiler {
         this.idContratoAlquiler = idContratoAlquiler;
     }
 
-    public Inquilino getIdInquilino() {
-        return idInquilino;
+    public Inquilino getInquilino() {
+        return inquilino;
     }
 
-    public void setIdInquilino(Inquilino idInquilino) {
-        this.idInquilino = idInquilino;
+    public void setInquilino(Inquilino inquilino) {
+        this.inquilino = inquilino;
     }
 
-    public PropiedadInmueble getIdPropiedadInmueble() {
-        return idPropiedadInmueble;
+    public PropiedadInmueble getPropiedadInmueble() {
+        return propiedadInmueble;
     }
 
-    public void setIdPropiedadInmueble(PropiedadInmueble idPropiedadInmueble) {
-        this.idPropiedadInmueble = idPropiedadInmueble;
+    public void setPropiedadInmueble(PropiedadInmueble idPropiedadInmueble) {
+        this.propiedadInmueble = idPropiedadInmueble;
     }
 
     public LocalDate getFechaFinal() {
@@ -95,17 +98,31 @@ public class ContratoAlquiler {
         this.fechaRealizacion = fechaRealizacion;
     }
 
-    public Vendedor getIdVendedor() {
-        return idVendedor;
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 
-    public void setIdVendedor(Vendedor idVendedor) {
-        this.idVendedor = idVendedor;
+    public void setVendedor(Vendedor idVendedor) {
+        this.vendedor = idVendedor;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public EstadoContrato getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoContrato estado) {
+        this.estado = estado;
+    }
+    
+    
+    
     @Override
     public String toString() {
-        return "contratoAlquiler{" + "idContratoAlquiler=" + idContratoAlquiler + ", idInquilino=" + idInquilino + ", idPropiedadInmueble=" + idPropiedadInmueble + ", fechaFinal=" + fechaFinal + ", fechaInicio=" + fechaInicio + ", fechaRealizacion=" + fechaRealizacion + ", marca=" + marca + ", idVendedor=" + idVendedor + '}';
+        return "contratoAlquiler{" + "idContratoAlquiler=" + idContratoAlquiler + ", idInquilino=" + inquilino + ", idPropiedadInmueble=" + propiedadInmueble + ", fechaFinal=" + fechaFinal + ", fechaInicio=" + fechaInicio + ", fechaRealizacion=" + fechaRealizacion + ", marca=" + marca + ", idVendedor=" + vendedor +", estado="+estado.getNombre()+ '}';
     }
     
 }
