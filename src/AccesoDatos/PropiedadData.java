@@ -146,4 +146,63 @@ public class PropiedadData {
         }
         return listado;
     }
-}
+    
+    public PropiedadInmueble buscarPropiedadPorId (int id){
+        PropiedadInmueble temp=null;
+        Propietario elProp=null;
+        Zona zon=null;
+        EstadoLocal elEstado=null;
+        TipoLocal elTipo=null;
+        Vendedor ven=null;
+        Inspector insp=null;
+        String sql="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
+                + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
+                + "FROM propiedadInmueble pi JOIN propietario prop on(pi.idPropietario=prop.idPropietario) "
+                + "JOIN estadoLocal el on(pi.idEstadoLocal=el.idEstadoLocal) "
+                + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
+                + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
+                + "JOIN zona z on(pi.idZona=z.idZona) where idPropiedad = ?";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                zon=new Zona();
+                elProp=new Propietario();
+                elEstado=new EstadoLocal();
+                elTipo=new TipoLocal();
+                ven=new Vendedor();
+                insp=new Inspector();
+                temp=new PropiedadInmueble();
+                zon=abmZona.buscarZona(rs.getInt("idZona"));
+                elProp=abmProp.buscopPropietario(rs.getInt("idpropietario"));
+                elEstado=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
+                elTipo=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
+                ven=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                insp=abmInsp.buscoInspector(rs.getInt("idInspector"));
+                
+                //Empiezo armar el la propiedad inmuelble
+                
+                temp.setIdPropiedadInmueble(rs.getInt("idPropiedadInmueble"));
+                temp.setPropietario(elProp);
+                temp.setAccesibilidad(rs.getString("accesibilidad"));
+                temp.setCaracteristicasString(rs.getString("caracteristicas"));
+                temp.setDireccion(rs.getString("direccion"));
+                temp.setEstadoLocal(elEstado);
+                temp.setPrecioTrazado(rs.getFloat("precioTrazado"));
+                temp.setInspector(insp);
+                temp.setTipoLocal(elTipo);
+                temp.setZona(zon);
+                temp.setDisponibilidad(rs.getBoolean("disponibilidad"));
+            }
+            ps.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return temp;
+        }
+        
+    }
+
