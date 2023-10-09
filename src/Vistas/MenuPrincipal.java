@@ -31,11 +31,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItemPropiedades = new javax.swing.JMenuItem();
+        Inquilinos = new javax.swing.JMenu();
+        JMI_verPropiedadesInquilino = new javax.swing.JMenuItem();
+        JMI_verContratosInquilinos = new javax.swing.JMenuItem();
+        Propiedades = new javax.swing.JMenu();
+        JMI_GestionPropiedades = new javax.swing.JMenuItem();
+        Inmobiiaria = new javax.swing.JMenu();
+        JMI_Empleados = new javax.swing.JMenuItem();
+        JMI_InquilinosListaInmobiliaria = new javax.swing.JMenuItem();
+        JMI_PropietariosListaInmobiliaria = new javax.swing.JMenuItem();
+        JMI_PropiedadesListaInmobiliaria = new javax.swing.JMenuItem();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -53,32 +58,68 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 521, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Inquilinos");
+        Inquilinos.setText("Inquilinos");
 
-        jMenuItem1.setText("Ver Propiedades");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Ver Contratos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        JMI_verPropiedadesInquilino.setText("Ver Propiedades");
+        JMI_verPropiedadesInquilino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                JMI_verPropiedadesInquilinoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        Inquilinos.add(JMI_verPropiedadesInquilino);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Propiedades");
-
-        jMenuItemPropiedades.setText("Gestión Propiedades");
-        jMenuItemPropiedades.addActionListener(new java.awt.event.ActionListener() {
+        JMI_verContratosInquilinos.setText("Ver Contratos");
+        JMI_verContratosInquilinos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemPropiedadesActionPerformed(evt);
+                JMI_verContratosInquilinosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItemPropiedades);
+        Inquilinos.add(JMI_verContratosInquilinos);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(Inquilinos);
+
+        Propiedades.setText("Propiedades");
+
+        JMI_GestionPropiedades.setText("Gestión Propiedades");
+        JMI_GestionPropiedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_GestionPropiedadesActionPerformed(evt);
+            }
+        });
+        Propiedades.add(JMI_GestionPropiedades);
+
+        jMenuBar1.add(Propiedades);
+
+        Inmobiiaria.setText("Inmobiliaria");
+
+        JMI_Empleados.setText("Empleados");
+        JMI_Empleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_EmpleadosActionPerformed(evt);
+            }
+        });
+        Inmobiiaria.add(JMI_Empleados);
+
+        JMI_InquilinosListaInmobiliaria.setText("Inquilinos");
+        JMI_InquilinosListaInmobiliaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_InquilinosListaInmobiliariaActionPerformed(evt);
+            }
+        });
+        Inmobiiaria.add(JMI_InquilinosListaInmobiliaria);
+
+        JMI_PropietariosListaInmobiliaria.setText("Propietarios");
+        JMI_PropietariosListaInmobiliaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_PropietariosListaInmobiliariaActionPerformed(evt);
+            }
+        });
+        Inmobiiaria.add(JMI_PropietariosListaInmobiliaria);
+
+        JMI_PropiedadesListaInmobiliaria.setText("Propiedades");
+        Inmobiiaria.add(JMI_PropiedadesListaInmobiliaria);
+
+        jMenuBar1.add(Inmobiiaria);
 
         setJMenuBar(jMenuBar1);
 
@@ -96,18 +137,55 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPropiedadesActionPerformed
+    private void JMI_GestionPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_GestionPropiedadesActionPerformed
         // Este procedimiento abre la gestión de las propiedades
         escritorio.removeAll();
         escritorio.repaint();
         VistaPropiedades vistaProp=new VistaPropiedades();
         vistaProp.setVisible(true);
         escritorio.add(vistaProp);
-    }//GEN-LAST:event_jMenuItemPropiedadesActionPerformed
+    }//GEN-LAST:event_JMI_GestionPropiedadesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void JMI_verContratosInquilinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_verContratosInquilinosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaContratosInquilinos vista = new vistaContratosInquilinos();
+        vista.setVisible(true);
+        escritorio.add(vista);
+    }//GEN-LAST:event_JMI_verContratosInquilinosActionPerformed
+
+    private void JMI_verPropiedadesInquilinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_verPropiedadesInquilinoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_JMI_verPropiedadesInquilinoActionPerformed
+
+    private void JMI_EmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_EmpleadosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaEmpleados vista = new vistaEmpleados();
+        vista.setVisible(true);
+        escritorio.add(vista);
+    }//GEN-LAST:event_JMI_EmpleadosActionPerformed
+
+    private void JMI_InquilinosListaInmobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_InquilinosListaInmobiliariaActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaInquilinos vista = new vistaInquilinos();
+        vista.setVisible(true);
+        escritorio.add(vista);
+    }//GEN-LAST:event_JMI_InquilinosListaInmobiliariaActionPerformed
+
+    private void JMI_PropietariosListaInmobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_PropietariosListaInmobiliariaActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaPropietarios vista = new vistaPropietarios();
+        vista.setVisible(true);
+        escritorio.add(vista);
+    }//GEN-LAST:event_JMI_PropietariosListaInmobiliariaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,13 +223,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Inmobiiaria;
+    private javax.swing.JMenu Inquilinos;
+    private javax.swing.JMenuItem JMI_Empleados;
+    private javax.swing.JMenuItem JMI_GestionPropiedades;
+    private javax.swing.JMenuItem JMI_InquilinosListaInmobiliaria;
+    private javax.swing.JMenuItem JMI_PropiedadesListaInmobiliaria;
+    private javax.swing.JMenuItem JMI_PropietariosListaInmobiliaria;
+    private javax.swing.JMenuItem JMI_verContratosInquilinos;
+    private javax.swing.JMenuItem JMI_verPropiedadesInquilino;
+    private javax.swing.JMenu Propiedades;
     public static javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItemPropiedades;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
