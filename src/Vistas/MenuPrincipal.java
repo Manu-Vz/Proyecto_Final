@@ -31,11 +31,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jmInquilinos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jmiPropiedades = new javax.swing.JMenu();
         jMenuItemPropiedades = new javax.swing.JMenuItem();
+        jmInmobiliaria = new javax.swing.JMenu();
+        jmiDatosEmpleados = new javax.swing.JMenuItem();
+        jmiDatosPropietarios = new javax.swing.JMenuItem();
+        jmiDatosInquilinos = new javax.swing.JMenuItem();
+        jmiDatosPropiedades = new javax.swing.JMenuItem();
+        jmiDatoZonas = new javax.swing.JMenuItem();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -53,22 +59,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 521, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Inquilinos");
+        jmInquilinos.setText("Inquilinos");
 
         jMenuItem1.setText("Ver Propiedades");
-        jMenu1.add(jMenuItem1);
+        jmInquilinos.add(jMenuItem1);
 
-        jMenuItem2.setText("Ver Contratos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
+        jMenuItem2.setText("Ver Contrato");
+        jmInquilinos.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jmInquilinos);
 
-        jMenu2.setText("Propiedades");
+        jmiPropiedades.setText("Propiedades");
 
         jMenuItemPropiedades.setText("Gestión Propiedades");
         jMenuItemPropiedades.addActionListener(new java.awt.event.ActionListener() {
@@ -76,9 +77,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItemPropiedadesActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItemPropiedades);
+        jmiPropiedades.add(jMenuItemPropiedades);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmiPropiedades);
+
+        jmInmobiliaria.setText("Inmobiliaria");
+
+        jmiDatosEmpleados.setText("Datos de empleados");
+        jmInmobiliaria.add(jmiDatosEmpleados);
+
+        jmiDatosPropietarios.setText("Datos de Propietarios");
+        jmiDatosPropietarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDatosPropietariosActionPerformed(evt);
+            }
+        });
+        jmInmobiliaria.add(jmiDatosPropietarios);
+
+        jmiDatosInquilinos.setText("Datos de Inquilinos");
+        jmInmobiliaria.add(jmiDatosInquilinos);
+
+        jmiDatosPropiedades.setText("Datos de Propiedades");
+        jmInmobiliaria.add(jmiDatosPropiedades);
+
+        jmiDatoZonas.setText("Datos de Zonas");
+        jmInmobiliaria.add(jmiDatoZonas);
+
+        jMenuBar1.add(jmInmobiliaria);
 
         setJMenuBar(jMenuBar1);
 
@@ -108,6 +133,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jmiDatosPropietariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDatosPropietariosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionPropietarios gp = new GestionPropietarios();
+        gp.setVisible(true);
+        escritorio.add(gp);
+    }//GEN-LAST:event_jmiDatosPropietariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,12 +179,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemPropiedades;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JMenu jmInmobiliaria;
+    private javax.swing.JMenu jmInquilinos;
+    private javax.swing.JMenuItem jmiDatoZonas;
+    private javax.swing.JMenuItem jmiDatosEmpleados;
+    private javax.swing.JMenuItem jmiDatosInquilinos;
+    private javax.swing.JMenuItem jmiDatosPropiedades;
+    private javax.swing.JMenuItem jmiDatosPropietarios;
+    private javax.swing.JMenu jmiPropiedades;
     // End of variables declaration//GEN-END:variables
 }
