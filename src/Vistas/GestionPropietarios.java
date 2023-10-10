@@ -39,6 +39,8 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         camposIniciales();
 
     }
+    
+    //solo para que tome cambios
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -233,7 +235,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
                                     .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jTPropietarioApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                         .addComponent(jLabelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 94, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jbtModificarProp)
                         .addGap(18, 18, 18)
