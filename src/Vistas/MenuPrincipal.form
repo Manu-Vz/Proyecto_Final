@@ -10,77 +10,23 @@
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="Inquilinos">
+        <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Inquilinos"/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_verPropiedadesInquilino">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ver Propiedades"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMI_verPropiedadesInquilinoActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_verContratosInquilinos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ver Contratos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMI_verContratosInquilinosActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Propiedades">
+        <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Propiedades"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_GestionPropiedades">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPropiedades">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gesti&#xf3;n Propiedades"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMI_GestionPropiedadesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPropiedadesActionPerformed"/>
               </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="Inmobiiaria">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Inmobiliaria"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_Empleados">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Empleados"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMI_EmpleadosActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_InquilinosListaInmobiliaria">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Inquilinos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMI_InquilinosListaInmobiliariaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_PropietariosListaInmobiliaria">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Propietarios"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMI_PropietariosListaInmobiliariaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="JMI_PropiedadesListaInmobiliaria">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Propiedades"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
