@@ -45,7 +45,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtBusquedaNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabla = new javax.swing.JTable();
         jPanelxZona = new javax.swing.JPanel();
         jPanelxPrecio = new javax.swing.JPanel();
         jPanelxTipo = new javax.swing.JPanel();
@@ -76,7 +76,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Ingrese el nombre");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -87,7 +87,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTabla);
 
         javax.swing.GroupLayout jPanelxPropietarioLayout = new javax.swing.GroupLayout(jPanelxPropietario);
         jPanelxPropietario.setLayout(jPanelxPropietarioLayout);
@@ -96,7 +96,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             .addGroup(jPanelxPropietarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelxPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1044, Short.MAX_VALUE)
                     .addGroup(jPanelxPropietarioLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -122,7 +122,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jPanelxZona.setLayout(jPanelxZonaLayout);
         jPanelxZonaLayout.setHorizontalGroup(
             jPanelxZonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1027, Short.MAX_VALUE)
+            .addGap(0, 1056, Short.MAX_VALUE)
         );
         jPanelxZonaLayout.setVerticalGroup(
             jPanelxZonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +135,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jPanelxPrecio.setLayout(jPanelxPrecioLayout);
         jPanelxPrecioLayout.setHorizontalGroup(
             jPanelxPrecioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1027, Short.MAX_VALUE)
+            .addGap(0, 1056, Short.MAX_VALUE)
         );
         jPanelxPrecioLayout.setVerticalGroup(
             jPanelxPrecioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +148,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jPanelxTipo.setLayout(jPanelxTipoLayout);
         jPanelxTipoLayout.setHorizontalGroup(
             jPanelxTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1027, Short.MAX_VALUE)
+            .addGap(0, 1056, Short.MAX_VALUE)
         );
         jPanelxTipoLayout.setVerticalGroup(
             jPanelxTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +291,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                         .addGap(88, 88, 88)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanelAgregarLayout.setVerticalGroup(
             jPanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +321,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCapasPanelBusquedas)
+                .addComponent(jCapasPanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -365,8 +365,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanelxZona;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTabla;
     private javax.swing.JTable jTablaBusqueda;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

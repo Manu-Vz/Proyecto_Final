@@ -23,7 +23,7 @@ public class PropietarioData {
         con = Conectar.getConectar();
     }
     
-    public void agrearPropiedad(Propietario prop){
+    public void agrearPropietario(Propietario prop){
         String sql="INSERT INTO propietario (dni,nombre,apellido,domicilio,telefono)"
                 + "VALUES (?,?,?,?,?)";
         try {

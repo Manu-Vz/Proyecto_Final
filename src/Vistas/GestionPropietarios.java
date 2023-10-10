@@ -37,7 +37,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         this.setLocation(100, 100);
         armarTabla();
         camposIniciales();
-       
+
     }
 
     /**
@@ -63,6 +63,10 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         jbtCancelarProp = new javax.swing.JButton();
         jlabelDNI = new javax.swing.JLabel();
         jLabelNombre = new javax.swing.JLabel();
+        jLabelApellido = new javax.swing.JLabel();
+        jLabelDomicilio = new javax.swing.JLabel();
+        jLabelTelefono = new javax.swing.JLabel();
+        jLabelID = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -95,6 +99,11 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablaBusquedaPropietario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaBusquedaPropietarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablaBusquedaPropietario);
 
         jTPropietarioNombre.setForeground(new java.awt.Color(204, 204, 204));
@@ -102,6 +111,9 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         jTPropietarioNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTPropietarioNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTPropietarioNombreFocusLost(evt);
             }
         });
         jTPropietarioNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -116,21 +128,73 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTPropietarioApellidoFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTPropietarioApellidoFocusLost(evt);
+            }
+        });
+        jTPropietarioApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTPropietarioApellidoKeyReleased(evt);
+            }
         });
 
         jTPropietarioDomicilio.setForeground(new java.awt.Color(204, 204, 204));
         jTPropietarioDomicilio.setText("Domicilio");
+        jTPropietarioDomicilio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTPropietarioDomicilioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTPropietarioDomicilioFocusLost(evt);
+            }
+        });
+        jTPropietarioDomicilio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTPropietarioDomicilioKeyReleased(evt);
+            }
+        });
 
         jTPropietarioTelefono.setForeground(new java.awt.Color(204, 204, 204));
         jTPropietarioTelefono.setText("Teléfono");
+        jTPropietarioTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTPropietarioTelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTPropietarioTelefonoFocusLost(evt);
+            }
+        });
+        jTPropietarioTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTPropietarioTelefonoKeyReleased(evt);
+            }
+        });
 
         jbtAgregarProp.setText("Agregar");
+        jbtAgregarProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtAgregarPropActionPerformed(evt);
+            }
+        });
 
         jbtModificarProp.setText("Modificar");
+        jbtModificarProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtModificarPropActionPerformed(evt);
+            }
+        });
 
         jbtCancelarProp.setText("Cancelar");
+        jbtCancelarProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCancelarPropActionPerformed(evt);
+            }
+        });
 
         jlabelDNI.setFocusable(false);
+
+        jLabelID.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelID.setText("Identificador");
 
         javax.swing.GroupLayout jPanelPropietarioLayout = new javax.swing.GroupLayout(jPanelPropietario);
         jPanelPropietario.setLayout(jPanelPropietarioLayout);
@@ -141,27 +205,35 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanelPropietarioLayout.createSequentialGroup()
+                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelPropietarioLayout.createSequentialGroup()
+                                .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addGroup(jPanelPropietarioLayout.createSequentialGroup()
+                                .addComponent(jlabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPropietarioLayout.createSequentialGroup()
+                                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTPropietarioDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTPropietarioDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTPropietarioNombre)
+                                    .addComponent(jTPropietarioTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
                         .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPropietarioLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(159, 159, 159)
                                 .addComponent(jbtAgregarProp))
                             .addGroup(jPanelPropietarioLayout.createSequentialGroup()
-                                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPropietarioLayout.createSequentialGroup()
-                                        .addComponent(jlabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanelPropietarioLayout.createSequentialGroup()
-                                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jTPropietarioDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTPropietarioDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTPropietarioNombre)
-                                            .addComponent(jTPropietarioTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
                                 .addGap(18, 18, 18)
-                                .addComponent(jTPropietarioApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 72, Short.MAX_VALUE)))
+                                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTPropietarioApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(jLabelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jbtModificarProp)
                         .addGap(18, 18, 18)
@@ -172,24 +244,36 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
             jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPropietarioLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTPropietarioDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPropietarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPropietarioApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelPropietarioLayout.createSequentialGroup()
+                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTPropietarioDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTPropietarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTPropietarioApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTPropietarioDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPropietarioTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtAgregarProp)
-                    .addComponent(jbtModificarProp)
-                    .addComponent(jbtCancelarProp))
-                .addGap(31, 31, 31)
+                    .addComponent(jTPropietarioTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPropietarioLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtAgregarProp)
+                            .addComponent(jbtModificarProp)
+                            .addComponent(jbtCancelarProp))
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanelPropietarioLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelPropietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -219,41 +303,49 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         // Pido el número de documetno para chequear que ya no exista. Si no existe lo puede agregar
         //String cadena=jTPropietrioDNI.getText();
         borroFilas();
-        String chequeo=jTPropietarioDNI.getText();
+        String chequeo = jTPropietarioDNI.getText();
         char[] armoDNI = chequeo.toCharArray();
         listado = abmPropietario.listarPropietario();
-
-       //
-        String chequeoError="";
-        for (int i = 0; i < armoDNI.length; i++) {
-            chequeoError = String.valueOf(armoDNI[i]).toLowerCase();
-            if (!chequeoError.matches("[0-9]*")) {
-                jlabelDNI.setEnabled(true);
-                jlabelDNI.setForeground(Color.red.darker());
-                jlabelDNI.setText("Solo números 0-9");
-                break;
-            } else {
-                borroFilas();
-                jlabelDNI.setEnabled(false);
-                jlabelDNI.setText("");
-                if (chequeo.isEmpty()) {
-                    borroFilas();
+        jTPropietarioNombre.setEnabled(false);
+        //
+        String chequeoError = "";
+        if (jTPropietarioDNI.getText().isEmpty()) {
+            jlabelDNI.setEnabled(true);
+            jlabelDNI.setText("No puede estar vacío");
+            jlabelDNI.setForeground(Color.red.darker());
+            
+        } else {
+            for (int i = 0; i < armoDNI.length; i++) {
+                chequeoError = String.valueOf(armoDNI[i]).toLowerCase();
+                if (!chequeoError.matches("[0-9]*")) {
+                    jlabelDNI.setEnabled(true);
+                    jlabelDNI.setForeground(Color.red.darker());
+                    jlabelDNI.setText("Solo números 0-9");
                     camposIniciales();
-                    jlabelDNI.setEnabled(false);
+                    break;
                 } else {
                     borroFilas();
-                    for (Propietario prop : listado) {
-                        String propDNI = String.valueOf(prop.getDni());
-                        if (propDNI.startsWith(chequeo)) {
-                            modeloProp.addRow(new Object[]{prop.getIdPropietario(), prop.getNombre(), prop.getApellido(),
-                                prop.getDni(), prop.getDomicilio(), prop.getDomicilio(), prop.getTelefono()});
+                    jlabelDNI.setEnabled(false);
+                    jlabelDNI.setText("");
+                    if (chequeo.isEmpty()) {
+                        borroFilas();
+                        camposIniciales();
+                        jlabelDNI.setEnabled(false);
+                    } else {
+                        borroFilas();
+                        for (Propietario prop : listado) {
+                            String propDNI = String.valueOf(prop.getDni());
+                            if (propDNI.startsWith(chequeo)) {
+                                modeloProp.addRow(new Object[]{prop.getIdPropietario(), prop.getNombre(), prop.getApellido(),
+                                    prop.getDni(), prop.getDomicilio(), prop.getTelefono()});
+                            }
+                            if (modeloProp.getRowCount() == 0 && chequeo.length() >= 8) {
+                                //El dni no existe por lo tatno puede agregar el propietario
+                                jTPropietarioNombre.setEnabled(true);
+                            }
                         }
-                        if (modeloProp.getRowCount() == 0 && chequeo.length() >= 8) {
-                            //El dni no existe por lo tatno puede agregar el propietario
-                            jTPropietarioNombre.setEnabled(true);
-                        }
-                    }
 
+                    }
                 }
             }
         }
@@ -266,10 +358,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         if (jTPropietarioDNI.getText().isEmpty()) {
             jTPropietarioDNI.setText("Ingrese DNI");
             jTPropietarioDNI.setForeground(Color.gray);
-            if (jTPropietarioNombre.isEnabled()) {
-                jTPropietarioNombre.setEditable(false);
-            }
-        } else if(jTPropietarioDNI.getText().equals("Ingrese DNI")) {
+        } else if (jTPropietarioDNI.getText().equals("Ingrese DNI")) {
             jTPropietarioDNI.selectAll();
             jTPropietarioDNI.setForeground(Color.black);
         }
@@ -277,40 +366,236 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
 
     private void jTPropietarioNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioNombreFocusGained
         // chequeo que dni no este difícil
-        if (jTPropietarioNombre.getText().isEmpty()) {
-            jTPropietarioNombre.setText("Nombre");
-            jTPropietarioNombre.setForeground(Color.gray);
-            if (jTPropietarioApellido.isEnabled()) {
-                jTPropietarioApellido.setEnabled(false);
-            }
-        } else if(jTPropietarioNombre.getText().equals("Nombre")){
-            jTPropietarioNombre.selectAll();
+        String testigo = jTPropietarioNombre.getText();
+        if (jTPropietarioNombre.getText().equals("Nombre")) {
+            jTPropietarioNombre.setText("");
             jTPropietarioNombre.setForeground(Color.black);
+        } else if (jTPropietarioNombre.getText().equals(testigo)) {
+            jTPropietarioNombre.selectAll();
         }
     }//GEN-LAST:event_jTPropietarioNombreFocusGained
 
     private void jTPropietarioNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPropietarioNombreKeyReleased
         // Mientras el campo no este vacío habilito el campo Apellido
-        if(jTPropietarioNombre.getText().isEmpty()){
-            jLabelNombre.setVisible(true);
+        if (jTPropietarioNombre.getText().isEmpty()) {
+            jLabelNombre.setEnabled(true);
             jLabelNombre.setForeground(Color.red.darker());
             jLabelNombre.setText("No puede estar vacío");
-        }else{
+            if (jTPropietarioApellido.isEnabled()) {
+                jTPropietarioApellido.setEnabled(false);
+            }
+        } else {
             jTPropietarioApellido.setEnabled(true);
+            jLabelNombre.setText("");
+            jLabelNombre.setEnabled(false);
+
         }
     }//GEN-LAST:event_jTPropietarioNombreKeyReleased
 
     private void jTPropietarioApellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioApellidoFocusGained
         // Mientras el campo apellido este vacío no habilito el campo Domicilio
-        if(jTPropietarioApellido.getText().isEmpty()){
-            
+        String testigo = jTPropietarioApellido.getText();
+        if (jTPropietarioApellido.getText().equals("Apellido")) {
+            jTPropietarioApellido.setText("");
+            jTPropietarioApellido.setForeground(Color.black);
+        } else if (jTPropietarioApellido.getText().equals(testigo)) {
+            jTPropietarioApellido.selectAll();
         }
     }//GEN-LAST:event_jTPropietarioApellidoFocusGained
+
+    private void jTPropietarioApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPropietarioApellidoKeyReleased
+        // Chequeo que el campo no este vacío para habilira el de domicilio
+        if (jTPropietarioApellido.getText().isEmpty()) {
+            jLabelApellido.setEnabled(true);
+            jLabelApellido.setForeground(Color.red.darker());
+            jLabelApellido.setText("No puede estar vacío");
+            if (jTPropietarioDomicilio.isEnabled()) {
+                jTPropietarioDomicilio.setEnabled(false);
+            }
+        } else {
+            jTPropietarioDomicilio.setEnabled(true);
+            jLabelApellido.setText("");
+            jLabelApellido.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTPropietarioApellidoKeyReleased
+
+    private void jTPropietarioDomicilioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioDomicilioFocusGained
+        // Chequeo que el campo no este vacío para habilitar
+        if (jTPropietarioDomicilio.getText().equals("Domicilio")) {
+            jTPropietarioDomicilio.setText("");
+            jTPropietarioDomicilio.setForeground(Color.black);
+        } else {
+            jTPropietarioApellido.selectAll();
+        }
+    }//GEN-LAST:event_jTPropietarioDomicilioFocusGained
+
+    private void jTPropietarioNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioNombreFocusLost
+        // Completo el campo NOMBRE para que no quede totalmente vacío
+        if (jTPropietarioNombre.getText().isEmpty()) {
+            jTPropietarioNombre.setText("Nombre");
+            jTPropietarioNombre.setForeground(Color.gray);
+            jLabelNombre.setEnabled(false);
+            jLabelNombre.setText("");
+        }
+    }//GEN-LAST:event_jTPropietarioNombreFocusLost
+
+    private void jTPropietarioApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioApellidoFocusLost
+        // Completo el campo APELLIDO para que no quede totalmente vacío
+        if (jTPropietarioApellido.getText().isEmpty()) {
+            jTPropietarioApellido.setText("Apellido");
+            jTPropietarioApellido.setForeground(Color.gray);
+            jLabelApellido.setEnabled(false);
+            jLabelApellido.setText("");
+        }
+    }//GEN-LAST:event_jTPropietarioApellidoFocusLost
+
+    private void jTPropietarioDomicilioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioDomicilioFocusLost
+        // TODO add your handling code here:
+        if (jTPropietarioDomicilio.getText().isEmpty()) {
+            jTPropietarioDomicilio.setText("Domicilio");
+            jTPropietarioDomicilio.setForeground(Color.gray);
+            jLabelDomicilio.setEnabled(false);
+            jLabelDomicilio.setText("");
+        }
+    }//GEN-LAST:event_jTPropietarioDomicilioFocusLost
+
+    private void jTPropietarioDomicilioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPropietarioDomicilioKeyReleased
+        // Chequeo que el campo no este vacío para habilitar el Telefono
+        if (jTPropietarioDomicilio.getText().isEmpty()) {
+            jLabelDomicilio.setEnabled(true);
+            jLabelDomicilio.setForeground(Color.red.darker());
+            jLabelDomicilio.setText("No puede estar vacío");
+            if (jTPropietarioTelefono.isEnabled()) {
+                jTPropietarioTelefono.setEnabled(false);
+            }
+        } else {
+            jTPropietarioTelefono.setEnabled(true);
+            jLabelDomicilio.setText("");
+            jLabelDomicilio.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTPropietarioDomicilioKeyReleased
+
+    private void jTPropietarioTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioTelefonoFocusGained
+        // Chequeo que le campo se inicialize correctamente
+        if (jTPropietarioTelefono.getText().equals("Teléfono")) {
+            jTPropietarioTelefono.setText("");
+            jTPropietarioTelefono.setForeground(Color.black);
+        } else {
+            jTPropietarioTelefono.selectAll();
+        }
+    }//GEN-LAST:event_jTPropietarioTelefonoFocusGained
+
+    private void jTPropietarioTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPropietarioTelefonoFocusLost
+        // Chequeo que si el campo queda vacío lo rellene con el texto por defecto
+        if (jTPropietarioTelefono.getText().isEmpty()) {
+            jTPropietarioTelefono.setText("Teléfono");
+            jTPropietarioTelefono.setForeground(Color.gray);
+            jLabelTelefono.setEnabled(false);
+            jLabelTelefono.setText("");
+        }
+    }//GEN-LAST:event_jTPropietarioTelefonoFocusLost
+
+    private void jTPropietarioTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPropietarioTelefonoKeyReleased
+        // Chequeo que el campo se complete con datos para habilitar el botón agregar
+        if (jTPropietarioTelefono.getText().isEmpty()) {
+            jLabelTelefono.setEnabled(true);
+            jLabelTelefono.setText("No puede estar vacío");
+            jLabelTelefono.setForeground(Color.red.darker());
+            if (jbtAgregarProp.isEnabled()) {
+                jbtAgregarProp.setEnabled(false);
+            }
+        } else {
+            String cadenaTEl = jTPropietarioTelefono.getText();
+            char[] vectorTel = cadenaTEl.toCharArray();
+            String evaluar = "";
+            for (int i = 0; i < vectorTel.length; i++) {
+                evaluar = String.valueOf(vectorTel[i]);
+                if (!evaluar.matches("[0-9]*")) {
+                    jLabelTelefono.setText("Solo números 0-9");
+                    jLabelTelefono.setForeground(Color.red.darker());
+                    if (jbtAgregarProp.isEnabled()) {
+                        jbtAgregarProp.setEnabled(false);
+                    }
+                    break;
+                } else if (vectorTel.length > 7) {
+                    jbtAgregarProp.setEnabled(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_jTPropietarioTelefonoKeyReleased
+
+    private void jTablaBusquedaPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaBusquedaPropietarioMouseClicked
+        // Cargo los datos seleccionados en la fila de la tabla
+        jbtAgregarProp.setEnabled(false);
+        int valorFila = jTablaBusquedaPropietario.getSelectedRow();
+        String propId = String.valueOf(modeloProp.getValueAt(valorFila, 0));
+        String propNombre = String.valueOf(modeloProp.getValueAt(valorFila, 1));
+        String propApellido = String.valueOf(modeloProp.getValueAt(valorFila, 2));
+        String propDNI = String.valueOf(modeloProp.getValueAt(valorFila, 3));
+        String propDireccion = String.valueOf(modeloProp.getValueAt(valorFila, 4));
+        String propTelefono = String.valueOf(modeloProp.getValueAt(valorFila, 5));
+        jLabelID.setText(propId);
+        jLabelID.setForeground(Color.black);
+        jTPropietarioDNI.setText(propDNI);
+        jTPropietarioNombre.setText(propNombre);
+        jTPropietarioApellido.setText(propApellido);
+        jTPropietarioDomicilio.setText(propDireccion);
+        jTPropietarioDomicilio.setText(propDireccion);
+        jTPropietarioTelefono.setText(propTelefono);
+        habilitoModificar();
+    }//GEN-LAST:event_jTablaBusquedaPropietarioMouseClicked
+
+    private void jbtCancelarPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarPropActionPerformed
+        // Seteo todo a 0
+        jTPropietarioDNI.setText("Ingrese DNi");
+        jTPropietarioDNI.setForeground(Color.gray);
+        jTPropietarioNombre.setText("Nombre");
+        jTPropietarioNombre.setForeground(Color.gray);
+        jTPropietarioApellido.setText("Apellido");
+        jTPropietarioApellido.setForeground(Color.gray);
+        jTPropietarioDomicilio.setText("Domicilio");
+        jTPropietarioDomicilio.setForeground(Color.gray);
+        jTPropietarioTelefono.setText("Teléfono");
+        jTPropietarioTelefono.setForeground(Color.gray);
+        jbtAgregarProp.setEnabled(false);
+        jbtModificarProp.setEnabled(false);
+        camposIniciales();
+        borroFilas();
+        jTPropietarioDNI.requestFocus();
+        jTPropietarioDNI.selectAll();
+    }//GEN-LAST:event_jbtCancelarPropActionPerformed
+
+    private void jbtAgregarPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAgregarPropActionPerformed
+        // Guardo los datos nuevos en la base de datos
+        temp = new Propietario();
+        temp.setDni(Integer.parseInt(jTPropietarioDNI.getText()));
+        temp.setNombre(jTPropietarioNombre.getText());
+        temp.setApellido(jTPropietarioApellido.getText());
+        temp.setDomicilio(jTPropietarioDomicilio.getText());
+        temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
+        abmPropietario.agrearPropietario(temp);
+    }//GEN-LAST:event_jbtAgregarPropActionPerformed
+
+    private void jbtModificarPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtModificarPropActionPerformed
+        // Actualizo los datos de el propietario seleccionado
+        temp = new Propietario();
+        temp.setIdPropietario(Integer.parseInt(jLabelID.getText()));
+        temp.setNombre(jTPropietarioNombre.getText());
+        temp.setApellido(jTPropietarioApellido.getText());
+        temp.setDni(Integer.parseInt(jTPropietarioDNI.getText()));
+        temp.setDomicilio(jTPropietarioDomicilio.getText());
+        temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
+        abmPropietario.modificarPropietario(temp);
+    }//GEN-LAST:event_jbtModificarPropActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelDomicilio;
+    private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JPanel jPanelPropietario;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTPropietarioApellido;
@@ -341,12 +626,11 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
             modeloProp.removeRow(i);
         }
     }
-    
-    public void etiquetasInicio(){
-         jlabelDNI.setEnabled(false);
-//         jlabelDNI.setVisible(false);
-         jLabelNombre.setEnabled(false);
-//         jLabelNombre.setVisible(false);
+
+    public void etiquetasInicio() {
+        jlabelDNI.setEnabled(false);
+        jLabelNombre.setEnabled(false);
+        jLabelApellido.setEnabled(false);
     }
 
     public void camposIniciales() {
@@ -357,6 +641,19 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         jTPropietarioNombre.setEnabled(false);
         jTPropietarioApellido.setEnabled(false);
         jTPropietarioTelefono.setEnabled(false);
+    }
+
+    public void habilitoModificar() {
+        jTPropietarioNombre.setEnabled(true);
+        jTPropietarioNombre.setForeground(Color.black);
+        jTPropietarioApellido.setEnabled(true);
+        jTPropietarioApellido.setForeground(Color.black);
+        jTPropietarioDomicilio.setEnabled(true);
+        jTPropietarioDomicilio.setForeground(Color.black);
+        jTPropietarioTelefono.setEnabled(true);
+        jTPropietarioTelefono.setForeground(Color.black);
+        jbtModificarProp.setEnabled(true);
+        jbtCancelarProp.setEnabled(true);
     }
 
 }
