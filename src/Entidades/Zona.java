@@ -63,7 +63,7 @@ public class Zona {
 
     @Override
     public String toString() {
-        return "Zona{" + "idZona=" + idZona + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado + '}';
+        return nombre;
     }
     
     

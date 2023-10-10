@@ -64,7 +64,7 @@ public class TipoLocal {
 
     @Override
     public String toString() {
-        return "TipoLocal{" + "idTipoLocal=" + idTipoLocal + ", nombre=" + nombre + ", descripcion=" + descripcion + ", superficieMinima=" + superficieMinima + '}';
+        return nombre;
     }
     
 }
