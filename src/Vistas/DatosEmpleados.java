@@ -81,10 +81,12 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Ingrese el Nombre:");
 
+        jtfNombreVendedor.setForeground(new java.awt.Color(204, 204, 204));
         jtfNombreVendedor.setText("Nombre");
 
         jbNuevoVendedor.setText("Nuevo Vendedor");
 
+        jtfApellidoVendedor.setForeground(new java.awt.Color(204, 204, 204));
         jtfApellidoVendedor.setText("Apellido");
 
         jtfIdVendedor.setEditable(false);
@@ -184,10 +186,12 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ingrese el Nombre:");
 
+        jtfNombreInspector.setForeground(new java.awt.Color(204, 204, 204));
         jtfNombreInspector.setText("Nombre");
 
         jbNuevoInspector.setText("Nuevo Inspector");
 
+        jtfApellidoInspector.setForeground(new java.awt.Color(204, 204, 204));
         jtfApellidoInspector.setText("Apellido");
 
         jtfIdInspector.setEditable(false);
@@ -220,6 +224,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Especialidad:");
 
+        jtfApellidoInspector1.setForeground(new java.awt.Color(204, 204, 204));
         jtfApellidoInspector1.setText("Especialidad");
         jtfApellidoInspector1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

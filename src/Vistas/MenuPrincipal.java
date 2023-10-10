@@ -52,11 +52,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1096, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
 
         jmInquilinos.setText("Inquilinos");
@@ -89,6 +89,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmInmobiliaria.setText("Inmobiliaria");
 
         jmiDatosEmpleados.setText("Datos de empleados");
+        jmiDatosEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDatosEmpleadosActionPerformed(evt);
+            }
+        });
         jmInmobiliaria.add(jmiDatosEmpleados);
 
         jmiDatosPropietarios.setText("Datos de Propietarios");
@@ -116,11 +121,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,6 +164,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gp.setVisible(true);
         escritorio.add(gp);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jmiDatosEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDatosEmpleadosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        DatosEmpleados de = new DatosEmpleados();
+        de.setVisible(true);
+        escritorio.add(de);
+    }//GEN-LAST:event_jmiDatosEmpleadosActionPerformed
 
     /**
      * @param args the command line arguments
