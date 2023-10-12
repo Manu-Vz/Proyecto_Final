@@ -72,12 +72,13 @@ public class ZonaData {
         }
         
         
+        
     }
     
     public List<Zona> listarZonas (){
         List<Zona> listaZona = new ArrayList();
         Zona zona;
-        String sql = "SELECT * FROM zona WHERE estado = 1";
+        String sql = "SELECT * FROM zona";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
