@@ -17,6 +17,11 @@ public class notasTiempo {
         long mesesDeDiferencia = ChronoUnit.MONTHS.between(fechaInicial, fechaFinal);
         long añosDeDiferencia = ChronoUnit.YEARS.between(fechaInicial, fechaFinal);
 
+        LocalDate fechaHoy = LocalDate.now();
+        
+        
+        
+        
         // Imprime los resultados
 //      System.out.println("Días de diferencia: " + diasDeDiferencia);
 //      System.out.println("Semanas de diferencia: " + semanasDeDiferencia);
