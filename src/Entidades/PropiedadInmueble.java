@@ -17,6 +17,7 @@ public class PropiedadInmueble {
     private String direccion;
     private EstadoLocal estadoLocal;
     private float precioTrazado;
+    private Vendedor vendedor;
     private Inspector inspector;
     private TipoLocal tipoLocal;
     private Zona zona;
@@ -24,20 +25,21 @@ public class PropiedadInmueble {
     
     public PropiedadInmueble(){}
 
-    public PropiedadInmueble(Propietario propietario, String accesibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
+    public PropiedadInmueble(Propietario propietario, String accesibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Vendedor vendedor, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
         this.propietario = propietario;
         this.accesibilidad = accesibilidad;
         this.caracteristicasString = caracteristicasString;
         this.direccion = direccion;
         this.estadoLocal = estadoLocal;
         this.precioTrazado = precioTrazado;
+        this.vendedor = vendedor;
         this.inspector = inspector;
         this.tipoLocal = tipoLocal;
         this.zona = zona;
         this.disponibilidad = disponibilidad;
     }
 
-    public PropiedadInmueble(int idPropiedadInmueble, Propietario propietario, String accesibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
+    public PropiedadInmueble(int idPropiedadInmueble, Propietario propietario, String accesibilidad, String caracteristicasString, String direccion, EstadoLocal estadoLocal, float precioTrazado, Vendedor vendedor, Inspector inspector, TipoLocal tipoLocal, Zona zona, boolean disponibilidad) {
         this.idPropiedadInmueble = idPropiedadInmueble;
         this.propietario = propietario;
         this.accesibilidad = accesibilidad;
@@ -45,6 +47,7 @@ public class PropiedadInmueble {
         this.direccion = direccion;
         this.estadoLocal = estadoLocal;
         this.precioTrazado = precioTrazado;
+        this.vendedor = vendedor;
         this.inspector = inspector;
         this.tipoLocal = tipoLocal;
         this.zona = zona;
@@ -105,6 +108,14 @@ public class PropiedadInmueble {
 
     public void setPrecioTrazado(float precioTrazado) {
         this.precioTrazado = precioTrazado;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
 
     public Inspector getInspector() {

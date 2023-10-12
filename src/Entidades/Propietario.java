@@ -10,29 +10,29 @@ package Entidades;
  * @author pcdlc
  */
 public class Propietario {
-  private int idPropietario;
-   private String nombre;
-   private String apellido;
+
+    private int idPropietario;
+    private String nombre;
+    private String apellido;
     private int dni;
     private String domicilio;
-   private int telefono;
-    
-   
-   public Propietario(){
-       
-   }
-    
-    public Propietario (String nombre, String apellido, int dni, int telefono, String domicilio){
-        
+    private int telefono;
+
+    public Propietario() {
+
+    }
+
+    public Propietario(String nombre, String apellido, int dni, int telefono, String domicilio) {
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
         this.domicilio = domicilio;
     }
-    
-    public Propietario (int Propietario , String nombre, String apellido, int dni, int telefono, String domicilio){
-       this.idPropietario = idPropietario;
+
+    public Propietario(int Propietario, String nombre, String apellido, int dni, int telefono, String domicilio) {
+        this.idPropietario = idPropietario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -88,15 +88,8 @@ public class Propietario {
         this.telefono = telefono;
     }
 
- 
-    
-    
-    
-    
-
- @Override
-public String toString() {
-    return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + "]";
-} 
+    @Override
+    public String toString() {
+        return nombre + " " + apellido;
+    }
 }
-    

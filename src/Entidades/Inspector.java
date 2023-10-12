@@ -74,7 +74,7 @@ public class Inspector {
 
     @Override
     public String toString() {
-        return "Inspector{" + "idInspector=" + idInspector + ", nombre=" + nombre + ", apellido=" + apellido + ", especialidad=" + especialidad + ", estado=" + estado + '}';
+        return nombre + " " + apellido ;
     }
     
     

@@ -315,7 +315,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
             jlabelDNI.setEnabled(true);
             jlabelDNI.setText("No puede estar vacío");
             jlabelDNI.setForeground(Color.red.darker());
-            
+            camposIniciales();
         } else {
             for (int i = 0; i < armoDNI.length; i++) {
                 chequeoError = String.valueOf(armoDNI[i]).toLowerCase();
@@ -539,6 +539,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         jLabelID.setText(propId);
         jLabelID.setForeground(Color.black);
         jTPropietarioDNI.setText(propDNI);
+        jTPropietarioDNI.setForeground(Color.black);
         jTPropietarioNombre.setText(propNombre);
         jTPropietarioApellido.setText(propApellido);
         jTPropietarioDomicilio.setText(propDireccion);
@@ -576,6 +577,11 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         temp.setDomicilio(jTPropietarioDomicilio.getText());
         temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
         abmPropietario.agrearPropietario(temp);
+        temp = abmPropietario.buscoxDNI(Integer.parseInt(jTPropietarioDNI.getText()));
+        modeloProp.addRow(new Object[]{temp.getIdPropietario(),temp.getNombre(),temp.getApellido(),
+                        temp.getDni(),temp.getDomicilio(),temp.getTelefono()});
+        camposIniciales();
+        jTPropietarioDNI.selectAll();
     }//GEN-LAST:event_jbtAgregarPropActionPerformed
 
     private void jbtModificarPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtModificarPropActionPerformed
@@ -588,6 +594,10 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         temp.setDomicilio(jTPropietarioDomicilio.getText());
         temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
         abmPropietario.modificarPropietario(temp);
+        abmPropietario.buscopPropietario(Integer.parseInt(jTPropietarioDNI.getText()));
+        borroFilas();
+        modeloProp.addRow(new Object[]{temp.getIdPropietario(),temp.getNombre(),temp.getApellido(),
+                        temp.getDni(),temp.getDomicilio(),temp.getTelefono()});
     }//GEN-LAST:event_jbtModificarPropActionPerformed
 
 
@@ -638,11 +648,21 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
     public void camposIniciales() {
         jbtAgregarProp.setEnabled(false);
         jbtModificarProp.setEnabled(false);
-        jbtCancelarProp.setEnabled(false);
-        jTPropietarioDomicilio.setEnabled(false);
+        jbtCancelarProp.setEnabled(true);
+//        jTPropietarioDNI.setText("Ingrese DNI");
+//        jTPropietarioDNI.setForeground(Color.gray);
         jTPropietarioNombre.setEnabled(false);
+        jTPropietarioNombre.setText("Nombre");
+        jTPropietarioNombre.setForeground(Color.gray);
         jTPropietarioApellido.setEnabled(false);
+        jTPropietarioApellido.setText("Apellido");
+        jTPropietarioApellido.setForeground(Color.gray);
+        jTPropietarioDomicilio.setEnabled(false);
+        jTPropietarioDomicilio.setText("Domicilio");
+        jTPropietarioDomicilio.setForeground(Color.gray);
         jTPropietarioTelefono.setEnabled(false);
+        jTPropietarioTelefono.setText("Teléfono");
+        jTPropietarioTelefono.setForeground(Color.gray);
     }
 
     public void habilitoModificar() {

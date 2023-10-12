@@ -37,7 +37,7 @@ public class PropietarioData {
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
                 prop.setIdPropietario(1);
-                JOptionPane.showMessageDialog(null, "El propietario se ha agregado correctamente");
+                //JOptionPane.showMessageDialog(null, "El propietario se ha agregado correctamente");
             }
             ps.close();
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class PropietarioData {
             ps.setInt(6, prop.getIdPropietario());
             int valor =ps.executeUpdate();
             if(valor>0){
-                JOptionPane.showMessageDialog(null, "Se ha actualizado el propietario");
+                //JOptionPane.showMessageDialog(null, "Se ha actualizado el propietario");
             }
             ps.close();
         } catch (SQLException e) {
@@ -115,6 +115,25 @@ public class PropietarioData {
     }
     
     
-    
+    public Propietario buscoxDNI(int dni){
+        Propietario prop=new Propietario();
+        String sql="SELECT * FROM propietario WHERE dni=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                prop.setIdPropietario(rs.getInt(1));
+                prop.setDni(rs.getInt(2));
+                prop.setNombre(rs.getString(3));
+                prop.setApellido(rs.getString(4));
+                prop.setDomicilio(rs.getString(5));
+                prop.setTelefono(rs.getInt(6));
+            }
+        } catch (Exception e) {
+        }
+        
+        return prop;
+    }
     
 }

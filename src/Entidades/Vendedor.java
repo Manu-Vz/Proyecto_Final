@@ -70,7 +70,7 @@ public class Vendedor {
 
     @Override
     public String toString() {
-        return "Vendedor{" + "idVendedor=" + idVendedor + ", nombre=" + nombre + ", apellido=" + apellido + ", cantidadVentas=" + cantidadVentas + ", estado=" + estado + '}';
+        return  nombre + " " + apellido ;
     }
     
 }
