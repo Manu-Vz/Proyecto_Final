@@ -46,7 +46,7 @@ public class VendedorData {
     public void modificarVendedor(Vendedor vend){
         String sql="UPDATE vendedor SET nombre=?,apellido=?,cantidadVentas=?,estado=? WHERE idVendedor=?";
         try {
-            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, vend.getNombre());
             ps.setString(2, vend.getApellido());
             ps.setInt(3, vend.getCantidadVentas());
@@ -105,5 +105,26 @@ public class VendedorData {
         } catch (SQLException e) {
         }
         return temp;
+    }
+    
+    public void actualizarCantidadVentas(int idVend){
+        String sql="SELECT COUNT(idPropiedad) FROM propiedadInmueble WHERE idVendedor = ?";
+        String cadena="UPDATE vendedor set cantidadVentas = ? where idVendedor = ?";
+        int contador = 0;
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idVend);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {                
+                contador = rs.getInt(1);
+            }
+            //Acá actualizo la cantidad de ventas de el vendedor
+            PreparedStatement ps2=con.prepareStatement(cadena);
+            ps2.setInt(1, contador);
+            ps2.setInt(2, idVend);
+            int valor = ps2.executeUpdate();
+        } catch (SQLException e) {
+        }
+        
     }
 }

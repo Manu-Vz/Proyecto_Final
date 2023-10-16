@@ -35,7 +35,7 @@ public class PropiedadData {
                   
     }
     
-    public void guardarPropiedad(PropiedadInmueble prop){
+    public PropiedadInmueble guardarPropiedad(PropiedadInmueble prop){
         String sql="INSERT INTO propiedadInmueble(idpropietario,accesibilidad,caracteristicas,direccion,"
                 + "idEstadoLocal,precioTrazado,idVendedor,idInspector,idTipoLocal,idZona,disponibilidad)"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -56,19 +56,20 @@ public class PropiedadData {
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
                 prop.setIdPropiedadInmueble(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se agregó la propiedad correctamente");
+                //JOptionPane.showMessageDialog(null, "Se agregó la propiedad correctamente");
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al agregar la propiedad "+e.getMessage());
         }
+        return prop;
     }
     
     public void modificarpropiedad(PropiedadInmueble prop){
         //idpropietario,accesibilidad,caracteristicas,direccion,
         //idEstadoLocal,precioTrazado,idInspector,idTipoLocal,idZona,disponibilidad
         String sql="UPDATE propiedadInmueble SET idPropietario=?, accesibilidad=?, caracteristicas=?, "
-                + "direccion=?, idEstadoLocal=?, precioTrazado=?, idVendedor=?, idInspector=?, idTipoLocal=?, idZona=?, disponibilidad=?"
+                + "direccion=?, idEstadoLocal=?, precioTrazado=?, idVendedor=?, idInspector=?, idTipoLocal=?, idZona=?, disponibilidad=? "
                 + "WHERE idPropiedad=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -86,7 +87,7 @@ public class PropiedadData {
             ps.setInt(12, prop.getIdPropiedadInmueble());
             int valor=ps.executeUpdate();
             if(valor>0){
-                JOptionPane.showMessageDialog(null, "La propiedad se ha actualizado correctamente");
+                //JOptionPane.showMessageDialog(null, "La propiedad se ha actualizado correctamente");
             }
             ps.close();
         } catch (SQLException e) {
@@ -150,6 +151,59 @@ public class PropiedadData {
             JOptionPane.showMessageDialog(null, "Error a acceder a los datos de la tabla "+e.getMessage());
         }
         return listado;
+    }
+    
+    public List<PropiedadInmueble> rangoPrecios(float ini,float fin){
+        List<PropiedadInmueble> elListado = new ArrayList();
+        PropiedadInmueble rangoProp = null;
+        Propietario rangoPropietario = null;
+        EstadoLocal rangoEstadoLocal = null;
+        TipoLocal rangoTipoLocal = null;
+        Inspector rangoInspector = null;
+        Vendedor rangoVendedor = null;
+        Zona rangoZona = null;
+        String sql = "SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
+                + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
+                + "FROM propiedadInmueble pi JOIN propietario prop on(pi.idPropietario=prop.idPropietario) "
+                + "JOIN estadoLocal el on(pi.idEstadoLocal=el.idEstadoLocal) "
+                + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
+                + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
+                + "JOIN zona z on(pi.idZona=z.idZona) "
+                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.precioTRazado > ? and pi.precioTrazado < ?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setFloat(1, ini);
+            ps.setFloat(2, fin);
+            ResultSet rs=ps.executeQuery();
+            
+            while (rs.next()){
+                //Construyo los objetos para el inmueble
+                rangoPropietario = abmProp.buscopPropietario(rs.getInt("idPropietario"));
+                rangoEstadoLocal = abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
+                rangoTipoLocal = abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
+                rangoInspector = abmInsp.buscoInspector(rs.getInt("idInspector"));
+                rangoVendedor = abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                rangoZona = abmZona.buscarZona(rs.getInt("idZona"));
+                //Construyo el objeto inmueble para agragar al listado
+                rangoProp = new PropiedadInmueble();
+                rangoProp.setIdPropiedadInmueble(rs.getInt(1));
+                rangoProp.setPropietario(rangoPropietario);
+                rangoProp.setAccesibilidad(rs.getString("accesibilidad"));
+                rangoProp.setCaracteristicasString(rs.getString("caracteristicas"));
+                rangoProp.setDireccion(rs.getString("direccion"));
+                rangoProp.setEstadoLocal(rangoEstadoLocal);
+                rangoProp.setPrecioTrazado(rs.getFloat("precioTrazado"));
+                rangoProp.setVendedor(rangoVendedor);
+                rangoProp.setInspector(rangoInspector);
+                rangoProp.setTipoLocal(rangoTipoLocal);
+                rangoProp.setZona(rangoZona);
+                rangoProp.setDisponibilidad(rs.getBoolean("disponibilidad"));
+                elListado.add(rangoProp);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
+        }
+        return elListado;
     }
     
     public PropiedadInmueble buscarPropiedadPorId (int id){
@@ -255,6 +309,7 @@ public class PropiedadData {
              elInmueble.setDisponibilidad(rs.getBoolean(12));
              listado.add(elInmueble);
             }
+            ps.close();
         } catch (SQLException e) {
         }
         
@@ -262,6 +317,108 @@ public class PropiedadData {
         return listado;
     }
     
-        
+    public List<PropiedadInmueble> busquedaXZona(int idZona){
+        List<PropiedadInmueble> listaXZona= new ArrayList();
+        PropiedadInmueble zonaInmueble=null;
+        Propietario zonaPropietario=null;
+        TipoLocal zonaTipo=null;
+        EstadoLocal zonaEstado=null;
+        Inspector zonainsInspector=null;
+        Vendedor zonaVendedor=null;
+        Zona laZona=null;
+        String sqlZona="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
+                + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
+                + "FROM propiedadInmueble pi JOIN propietario prop on(pi.idPropietario=prop.idPropietario) "
+                + "JOIN estadoLocal el on(pi.idEstadoLocal=el.idEstadoLocal) "
+                + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
+                + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
+                + "JOIN zona z on(pi.idZona=z.idZona)"
+                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.idZona = ?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sqlZona);
+            ps.setInt(1, idZona);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                //Empiezo a buscar los datos para construir los objetos relacionados con el inmueble
+                zonaPropietario=abmProp.buscopPropietario(rs.getInt("idPropietario"));
+                zonaTipo=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
+                zonaEstado=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
+                zonainsInspector=abmInsp.buscoInspector(rs.getInt("idInspector"));
+                zonaVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                laZona=abmZona.buscarZona(rs.getInt("idZona"));
+                //Empiezo a construir el objeto inmueble
+                zonaInmueble = new PropiedadInmueble();
+                zonaInmueble.setIdPropiedadInmueble(rs.getInt(1));
+                zonaInmueble.setPropietario(zonaPropietario);
+                zonaInmueble.setAccesibilidad(rs.getString(3));
+                zonaInmueble.setCaracteristicasString(rs.getString(4));
+                zonaInmueble.setDireccion(rs.getString(5));
+                zonaInmueble.setEstadoLocal(zonaEstado);
+                zonaInmueble.setPrecioTrazado(rs.getFloat(7));
+                zonaInmueble.setVendedor(zonaVendedor);
+                zonaInmueble.setInspector(zonainsInspector);
+                zonaInmueble.setTipoLocal(zonaTipo);
+                zonaInmueble.setZona(laZona);
+                zonaInmueble.setDisponibilidad(rs.getBoolean(12));
+                listaXZona.add(zonaInmueble);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
+        }
+        return listaXZona;
     }
+    
+    
+    public List<PropiedadInmueble> listadoInmueblexTipo(int idTipo){
+        List<PropiedadInmueble> laLista= new ArrayList();
+        PropiedadInmueble tipoProp=null;
+        Propietario tipoPropietario=null;
+        TipoLocal elTipoLocal=null;
+        EstadoLocal tipoEstadoLocal=null;
+        Inspector tipoInspector=null;
+        Vendedor tipoVendedor=null;
+        Zona tipoZona=null;
+        String cadena="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
+                + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
+                + "FROM propiedadInmueble pi JOIN propietario prop on(pi.idPropietario=prop.idPropietario) "
+                + "JOIN estadoLocal el on(pi.idEstadoLocal=el.idEstadoLocal) "
+                + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
+                + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
+                + "JOIN zona z on(pi.idZona=z.idZona)"
+                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.idTipoLocal = ?";
+        try {
+            PreparedStatement ps=con.prepareStatement(cadena);
+            ps.setInt(1, idTipo);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                tipoPropietario=abmProp.buscopPropietario(rs.getInt("idPropietario"));
+                elTipoLocal=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
+                tipoEstadoLocal=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
+                tipoInspector=abmInsp.buscoInspector(rs.getInt("idInspector"));
+                tipoVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                tipoZona=abmZona.buscarZona(rs.getInt("idZona"));
+                tipoProp =new PropiedadInmueble();
+                tipoProp.setIdPropiedadInmueble(rs.getInt("idPropiedad"));
+                tipoProp.setPropietario(tipoPropietario);
+                tipoProp.setAccesibilidad(rs.getString("accesibilidad"));
+                tipoProp.setCaracteristicasString(rs.getString("caracteristicas"));
+                tipoProp.setDireccion(rs.getString("direccion"));
+                tipoProp.setEstadoLocal(tipoEstadoLocal);
+                tipoProp.setPrecioTrazado(rs.getFloat("precioTrazado"));
+                tipoProp.setVendedor(tipoVendedor);
+                tipoProp.setInspector(tipoInspector);
+                tipoProp.setTipoLocal(elTipoLocal);
+                tipoProp.setZona(tipoZona);
+                tipoProp.setDisponibilidad(rs.getBoolean("disponibilidad"));
+                laLista.add(tipoProp);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
+        }
+        
+        return laLista;
+    }
+    
+        
+}
 
