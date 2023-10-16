@@ -117,6 +117,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         comboDisponibilidad();
         comboBusquedaxTipo();
         camposInicialTabAgregar();
+        camposInicioxTipo();
     }
 
     /**
@@ -1794,6 +1795,11 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jtPrecio.setText("Precio");
         jLIdPropiedad.setText("Identificador");
         jtPrecio.setForeground(Color.gray);
+    }
+    
+    private void camposInicioxTipo(){
+        jtPrecioFinal.setEnabled(false);
+        jbtBuscarXPrecio.setEnabled(false);
     }
 
     public void borroFilas() {
