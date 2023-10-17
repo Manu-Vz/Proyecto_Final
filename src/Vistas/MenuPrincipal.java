@@ -105,6 +105,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmInmobiliaria.add(jmiDatosPropietarios);
 
         jmiDatosInquilinos.setText("Datos de Inquilinos");
+        jmiDatosInquilinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDatosInquilinosActionPerformed(evt);
+            }
+        });
         jmInmobiliaria.add(jmiDatosInquilinos);
 
         jmiDatosPropiedades.setText("Datos de Propiedades");
@@ -170,6 +175,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         de.setVisible(true);
         escritorio.add(de);
     }//GEN-LAST:event_jmiDatosEmpleadosActionPerformed
+
+    private void jmiDatosInquilinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDatosInquilinosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionInquilinos GI = new GestionInquilinos();
+        GI.setVisible(true);
+        escritorio.add(GI);
+    }//GEN-LAST:event_jmiDatosInquilinosActionPerformed
 
     /**
      * @param args the command line arguments
