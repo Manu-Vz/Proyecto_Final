@@ -6,8 +6,9 @@ package Vistas;
 
 import AccesoDatos.VendedorData;
 import Entidades.Vendedor;
-import java.util.ArrayList;
+import java.awt.Color;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -109,6 +110,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
 
         jtfNombreVendedor.setForeground(new java.awt.Color(204, 204, 204));
         jtfNombreVendedor.setText("Nombre");
+        jtfNombreVendedor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfNombreVendedorFocusGained(evt);
+            }
+        });
         jtfNombreVendedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfNombreVendedorKeyReleased(evt);
@@ -124,6 +130,16 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
 
         jtfApellidoVendedor.setForeground(new java.awt.Color(204, 204, 204));
         jtfApellidoVendedor.setText("Apellido");
+        jtfApellidoVendedor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfApellidoVendedorFocusGained(evt);
+            }
+        });
+        jtfApellidoVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfApellidoVendedorActionPerformed(evt);
+            }
+        });
 
         jtfIdVendedor.setEditable(false);
 
@@ -138,6 +154,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtTablaVendedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTablaVendedoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtTablaVendedores);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -147,10 +168,25 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jLabel5.setText("ID:");
 
         jbAgregarVendedor.setText("Agregar");
+        jbAgregarVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarVendedorActionPerformed(evt);
+            }
+        });
 
         jbModificarVendedor.setText("Modificar");
+        jbModificarVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarVendedorActionPerformed(evt);
+            }
+        });
 
         jbCancelarVendedor.setText("Cancelar");
+        jbCancelarVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarVendedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpVendedoresLayout = new javax.swing.GroupLayout(jpVendedores);
         jpVendedores.setLayout(jpVendedoresLayout);
@@ -375,6 +411,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
 
     private void jbNuevoVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoVendedorActionPerformed
         habilitoCampos();
+        jbAgregarVendedor.setEnabled(true);
     }//GEN-LAST:event_jbNuevoVendedorActionPerformed
 
     private void jtfNombreVendedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreVendedorKeyReleased
@@ -391,7 +428,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 if (jbAgregarVendedor.isEnabled()) {
                     jbAgregarVendedor.setEnabled(false);
                 }
-                modeloV.addRow(new Object[]{vend.getNombre(),vend.getApellido(),vend.getCantidadVentas(),vend.isEstado()});
+                modeloV.addRow(new Object[]{vend.getIdVendedor(),vend.getNombre(),vend.getApellido(),vend.getCantidadVentas(),vend.isEstado()});
             }else{
                 if (modeloV.getRowCount()==0) {
                     jbNuevoVendedor.setEnabled(true);
@@ -401,6 +438,99 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jtfNombreVendedorKeyReleased
 
+    private void jbAgregarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarVendedorActionPerformed
+        String castNombreVendedor = jtfNombreVendedor.getText();
+        int valorCombo = jcbEstadoVendedor.getSelectedIndex();
+        boolean activo = false;
+        if (valorCombo==0) {
+            activo=true;
+        }
+        tempVendedor = new Vendedor();
+        tempVendedor.setNombre(castNombreVendedor);
+        tempVendedor.setApellido(jtfApellidoVendedor.getText());
+        //tempVendedor.setCantidadVentas(WIDTH);
+        tempVendedor.setEstado(activo);
+        abmVendedorData.agregarVendedor(tempVendedor);
+        resetearCampos();
+        camposIniciales();
+    }//GEN-LAST:event_jbAgregarVendedorActionPerformed
+
+    private void jbModificarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarVendedorActionPerformed
+        tempVendedor = new Vendedor();
+        
+            int idVendedor = Integer.parseInt(jtfIdVendedor.getText());
+            tempVendedor.setIdVendedor(idVendedor);
+            tempVendedor.setNombre(jtfNombreVendedor.getText());
+            tempVendedor.setApellido(jtfApellidoVendedor.getText());
+            int valorEstado = jcbEstadoVendedor.getSelectedIndex();
+            boolean activo = false;
+            if (valorEstado==0) {
+                activo = true;
+            }
+            tempVendedor.setEstado(activo);
+            abmVendedorData.modificarVendedor(tempVendedor);
+            resetearCampos();
+            borroFilasVendedor();
+            modeloV.addRow(new Object[]{tempVendedor.getIdVendedor(),tempVendedor.getNombre(),tempVendedor.getApellido(),tempVendedor.getCantidadVentas(),tempVendedor.isEstado()});
+    }//GEN-LAST:event_jbModificarVendedorActionPerformed
+
+    private void jtTablaVendedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaVendedoresMouseClicked
+        jbNuevoVendedor.setEnabled(false);
+        int valorVendedor = jtTablaVendedores.getSelectedRow();
+        String tomoIdVendedor = String.valueOf(modeloV.getValueAt(valorVendedor, 0));
+        String tomoNombreVendedor = String.valueOf(modeloV.getValueAt(valorVendedor, 1));
+        String tomoApellidoVendedor = String.valueOf(modeloV.getValueAt(valorVendedor, 2));
+        //String tomoCantidadVentas = String.valueOf(modeloV.getValueAt(valorVendedor, 2));
+        String tomoEstadoVendedor = String.valueOf(modeloV.getValueAt(valorVendedor, 4));
+        jtfIdVendedor.setText(tomoIdVendedor);
+        jtfNombreVendedor.setText(tomoNombreVendedor);
+        jtfApellidoVendedor.setText(tomoApellidoVendedor);
+        if (tomoEstadoVendedor.equals("true")) {
+            jcbEstadoVendedor.setSelectedIndex(0);
+        } else {
+            jcbEstadoVendedor.setSelectedIndex(1);
+        }
+        jbModificarVendedor.setEnabled(true);
+        habilitoCampos();
+            
+        
+    }//GEN-LAST:event_jtTablaVendedoresMouseClicked
+
+    private void jbCancelarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarVendedorActionPerformed
+        jtfNombreVendedor.setText("");
+        jtfApellidoVendedor.setText("");
+        jtfIdVendedor.setText("");
+        borroFilasVendedor();
+        camposIniciales();
+    }//GEN-LAST:event_jbCancelarVendedorActionPerformed
+
+    private void jtfApellidoVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfApellidoVendedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfApellidoVendedorActionPerformed
+
+    private void jtfNombreVendedorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNombreVendedorFocusGained
+        if (jtfNombreVendedor.getText().isEmpty()) {
+            jtfNombreVendedor.setText("Nombre");
+            jtfNombreVendedor.setForeground(Color.gray);
+        } else if( jtfNombreVendedor.getText().equals("Nombre")){
+            jtfNombreVendedor.selectAll();
+            jtfNombreVendedor.setForeground(Color.black);            
+        }
+    }//GEN-LAST:event_jtfNombreVendedorFocusGained
+
+    private void jtfApellidoVendedorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfApellidoVendedorFocusGained
+        if (jtfApellidoVendedor.getText().isEmpty()) {
+            jtfApellidoVendedor.setText("Apellido");
+            jtfApellidoVendedor.setForeground(Color.gray);
+        } else if( jtfApellidoVendedor.getText().equals("Apellido")){
+            jtfApellidoVendedor.selectAll();
+            jtfApellidoVendedor.setForeground(Color.black);
+            
+            
+        }
+    }//GEN-LAST:event_jtfApellidoVendedorFocusGained
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -439,12 +569,14 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     
     private void armarTablas(){
+        modeloV.addColumn("ID");
         modeloV.addColumn("Nombre");
         modeloV.addColumn("Apellido");
         modeloV.addColumn("Cantidad de Ventas");
         modeloV.addColumn("Estado");
         jtTablaVendedores.setModel(modeloV);
         
+        modeloI.addColumn("ID");
         modeloI.addColumn("Nombre");
         modeloI.addColumn("Apellido");
         modeloI.addColumn("Especialidad");
@@ -455,24 +587,29 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     private void camposIniciales(){
         jbNuevoVendedor.setEnabled(false);
         jtfApellidoVendedor.setEnabled(false);
+        jtfApellidoInspector.setText("Apellido");
+        jtfApellidoVendedor.setForeground(Color.gray);
         jcbEstadoVendedor.setEnabled(false);
         jbAgregarVendedor.setEnabled(false);
         jbModificarVendedor.setEnabled(false);
-        jbCancelarVendedor.setEnabled(false);
         jtfIdVendedor.setEnabled(false);
+        jbCancelarVendedor.setEnabled(true);
         
         jtfNombreVendedor.requestFocus();
         
         jbNuevoInspector.setEnabled(false);
         jtfApellidoInspector.setEnabled(false);
+        jtfApellidoInspector.setText("Apellido");
+        jtfApellidoInspector.setForeground(Color.gray);
         jtfEspecialidadInspector.setEnabled(false);
         jcbEstadoInspector.setEnabled(false);
         jbAgregarInspector.setEnabled(false);
         jbModificarInspector.setEnabled(false);
-        jbCancelarInspector.setEnabled(false);
         jtfIdInspector.setEnabled(false);
+        jbCancelarInspector.setEnabled(true);
         
         jtfNombreInspector.requestFocus();
+        
     }
     
     private void cargoCombo(){
@@ -506,6 +643,13 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jtfApellidoInspector.setEnabled(true);
         jtfEspecialidadInspector.setEnabled(true);
         jcbEstadoInspector.setEnabled(true);
+    }
+    
+    private void resetearCampos(){
+        jtfNombreVendedor.requestFocus();
+        jtfNombreVendedor.selectAll();
+        jtfApellidoVendedor.setText("");
+        jtfIdVendedor.setText("");
     }
 
 
