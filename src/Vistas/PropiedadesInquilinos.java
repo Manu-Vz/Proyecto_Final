@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author manuv
  */
+
 public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloTabla = null;
@@ -37,6 +38,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         armarComboBoxPrecios();
         armarComboBoxTipoLocal();
         armarTabla();
+        jButton2.setEnabled(false);
     }
 
     
@@ -210,6 +212,11 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
 
     private void ComboBoxZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxZonasActionPerformed
         // TODO add your handling code here:
+        if (ComboBoxLocal.getSelectedIndex() != 0 && 
+                ComboBoxPrecio.getSelectedIndex() != 0 &&
+                ComboBoxZonas.getSelectedIndex() != 0){
+            jButton2.setEnabled(true);
+        }
     }//GEN-LAST:event_ComboBoxZonasActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -218,10 +225,20 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
 
     private void ComboBoxLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxLocalActionPerformed
         // TODO add your handling code here:
+        if (ComboBoxLocal.getSelectedIndex() != 0 && 
+                ComboBoxPrecio.getSelectedIndex() != 0 &&
+                ComboBoxZonas.getSelectedIndex() != 0){
+            jButton2.setEnabled(true);
+        }
     }//GEN-LAST:event_ComboBoxLocalActionPerformed
 
     private void ComboBoxPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxPrecioActionPerformed
         // TODO add your handling code here:
+        if (ComboBoxLocal.getSelectedIndex() != 0 && 
+                ComboBoxPrecio.getSelectedIndex() != 0 &&
+                ComboBoxZonas.getSelectedIndex() != 0){
+            jButton2.setEnabled(true);
+        }
     }//GEN-LAST:event_ComboBoxPrecioActionPerformed
 
     private void ComboBoxZonasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboBoxZonasFocusLost
@@ -234,6 +251,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         ComboBoxLocal.setSelectedIndex(0);
         ComboBoxPrecio.setSelectedIndex(0);
         ComboBoxZonas.setSelectedIndex(0);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
