@@ -132,7 +132,7 @@ public class PropiedadData {
                 
                 //Empiezo armar el la propiedad inmuelble
                 
-                temp.setIdPropiedadInmueble(rs.getInt("idPropiedadInmueble"));
+                temp.setIdPropiedadInmueble(rs.getInt("idPropiedad"));
                 temp.setPropietario(elProp);
                 temp.setAccesibilidad(rs.getString("accesibilidad"));
                 temp.setCaracteristicasString(rs.getString("caracteristicas"));
