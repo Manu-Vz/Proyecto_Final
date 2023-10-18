@@ -210,15 +210,15 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
             nuevo.setNombre(nombreInquilino.getText());
             nuevo.setApellido(apellido.getText());
             if (confirmarCadenaSiEsNumero(cuitInquilino.getText())){
-                condicion = false;
                 nuevo.setCuit(cuitInquilino.getText());
             } else {
+                condicion = false;
                 JOptionPane.showMessageDialog(null, "El CUIT debe contener solo numeros");
             }
             if (confirmarCadenaSiEsNumero(dnigaranteInquilino.getText())){
-                condicion = false;
                 nuevo.setDniGarante(parseInt(dnigaranteInquilino.getText()));
             } else {
+                condicion = false;
                 JOptionPane.showMessageDialog(null, "El DNI del garante debe contener solo numeros");
             }
             nuevo.setLugarTrabajo(lugarDeTrabajoInquilino.getText());
