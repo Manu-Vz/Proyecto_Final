@@ -4,7 +4,9 @@
  */
 package Vistas;
 
+import AccesoDatos.InspectorData;
 import AccesoDatos.VendedorData;
+import Entidades.Inspector;
 import Entidades.Vendedor;
 import java.awt.Color;
 import java.util.List;
@@ -33,8 +35,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     };
     
     List<Vendedor> listarVendedor = null;
+    List<Inspector> listarInspector = null;
     VendedorData abmVendedorData = new VendedorData();
+    InspectorData abmInspectorData = new InspectorData();
     Vendedor tempVendedor = null;
+    Inspector tempInspector = null;
     
     
     public DatosEmpleados() {
@@ -70,6 +75,8 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jbAgregarVendedor = new javax.swing.JButton();
         jbModificarVendedor = new javax.swing.JButton();
         jbCancelarVendedor = new javax.swing.JButton();
+        jlCheckNombreVendedor = new javax.swing.JLabel();
+        jlCheckApellidoVendedor = new javax.swing.JLabel();
         jpInspectores = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jtfNombreInspector = new javax.swing.JTextField();
@@ -86,6 +93,9 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jtTablaInspectores = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jtfEspecialidadInspector = new javax.swing.JTextField();
+        jlCheckNombreInspector = new javax.swing.JLabel();
+        jlCheckApellidoInspector = new javax.swing.JLabel();
+        jlCheckEspecialidadInspector = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -140,6 +150,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 jtfApellidoVendedorActionPerformed(evt);
             }
         });
+        jtfApellidoVendedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfApellidoVendedorKeyReleased(evt);
+            }
+        });
 
         jtfIdVendedor.setEditable(false);
 
@@ -188,6 +203,10 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
+        jlCheckNombreVendedor.setText(" ");
+
+        jlCheckApellidoVendedor.setText(" ");
+
         javax.swing.GroupLayout jpVendedoresLayout = new javax.swing.GroupLayout(jpVendedores);
         jpVendedores.setLayout(jpVendedoresLayout);
         jpVendedoresLayout.setHorizontalGroup(
@@ -204,7 +223,6 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                                 .addComponent(jtfIdVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfApellidoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpVendedoresLayout.createSequentialGroup()
                                 .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpVendedoresLayout.createSequentialGroup()
@@ -217,7 +235,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jbModificarVendedor)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jbCancelarVendedor))))
+                                .addComponent(jbCancelarVendedor))
+                            .addComponent(jlCheckNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jlCheckApellidoVendedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtfApellidoVendedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))))
                     .addGroup(jpVendedoresLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(27, 27, 27)
@@ -233,17 +255,21 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jtfNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbNuevoVendedor))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCheckNombreVendedor)
+                .addGap(9, 9, 9)
                 .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtfApellidoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtfIdVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)))
-                .addGap(26, 26, 26)
+                .addGap(4, 4, 4)
+                .addComponent(jlCheckApellidoVendedor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jcbEstadoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jpVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarVendedor)
                     .addComponent(jbModificarVendedor)
@@ -260,11 +286,41 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
 
         jtfNombreInspector.setForeground(new java.awt.Color(204, 204, 204));
         jtfNombreInspector.setText("Nombre");
+        jtfNombreInspector.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfNombreInspectorFocusGained(evt);
+            }
+        });
+        jtfNombreInspector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNombreInspectorActionPerformed(evt);
+            }
+        });
+        jtfNombreInspector.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfNombreInspectorKeyReleased(evt);
+            }
+        });
 
         jbNuevoInspector.setText("Nuevo Inspector");
+        jbNuevoInspector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoInspectorActionPerformed(evt);
+            }
+        });
 
         jtfApellidoInspector.setForeground(new java.awt.Color(204, 204, 204));
         jtfApellidoInspector.setText("Apellido");
+        jtfApellidoInspector.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfApellidoInspectorFocusGained(evt);
+            }
+        });
+        jtfApellidoInspector.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfApellidoInspectorKeyReleased(evt);
+            }
+        });
 
         jtfIdInspector.setEditable(false);
 
@@ -275,10 +331,25 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jLabel7.setText("Estado:");
 
         jbAgregarInspector.setText("Agregar");
+        jbAgregarInspector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarInspectorActionPerformed(evt);
+            }
+        });
 
         jbModificarInspector.setText("Modificar");
+        jbModificarInspector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarInspectorActionPerformed(evt);
+            }
+        });
 
         jbCancelarInspector.setText("Cancelar");
+        jbCancelarInspector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarInspectorActionPerformed(evt);
+            }
+        });
 
         jtTablaInspectores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,6 +362,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtTablaInspectores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTablaInspectoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtTablaInspectores);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -298,11 +374,27 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
 
         jtfEspecialidadInspector.setForeground(new java.awt.Color(204, 204, 204));
         jtfEspecialidadInspector.setText("Especialidad");
+        jtfEspecialidadInspector.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfEspecialidadInspectorFocusGained(evt);
+            }
+        });
         jtfEspecialidadInspector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfEspecialidadInspectorActionPerformed(evt);
             }
         });
+        jtfEspecialidadInspector.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfEspecialidadInspectorKeyReleased(evt);
+            }
+        });
+
+        jlCheckNombreInspector.setText(" ");
+
+        jlCheckApellidoInspector.setText(" ");
+
+        jlCheckEspecialidadInspector.setText(" ");
 
         javax.swing.GroupLayout jpInspectoresLayout = new javax.swing.GroupLayout(jpInspectores);
         jpInspectores.setLayout(jpInspectoresLayout);
@@ -321,10 +413,15 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jlCheckNombreInspector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtfNombreInspector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
                             .addGroup(jpInspectoresLayout.createSequentialGroup()
-                                .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfEspecialidadInspector)
-                                    .addComponent(jtfApellidoInspector, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                                .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jlCheckEspecialidadInspector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlCheckApellidoInspector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfEspecialidadInspector, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfApellidoInspector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
                                 .addGap(21, 21, 21)
                                 .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jpInspectoresLayout.createSequentialGroup()
@@ -337,8 +434,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jcbEstadoInspector, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jbCancelarInspector))
-                            .addComponent(jtfNombreInspector, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbCancelarInspector))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -350,19 +446,25 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jtfNombreInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbNuevoInspector))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCheckNombreInspector)
+                .addGap(9, 9, 9)
                 .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtfApellidoInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtfIdInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCheckApellidoInspector)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jtfEspecialidadInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jcbEstadoInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCheckEspecialidadInspector)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpInspectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarInspector)
                     .addComponent(jbModificarInspector)
@@ -410,11 +512,13 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfEspecialidadInspectorActionPerformed
 
     private void jbNuevoVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoVendedorActionPerformed
+        
         habilitoCampos();
         jbAgregarVendedor.setEnabled(true);
     }//GEN-LAST:event_jbNuevoVendedorActionPerformed
 
     private void jtfNombreVendedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreVendedorKeyReleased
+       
         borroFilasVendedor();
         camposIniciales();
         String ingresoNombre = jtfNombreVendedor.getText().toLowerCase();
@@ -422,9 +526,18 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         for (Vendedor vend : listarVendedor) {
             String evaluo = vend.getNombre().toLowerCase();
             if (ingresoNombre.isEmpty()) {
+                jlCheckNombreVendedor.setEnabled(true);
+                jlCheckNombreVendedor.setText("No puede estar vacio");
+                jlCheckNombreVendedor.setForeground(Color.red.darker());
                 borroFilasVendedor();
                 camposIniciales();
-            }else if (evaluo.contains(ingresoNombre)) {
+                if (jtfApellidoVendedor.isEnabled()) {
+                    jtfApellidoVendedor.setEnabled(false);
+                }
+            }else{
+                jlCheckNombreVendedor.setEnabled(false);
+                jlCheckNombreVendedor.setText("");
+            }if (evaluo.contains(ingresoNombre)) {
                 if (jbAgregarVendedor.isEnabled()) {
                     jbAgregarVendedor.setEnabled(false);
                 }
@@ -439,6 +552,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfNombreVendedorKeyReleased
 
     private void jbAgregarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarVendedorActionPerformed
+       
         String castNombreVendedor = jtfNombreVendedor.getText();
         int valorCombo = jcbEstadoVendedor.getSelectedIndex();
         boolean activo = false;
@@ -456,6 +570,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAgregarVendedorActionPerformed
 
     private void jbModificarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarVendedorActionPerformed
+        
         tempVendedor = new Vendedor();
         
             int idVendedor = Integer.parseInt(jtfIdVendedor.getText());
@@ -475,6 +590,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarVendedorActionPerformed
 
     private void jtTablaVendedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaVendedoresMouseClicked
+        
         jbNuevoVendedor.setEnabled(false);
         int valorVendedor = jtTablaVendedores.getSelectedRow();
         String tomoIdVendedor = String.valueOf(modeloV.getValueAt(valorVendedor, 0));
@@ -497,6 +613,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtTablaVendedoresMouseClicked
 
     private void jbCancelarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarVendedorActionPerformed
+        
         jtfNombreVendedor.setText("");
         jtfApellidoVendedor.setText("");
         jtfIdVendedor.setText("");
@@ -509,6 +626,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfApellidoVendedorActionPerformed
 
     private void jtfNombreVendedorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNombreVendedorFocusGained
+       
         if (jtfNombreVendedor.getText().isEmpty()) {
             jtfNombreVendedor.setText("Nombre");
             jtfNombreVendedor.setForeground(Color.gray);
@@ -519,6 +637,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfNombreVendedorFocusGained
 
     private void jtfApellidoVendedorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfApellidoVendedorFocusGained
+        
         if (jtfApellidoVendedor.getText().isEmpty()) {
             jtfApellidoVendedor.setText("Apellido");
             jtfApellidoVendedor.setForeground(Color.gray);
@@ -529,6 +648,191 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_jtfApellidoVendedorFocusGained
+
+    private void jbNuevoInspectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoInspectorActionPerformed
+        habilitoCampos();
+        jbAgregarInspector.setEnabled(true);
+    }//GEN-LAST:event_jbNuevoInspectorActionPerformed
+
+    private void jtfNombreInspectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreInspectorActionPerformed
+        
+    }//GEN-LAST:event_jtfNombreInspectorActionPerformed
+
+    private void jtfNombreInspectorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreInspectorKeyReleased
+        
+        borroFilasInspector();
+        camposIniciales();
+        String ingresoNombreInspector = jtfNombreInspector.getText().toLowerCase();
+        listarInspector = abmInspectorData.listadoInspectoeres();
+        for (Inspector insp : listarInspector) {
+            String evaluoInsp = insp.getNombre().toLowerCase();
+            if (ingresoNombreInspector.isEmpty()) {
+                jlCheckNombreInspector.setEnabled(true);
+                jlCheckNombreInspector.setText("No puede estar vacio");
+                jlCheckNombreInspector.setForeground(Color.red.darker());
+                borroFilasInspector();
+                camposIniciales();
+                if (jtfApellidoInspector.isEnabled()) {
+                    jtfApellidoInspector.setEnabled(false);                    
+                }
+            }else{
+                jlCheckNombreInspector.setEnabled(false);
+                jlCheckNombreInspector.setText("");
+            
+            }if (evaluoInsp.contains(ingresoNombreInspector)) {
+                if (jbAgregarInspector.isEnabled()) {
+                    jbAgregarInspector.setEnabled(false);
+                }
+                modeloI.addRow(new Object[]{insp.getIdInspector(),insp.getNombre(),insp.getApellido(),insp.getEspecialidad(),insp.isEstado()});
+            }else{
+                if (modeloI.getRowCount()==0) {
+                    jbNuevoInspector.setEnabled(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_jtfNombreInspectorKeyReleased
+
+    private void jbAgregarInspectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarInspectorActionPerformed
+        
+        String castNombreInspector = jtfNombreInspector.getText();
+        int valorComboInspector = jcbEstadoInspector.getSelectedIndex();
+        boolean activo = false;
+        if (valorComboInspector==0) {
+            activo=true;
+        }
+        tempInspector = new Inspector();
+        tempInspector.setNombre(castNombreInspector);
+        tempInspector.setApellido(jtfApellidoInspector.getText());
+        tempInspector.setEspecialidad(jtfEspecialidadInspector.getText());
+        tempInspector.setEstado(activo);
+        abmInspectorData.agregarInspector(tempInspector);
+        resetearCampos();
+        camposIniciales();
+    }//GEN-LAST:event_jbAgregarInspectorActionPerformed
+
+    private void jbModificarInspectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarInspectorActionPerformed
+        
+        tempInspector = new Inspector();
+        
+            int idInspector = Integer.parseInt(jtfIdInspector.getText());
+            tempInspector.setIdInspector(idInspector);
+            tempInspector.setNombre(jtfNombreInspector.getText());
+            tempInspector.setApellido(jtfApellidoInspector.getText());
+            int valorEstadoInspector = jcbEstadoInspector.getSelectedIndex();
+            boolean activo = false;
+            if (valorEstadoInspector==0) {
+                activo = true;
+            }
+            tempInspector.setEstado(activo);
+            abmInspectorData.modificarInspector(tempInspector);
+            resetearCampos();
+            borroFilasInspector();
+            modeloI.addRow(new Object[]{tempInspector.getIdInspector(),tempInspector.getNombre(),tempInspector.getApellido(),tempInspector.getEspecialidad(),tempInspector.isEstado()});
+                                 
+    }//GEN-LAST:event_jbModificarInspectorActionPerformed
+
+    private void jtTablaInspectoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaInspectoresMouseClicked
+        
+        jbNuevoInspector.setEnabled(false);
+        int valorInspector = jtTablaInspectores.getSelectedRow();
+        String tomoIdInspector = String.valueOf(modeloI.getValueAt(valorInspector, 0));
+        String tomoNombreInspector = String.valueOf(modeloI.getValueAt(valorInspector, 1));
+        String tomoApellidoInspector = String.valueOf(modeloI.getValueAt(valorInspector, 2));
+        String tomoEspecialidad = String.valueOf(modeloI.getValueAt(valorInspector, 3));
+        String tomoEstadoInspector = String.valueOf(modeloI.getValueAt(valorInspector, 4));
+        jtfIdInspector.setText(tomoIdInspector);
+        jtfNombreInspector.setText(tomoNombreInspector);
+        jtfApellidoInspector.setText(tomoApellidoInspector);
+        jtfEspecialidadInspector.setText(tomoEspecialidad);
+        if (tomoEstadoInspector.equals("true")) {
+            jcbEstadoInspector.setSelectedIndex(0);
+        } else {
+            jcbEstadoInspector.setSelectedIndex(1);
+        }
+        jbModificarInspector.setEnabled(true);
+        habilitoCampos();
+    }//GEN-LAST:event_jtTablaInspectoresMouseClicked
+
+    private void jtfNombreInspectorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNombreInspectorFocusGained
+        
+        if (jtfNombreInspector.getText().isEmpty()) {
+            jtfNombreInspector.setText("Nombre");
+            jtfNombreInspector.setForeground(Color.gray);
+        } else if (jtfNombreInspector.getText().equals("Nombre")) {
+            jtfNombreInspector.selectAll();
+            jtfNombreInspector.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jtfNombreInspectorFocusGained
+
+    private void jtfApellidoInspectorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfApellidoInspectorFocusGained
+        if (jtfApellidoInspector.getText().isEmpty()) {
+            jtfApellidoInspector.setText("Apellido");
+            jtfApellidoInspector.setForeground(Color.gray);            
+        } else if (jtfApellidoInspector.getText().equals("Apellido")) {
+            jtfApellidoInspector.selectAll();
+            jtfApellidoInspector.setForeground(Color.black);            
+        }
+    }//GEN-LAST:event_jtfApellidoInspectorFocusGained
+
+    private void jtfEspecialidadInspectorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfEspecialidadInspectorFocusGained
+        
+        if (jtfEspecialidadInspector.getText().isEmpty()) {
+            jtfEspecialidadInspector.setText("Especialidad");
+            jtfEspecialidadInspector.setForeground(Color.gray);            
+        } else if (jtfEspecialidadInspector.getText().equals("Especialidad")) {
+            jtfEspecialidadInspector.selectAll();
+            jtfEspecialidadInspector.setForeground(Color.black);            
+        }
+    }//GEN-LAST:event_jtfEspecialidadInspectorFocusGained
+
+    private void jtfApellidoVendedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfApellidoVendedorKeyReleased
+        if (jtfApellidoVendedor.getText().isEmpty()) {
+            jlCheckApellidoVendedor.setEnabled(true);
+            jlCheckApellidoVendedor.setText("No puede estar vacio");
+            jlCheckApellidoVendedor.setForeground(Color.red.darker());
+        }else{
+            jlCheckApellidoVendedor.setEnabled(false);
+            jlCheckApellidoVendedor.setText("");                
+            }
+            
+        
+    }//GEN-LAST:event_jtfApellidoVendedorKeyReleased
+
+    private void jtfApellidoInspectorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfApellidoInspectorKeyReleased
+        if (jtfApellidoInspector.getText().isEmpty()) {
+            jlCheckApellidoInspector.setEnabled(true);
+            jlCheckApellidoInspector.setText("No puede estar vacio");
+            jlCheckApellidoInspector.setForeground(Color.red.darker());
+            if (jtfEspecialidadInspector.isEnabled()) {
+                jtfEspecialidadInspector.setEnabled(false);
+            }
+        }else{
+            jtfEspecialidadInspector.setEnabled(true);
+            jlCheckApellidoInspector.setEnabled(false);
+            jlCheckApellidoInspector.setText("");
+        }
+    }//GEN-LAST:event_jtfApellidoInspectorKeyReleased
+
+    private void jtfEspecialidadInspectorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEspecialidadInspectorKeyReleased
+        if (jtfEspecialidadInspector.getText().isEmpty()) {
+            jlCheckEspecialidadInspector.setEnabled(true);
+            jlCheckEspecialidadInspector.setText("No puede estar vacio");
+            jlCheckEspecialidadInspector.setForeground(Color.red.darker());            
+        }else{
+            jlCheckEspecialidadInspector.setEnabled(false);
+            jlCheckEspecialidadInspector.setText("");
+        }
+    }//GEN-LAST:event_jtfEspecialidadInspectorKeyReleased
+
+    private void jbCancelarInspectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarInspectorActionPerformed
+        
+        jtfNombreInspector.setText("");
+        jtfApellidoInspector.setText("");
+        jtfIdInspector.setText("");
+        jtfEspecialidadInspector.setText("");
+        borroFilasInspector();
+        camposIniciales();
+    }//GEN-LAST:event_jbCancelarInspectorActionPerformed
 
     
 
@@ -555,6 +859,11 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNuevoVendedor;
     private javax.swing.JComboBox<String> jcbEstadoInspector;
     private javax.swing.JComboBox<String> jcbEstadoVendedor;
+    private javax.swing.JLabel jlCheckApellidoInspector;
+    private javax.swing.JLabel jlCheckApellidoVendedor;
+    private javax.swing.JLabel jlCheckEspecialidadInspector;
+    private javax.swing.JLabel jlCheckNombreInspector;
+    private javax.swing.JLabel jlCheckNombreVendedor;
     private javax.swing.JPanel jpInspectores;
     private javax.swing.JPanel jpVendedores;
     private javax.swing.JTable jtTablaInspectores;
@@ -594,6 +903,10 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jbModificarVendedor.setEnabled(false);
         jtfIdVendedor.setEnabled(false);
         jbCancelarVendedor.setEnabled(true);
+        jlCheckNombreVendedor.setEnabled(false);
+        jlCheckNombreVendedor.setText("");
+        jlCheckApellidoVendedor.setEnabled(false);
+        jlCheckApellidoVendedor.setText("");
         
         jtfNombreVendedor.requestFocus();
         
@@ -607,6 +920,12 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         jbModificarInspector.setEnabled(false);
         jtfIdInspector.setEnabled(false);
         jbCancelarInspector.setEnabled(true);
+        jlCheckNombreInspector.setEnabled(false);
+        jlCheckNombreInspector.setText("");
+        jlCheckApellidoInspector.setEnabled(false);
+        jlCheckApellidoInspector.setText("");
+        jlCheckEspecialidadInspector.setEnabled(false);
+        jlCheckEspecialidadInspector.setText("");
         
         jtfNombreInspector.requestFocus();
         
