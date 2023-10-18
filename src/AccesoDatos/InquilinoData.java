@@ -89,7 +89,7 @@ public class InquilinoData {
               inq.setNombre(rs.getString("nombre"));
               inq.setApellido(rs.getString("apellido"));
               inq.setLugarTrabajo(rs.getString("lugarTrabajo"));
-              inq.setDniGarante(rs.getInt("deniGarante"));
+              inq.setDniGarante(rs.getInt("dniGarante"));
               inq.setNombreGarante(rs.getString("nombreGarante"));
               listado.add(inq);
             }

@@ -100,4 +100,7 @@ public class Inquilino {
         return "Inquilino{" + "idInquilino=" + idInquilino + ", cuit=" + cuit + ", nombre=" + nombre + ", apellido=" + apellido + ", lugarTrabajo=" + lugarTrabajo + ", dniGarante=" + dniGarante + ", nombreGarante=" + nombreGarante + '}';
     }
     
+    public String otraForma(){
+        return nombre + " " + apellido;
+    }
 }
