@@ -7,8 +7,10 @@ package Vistas;
 
 import AccesoDatos.ZonaData;
 import Entidades.Zona;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +27,8 @@ public class GestionZonas extends javax.swing.JInternalFrame {
         
     };
     
+    boolean seEstaModificando = false;
+    int Indice;
     
     
     public GestionZonas() {
@@ -33,6 +37,7 @@ public class GestionZonas extends javax.swing.JInternalFrame {
         armarTabla();
         inicializarCampos();
         cargarTabla();
+        ModificandoMensaje.setForeground(Color.red);
     }
 
     /**
@@ -53,7 +58,11 @@ public class GestionZonas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         AgregarZona = new javax.swing.JButton();
         ModificarZona = new javax.swing.JButton();
-        DarBaja = new javax.swing.JButton();
+        CambiarEstado = new javax.swing.JButton();
+        ModificandoMensaje = new javax.swing.JLabel();
+        CancelarModificacion = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Gestion de Zonas");
@@ -69,6 +78,11 @@ public class GestionZonas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jLabel2.setText("Ingrese nombre de la zona");
@@ -76,6 +90,17 @@ public class GestionZonas extends javax.swing.JInternalFrame {
         jtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtNombreActionPerformed(evt);
+            }
+        });
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
+            }
+        });
+
+        jtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtDescripcionKeyReleased(evt);
             }
         });
 
@@ -95,7 +120,21 @@ public class GestionZonas extends javax.swing.JInternalFrame {
             }
         });
 
-        DarBaja.setText("Dar de Baja");
+        CambiarEstado.setText("Cambiar Estado");
+        CambiarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambiarEstadoActionPerformed(evt);
+            }
+        });
+
+        ModificandoMensaje.setText("Actualmente se esta modificando");
+
+        CancelarModificacion.setText("Cancelar");
+        CancelarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarModificacionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,49 +148,56 @@ public class GestionZonas extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(211, 211, 211)
-                                .addComponent(jLabel1))
-                            .addComponent(jLabel2))
+                                .addComponent(jLabel1)))
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(AgregarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60)
-                                .addComponent(ModificarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(DarBaja)
-                                .addGap(116, 116, 116))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CancelarModificacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AgregarZona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(ModificarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CambiarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(ModificandoMensaje)))
+                        .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AgregarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ModificarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(ModificandoMensaje)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(DarBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AgregarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ModificarZona, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CancelarModificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CambiarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 23, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -163,16 +209,100 @@ public class GestionZonas extends javax.swing.JInternalFrame {
 
     private void AgregarZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarZonaActionPerformed
         // TODO add your handling code here:
+        if ((jtDescripcion.getText().isEmpty() || jtNombre.getText().isEmpty()) || seEstaModificando){
+            JOptionPane.showMessageDialog(null, "Para Agregar Una Zona es necesario tener todos los campos completados y no estar modificando ninguno de ellos");
+        } else {
+            ZonaData zd = new ZonaData();
+            Zona z = new Zona(jtNombre.getText(), jtDescripcion.getText(), true);
+            zd.agregarZona(z);
+            limpiarCampos();
+        }
     }//GEN-LAST:event_AgregarZonaActionPerformed
 
     private void ModificarZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarZonaActionPerformed
         // TODO add your handling code here:
+        ZonaData zd = new ZonaData();
+        Zona z = new Zona((int) modeloTabla.getValueAt(Indice, 0), 
+                          jtNombre.getText(), jtDescripcion.getText(),true);
+        zd.modificarZona(z);
+        limpiarCampos();
     }//GEN-LAST:event_ModificarZonaActionPerformed
 
+    private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+        // TODO add your handling code here:
+        ZonaData zd = new ZonaData();
+        List<Zona> lista = new ArrayList();
+        if(!seEstaModificando){
+            if(jtDescripcion.getText().isEmpty()){
+                lista = zd.listarZonasPorNombre(jtNombre.getText());
+
+            } else {
+                lista = zd.listarZonasPorNombre_Y_Descripcion(jtNombre.getText(), 
+                                                        jtDescripcion.getText());
+
+            }
+            cargarTabla(lista);
+        }
+    }//GEN-LAST:event_jtNombreKeyReleased
+
+    private void jtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDescripcionKeyReleased
+        // TODO add your handling code here:
+        ZonaData zd = new ZonaData();
+        List<Zona> lista = new ArrayList();
+        if(!seEstaModificando){
+            if(jtNombre.getText().isEmpty()){
+                lista = zd.listarZonasPorDescripcion(jtDescripcion.getText());
+
+            } else {
+                lista = zd.listarZonasPorNombre_Y_Descripcion(jtNombre.getText(), 
+                                                        jtDescripcion.getText());
+
+            }
+            cargarTabla(lista);
+        }
+    }//GEN-LAST:event_jtDescripcionKeyReleased
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+        int fila = tabla.getSelectedRow();
+               
+        jtDescripcion.setText((String) modeloTabla.getValueAt(fila, 2));
+        jtNombre.setText((String) modeloTabla.getValueAt(fila, 1));
+        
+        ModificarZona.setEnabled(true);
+        CancelarModificacion.setEnabled(true);
+        CambiarEstado.setEnabled(true);
+        ModificandoMensaje.setVisible(true);
+        seEstaModificando = true;
+        Indice = fila;
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void CancelarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarModificacionActionPerformed
+        // TODO add your handling code here:
+        ModificandoMensaje.setVisible(false);
+        ModificarZona.setEnabled(false);
+        CambiarEstado.setEnabled(false);
+        CancelarModificacion.setEnabled(false);
+        seEstaModificando = false;
+    }//GEN-LAST:event_CancelarModificacionActionPerformed
+
+    private void CambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarEstadoActionPerformed
+        // TODO add your handling code here:
+        ZonaData zd = new ZonaData();
+        if((Boolean) modeloTabla.getValueAt(Indice, 3)){
+            zd.darDeBaja((int) modeloTabla.getValueAt(Indice, 0));
+        } else {
+            zd.habilitarZona((int) modeloTabla.getValueAt(Indice, 0));
+        }
+            
+            limpiarCampos();
+    }//GEN-LAST:event_CambiarEstadoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarZona;
-    private javax.swing.JButton DarBaja;
+    private javax.swing.JButton CambiarEstado;
+    private javax.swing.JButton CancelarModificacion;
+    private javax.swing.JLabel ModificandoMensaje;
     private javax.swing.JButton ModificarZona;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -194,18 +324,41 @@ public class GestionZonas extends javax.swing.JInternalFrame {
     public void cargarTabla(){
         ZonaData zd = new ZonaData();
         List<Zona> lista = new ArrayList();
-        lista = zd.listarZonas();
+        lista = zd.listarZonasPorNombre("");
         for(Zona z : lista){
             modeloTabla.addRow(new Object[]{z.getIdZona(), z.getNombre(),
                                             z.getDescripcion(), z.isEstado()});
         }        
     }
 
+    public void cargarTabla(List<Zona> lista){
+        modeloTabla.setRowCount(0);
+        for(Zona z : lista){
+            modeloTabla.addRow(new Object[]{z.getIdZona(), z.getNombre(),
+                                            z.getDescripcion(), z.isEstado()});
+        }
+        if (modeloTabla.getRowCount() == 0){
+            AgregarZona.setEnabled(true);
+        } else {
+            AgregarZona.setEnabled(false);
+        }
+    }
+    
     public void inicializarCampos(){
-        jtDescripcion.setEnabled(false);
         AgregarZona.setEnabled(false);
-        DarBaja.setEnabled(false);
+        CambiarEstado.setEnabled(false);
         ModificarZona.setEnabled(false);
+        ModificandoMensaje.setVisible(false);
+        CancelarModificacion.setEnabled(false);
+        seEstaModificando = false;
+    }
+    
+    public void limpiarCampos(){
+        modeloTabla.setRowCount(0);
+        jtDescripcion.setText("");
+        jtNombre.setText("");
+        cargarTabla();
+        inicializarCampos();
     }
 
 

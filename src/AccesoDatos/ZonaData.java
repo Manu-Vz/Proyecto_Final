@@ -103,6 +103,93 @@ public class ZonaData {
     
     }
     
+    public List<Zona> listarZonasPorNombre (String nombre){
+        List<Zona> listaZona = new ArrayList();
+        Zona zona;
+        String sql = "SELECT * FROM zona WHERE nombre LIKE '"+nombre+"%' AND idZona > 1";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                zona = new Zona();
+                zona.setIdZona(rs.getInt("idZona"));
+                zona.setNombre(rs.getString("nombre"));
+                zona.setDescripcion(rs.getString("descripcion"));
+                zona.setEstado(rs.getBoolean("estado"));
+                listaZona.add(zona);
+            }
+            
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,  "Error al consultar la base de datos "+ex.getMessage());
+        }
+        
+        return listaZona;
+    
+    }
+    
+    public List<Zona> listarZonasPorDescripcion (String descripcion){
+        List<Zona> listaZona = new ArrayList();
+        Zona zona;
+        String sql = "SELECT * FROM zona WHERE descripcion LIKE '"+descripcion+"%' AND idZona > 1";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                zona = new Zona();
+                zona.setIdZona(rs.getInt("idZona"));
+                zona.setNombre(rs.getString("nombre"));
+                zona.setDescripcion(rs.getString("descripcion"));
+                zona.setEstado(rs.getBoolean("estado"));
+                listaZona.add(zona);
+            }
+            
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,  "Error al consultar la base de datos "+ex.getMessage());
+        }
+        
+        return listaZona;
+    
+    }
+    
+    public List<Zona> listarZonasPorNombre_Y_Descripcion (String nombre, String descripcion){
+        List<Zona> listaZona = new ArrayList();
+        Zona zona;
+        String sql = "SELECT * FROM zona WHERE nombre LIKE '"+nombre+"%' AND "
+                + "descripcion LIKE '"+descripcion+"%' AND idZona > 1";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                zona = new Zona();
+                zona.setIdZona(rs.getInt("idZona"));
+                zona.setNombre(rs.getString("nombre"));
+                zona.setDescripcion(rs.getString("descripcion"));
+                zona.setEstado(rs.getBoolean("estado"));
+                listaZona.add(zona);
+            }
+            
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,  "Error al consultar la base de datos "+ex.getMessage());
+        }
+        
+        return listaZona;
+    
+    }
+    
+    
+    
     public Zona buscarZona (int id){
         Zona zona = new Zona();
         String sql = "SELECT * FROM zona WHERE idZona = ?";
@@ -128,6 +215,44 @@ public class ZonaData {
         }
         
         return zona;
+    }
+    
+    public void darDeBaja(int id){
+        String sql = "UPDATE zona SET estado = 0 WHERE idZona = "+ id +"";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            int rs = ps.executeUpdate();
+
+            if(rs > 0){
+                JOptionPane.showMessageDialog(null, "La Zona se ha dado de baja");
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al dar de Baja la zona "+ ex.getMessage());
+        }
+    }
+    
+    public void habilitarZona(int id){
+        String sql = "UPDATE zona SET estado = 1 WHERE idZona = "+ id +"";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            int rs = ps.executeUpdate();
+
+            if(rs > 0){
+                JOptionPane.showMessageDialog(null, "La Zona se ha habilitado correctamente");
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al habilitar la zona "+ ex.getMessage());
+        }
     }
     
 }
