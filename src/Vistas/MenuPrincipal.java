@@ -37,11 +37,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmiPropiedades = new javax.swing.JMenu();
         jMenuItemPropiedades = new javax.swing.JMenuItem();
         jmInmobiliaria = new javax.swing.JMenu();
-        jmiDatosEmpleados = new javax.swing.JMenuItem();
         jmiDatosPropietarios = new javax.swing.JMenuItem();
         jmiDatosInquilinos = new javax.swing.JMenuItem();
         jmiDatosPropiedades = new javax.swing.JMenuItem();
         jmiDatoZonas = new javax.swing.JMenuItem();
+        jmiDatosEmpleados = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jEstadoLocal = new javax.swing.JMenuItem();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -52,11 +54,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1162, Short.MAX_VALUE)
+            .addGap(0, 1104, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 764, Short.MAX_VALUE)
         );
 
         jmInquilinos.setText("Inquilinos");
@@ -88,14 +90,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmInmobiliaria.setText("Inmobiliaria");
 
-        jmiDatosEmpleados.setText("Datos de empleados");
-        jmiDatosEmpleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiDatosEmpleadosActionPerformed(evt);
-            }
-        });
-        jmInmobiliaria.add(jmiDatosEmpleados);
-
         jmiDatosPropietarios.setText("Datos de Propietarios");
         jmiDatosPropietarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,25 +99,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmInmobiliaria.add(jmiDatosPropietarios);
 
         jmiDatosInquilinos.setText("Datos de Inquilinos");
-        jmiDatosInquilinos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiDatosInquilinosActionPerformed(evt);
-            }
-        });
         jmInmobiliaria.add(jmiDatosInquilinos);
 
         jmiDatosPropiedades.setText("Datos de Propiedades");
         jmInmobiliaria.add(jmiDatosPropiedades);
 
         jmiDatoZonas.setText("Datos de Zonas");
-        jmiDatoZonas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiDatoZonasActionPerformed(evt);
-            }
-        });
         jmInmobiliaria.add(jmiDatoZonas);
 
+        jmiDatosEmpleados.setText("Datos de empleados");
+        jmiDatosEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDatosEmpleadosActionPerformed(evt);
+            }
+        });
+        jmInmobiliaria.add(jmiDatosEmpleados);
+
         jMenuBar1.add(jmInmobiliaria);
+
+        jMenu1.setText("Local");
+
+        jEstadoLocal.setText("EstadoLocal");
+        jEstadoLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEstadoLocalActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jEstadoLocal);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -131,13 +135,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -190,21 +192,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(GI);
     }//GEN-LAST:event_jmiDatosInquilinosActionPerformed
 
+    private void jmiDatoZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDatoZonasActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionZonas gz = new GestionZonas();
+        gz.setVisible(true);
+        escritorio.add(gz);
+    }//GEN-LAST:event_jmiDatoZonasActionPerformed
+
     private void jEstadoLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoLocalActionPerformed
         // TODO add your handling code here:
         EstadoLocal stl = new EstadoLocal();
         stl.setVisible(true);
         escritorio.add(stl);
     }//GEN-LAST:event_jEstadoLocalActionPerformed
-
-    private void jmiDatoZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDatoZonasActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        GestionZonas GI = new GestionZonas();
-        GI.setVisible(true);
-        escritorio.add(GI);
-    }//GEN-LAST:event_jmiDatoZonasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,6 +245,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jEstadoLocal;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
