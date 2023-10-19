@@ -22,7 +22,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel modeloComboBoxPrecio = null;
     private DefaultComboBoxModel modeloComboBoxZona = null;
     private DefaultComboBoxModel modeloComboBoxLocal = null;
-    
+    public static int valorIdProp = 0;
     public PropiedadesInquilinos() {
         modeloTabla = new DefaultTableModel(){
          @Override
@@ -122,6 +122,11 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tabla);
 
         jButton1.setText("Alquilar Propiedad");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Borrar Filtros");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +143,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,6 +258,19 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         ComboBoxZonas.setSelectedIndex(0);
         jButton2.setEnabled(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Tomo el id de la propiedad seleccionada para manejar el contrato de alquiler
+        int valorFila=tabla.getSelectedRow();
+       
+        String tomoelId = String.valueOf(modeloTabla.getValueAt(valorFila, 0));
+        valorIdProp=Integer.parseInt(tomoelId);
+        MenuPrincipal.escritorio.repaint();
+        ContratoAlquilerID nuevoCAID = new ContratoAlquilerID();
+        //MenuPrincipal.escritorio.add(nuevoCAID);
+        nuevoCAID.toFront();
+        nuevoCAID.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

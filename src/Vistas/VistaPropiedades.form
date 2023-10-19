@@ -563,11 +563,6 @@
                                       <Component id="jLabelInspector" max="32767" attributes="0"/>
                                       <Component id="jcbInspector" pref="130" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jlabelVendedor" max="32767" attributes="0"/>
-                                      <Component id="jcbVendedor" pref="130" max="32767" attributes="0"/>
-                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace pref="152" max="32767" attributes="0"/>
@@ -579,7 +574,6 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jlabelVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelInspector" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelTipoLocal" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelEstadoLocal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -590,7 +584,6 @@
                               <Component id="jcbEstadoLocal" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcbTipoLocal" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcbInspector" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcbVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcbZona" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -779,24 +772,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtCancelarActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="jcbVendedor">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbVendedorActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jlabelVendedor">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Vendedor"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelInspector">
                   <Properties>

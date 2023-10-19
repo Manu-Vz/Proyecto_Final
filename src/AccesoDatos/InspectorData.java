@@ -64,7 +64,7 @@ public class InspectorData {
     public List<Inspector> listadoInspectoeres(){
         List<Inspector> listado=new ArrayList();
         Inspector temp=null;
-        String sql="SELECT * FROM inspector";
+        String sql="SELECT * FROM inspector where idInspector > 1";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();

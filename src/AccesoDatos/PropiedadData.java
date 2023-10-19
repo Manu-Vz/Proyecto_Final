@@ -37,7 +37,7 @@ public class PropiedadData {
     
     public PropiedadInmueble guardarPropiedad(PropiedadInmueble prop){
         String sql="INSERT INTO propiedadInmueble(idpropietario,accesibilidad,caracteristicas,direccion,"
-                + "idEstadoLocal,precioTrazado,idVendedor,idInspector,idTipoLocal,idZona,disponibilidad)"
+                + "idEstadoLocal,precioTrazado,idInspector,idTipoLocal,idZona,disponibilidad)"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -47,11 +47,11 @@ public class PropiedadData {
             ps.setString(4, prop.getDireccion());
             ps.setInt(5, prop.getEstadoLocal().getIdEstadoLocal());
             ps.setDouble(6, prop.getPrecioTrazado());
-            ps.setInt(7, prop.getVendedor().getIdVendedor());
-            ps.setInt(8, prop.getInspector().getIdInspector());
-            ps.setInt(9, prop.getTipoLocal().getIdTipoLocal());
-            ps.setInt(10, prop.getZona().getIdZona());
-            ps.setBoolean(11, prop.isDisponibilidad());
+            //ps.setInt(7, prop.getVendedor().getIdVendedor());
+            ps.setInt(7, prop.getInspector().getIdInspector());
+            ps.setInt(8, prop.getTipoLocal().getIdTipoLocal());
+            ps.setInt(9, prop.getZona().getIdZona());
+            ps.setBoolean(10, prop.isDisponibilidad());
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
@@ -69,7 +69,7 @@ public class PropiedadData {
         //idpropietario,accesibilidad,caracteristicas,direccion,
         //idEstadoLocal,precioTrazado,idInspector,idTipoLocal,idZona,disponibilidad
         String sql="UPDATE propiedadInmueble SET idPropietario=?, accesibilidad=?, caracteristicas=?, "
-                + "direccion=?, idEstadoLocal=?, precioTrazado=?, idVendedor=?, idInspector=?, idTipoLocal=?, idZona=?, disponibilidad=? "
+                + "direccion=?, idEstadoLocal=?, precioTrazado=?, idInspector=?, idTipoLocal=?, idZona=?, disponibilidad=? "
                 + "WHERE idPropiedad=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -79,12 +79,12 @@ public class PropiedadData {
             ps.setString(4, prop.getDireccion());
             ps.setInt(5, prop.getEstadoLocal().getIdEstadoLocal());
             ps.setDouble(6, prop.getPrecioTrazado());
-            ps.setInt(7, prop.getVendedor().getIdVendedor());
-            ps.setInt(8, prop.getInspector().getIdInspector());
-            ps.setInt(9, prop.getTipoLocal().getIdTipoLocal());
-            ps.setInt(10, prop.getZona().getIdZona());
-            ps.setBoolean(11, prop.isDisponibilidad());
-            ps.setInt(12, prop.getIdPropiedadInmueble());
+            //ps.setInt(7, prop.getVendedor().getIdVendedor());
+            ps.setInt(7, prop.getInspector().getIdInspector());
+            ps.setInt(8, prop.getTipoLocal().getIdTipoLocal());
+            ps.setInt(9, prop.getZona().getIdZona());
+            ps.setBoolean(10, prop.isDisponibilidad());
+            ps.setInt(11, prop.getIdPropiedadInmueble());
             int valor=ps.executeUpdate();
             if(valor>0){
                 //JOptionPane.showMessageDialog(null, "La propiedad se ha actualizado correctamente");
@@ -102,7 +102,7 @@ public class PropiedadData {
         Zona zon=null;
         EstadoLocal elEstado=null;
         TipoLocal elTipo=null;
-        Vendedor ven=null;
+        //Vendedor ven=null;
         Inspector insp=null;
         String sql="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
                 + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
@@ -110,8 +110,7 @@ public class PropiedadData {
                 + "JOIN estadoLocal el on(pi.idEstadoLocal=el.idEstadoLocal) "
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
-                + "JOIN zona z on(pi.idZona=z.idZona) "
-                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor)";
+                + "JOIN zona z on(pi.idZona=z.idZona)";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -120,14 +119,14 @@ public class PropiedadData {
                 elProp=new Propietario();
                 elEstado=new EstadoLocal();
                 elTipo=new TipoLocal();
-                ven=new Vendedor();
+                //ven=new Vendedor();
                 insp=new Inspector();
                 temp=new PropiedadInmueble();
                 zon=abmZona.buscarZona(rs.getInt("idZona"));
                 elProp=abmProp.buscopPropietario(rs.getInt("idpropietario"));
                 elEstado=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
                 elTipo=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
-                ven=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                //ven=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                 insp=abmInsp.buscoInspector(rs.getInt("idInspector"));
                 
                 //Empiezo armar el la propiedad inmuelble
@@ -139,7 +138,7 @@ public class PropiedadData {
                 temp.setDireccion(rs.getString("direccion"));
                 temp.setEstadoLocal(elEstado);
                 temp.setPrecioTrazado(rs.getFloat("precioTrazado"));
-                temp.setVendedor(ven);
+                //temp.setVendedor(ven);
                 temp.setInspector(insp);
                 temp.setTipoLocal(elTipo);
                 temp.setZona(zon);
@@ -160,7 +159,7 @@ public class PropiedadData {
         EstadoLocal rangoEstadoLocal = null;
         TipoLocal rangoTipoLocal = null;
         Inspector rangoInspector = null;
-        Vendedor rangoVendedor = null;
+        //Vendedor rangoVendedor = null;
         Zona rangoZona = null;
         String sql = "SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
                 + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
@@ -169,7 +168,7 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona) "
-                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.precioTRazado > ? and pi.precioTrazado < ?";
+                + "where pi.precioTRazado > ? and pi.precioTrazado < ?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setFloat(1, ini);
@@ -182,7 +181,7 @@ public class PropiedadData {
                 rangoEstadoLocal = abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
                 rangoTipoLocal = abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
                 rangoInspector = abmInsp.buscoInspector(rs.getInt("idInspector"));
-                rangoVendedor = abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                //rangoVendedor = abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                 rangoZona = abmZona.buscarZona(rs.getInt("idZona"));
                 //Construyo el objeto inmueble para agragar al listado
                 rangoProp = new PropiedadInmueble();
@@ -193,7 +192,7 @@ public class PropiedadData {
                 rangoProp.setDireccion(rs.getString("direccion"));
                 rangoProp.setEstadoLocal(rangoEstadoLocal);
                 rangoProp.setPrecioTrazado(rs.getFloat("precioTrazado"));
-                rangoProp.setVendedor(rangoVendedor);
+                //rangoProp.setVendedor(rangoVendedor);
                 rangoProp.setInspector(rangoInspector);
                 rangoProp.setTipoLocal(rangoTipoLocal);
                 rangoProp.setZona(rangoZona);
@@ -212,7 +211,7 @@ public class PropiedadData {
         Zona zon=null;
         EstadoLocal elEstado=null;
         TipoLocal elTipo=null;
-        Vendedor ven=null;
+        //Vendedor ven=null;
         Inspector insp=null;
         String sql="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
                 + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
@@ -221,7 +220,7 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona) "
-                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.idPropiedad = ?";
+                + "where pi.idPropiedad = ?";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -232,14 +231,14 @@ public class PropiedadData {
                 elProp=new Propietario();
                 elEstado=new EstadoLocal();
                 elTipo=new TipoLocal();
-                ven=new Vendedor();
+                //ven=new Vendedor();
                 insp=new Inspector();
                 temp=new PropiedadInmueble();
                 zon=abmZona.buscarZona(rs.getInt("idZona"));
                 elProp=abmProp.buscopPropietario(rs.getInt("idpropietario"));
                 elEstado=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
                 elTipo=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
-                ven=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                //ven=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                 insp=abmInsp.buscoInspector(rs.getInt("idInspector"));
                 
                 //Empiezo armar el la propiedad inmuelble
@@ -251,7 +250,7 @@ public class PropiedadData {
                 temp.setDireccion(rs.getString("direccion"));
                 temp.setEstadoLocal(elEstado);
                 temp.setPrecioTrazado(rs.getFloat("precioTrazado"));
-                temp.setVendedor(ven);
+                //temp.setVendedor(ven);
                 temp.setInspector(insp);
                 temp.setTipoLocal(elTipo);
                 temp.setZona(zon);
@@ -272,7 +271,7 @@ public class PropiedadData {
         Zona laZona=null;
         EstadoLocal elLocal=null;
         TipoLocal tipoLocal=null;
-        Vendedor elVendedor=null;
+        //Vendedor elVendedor=null;
         Inspector elInspector=null;
         String sql="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
                 + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
@@ -281,7 +280,7 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.idPropietario = ?";
+                + "where pi.idPropietario = ?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, idPropietario);
@@ -291,7 +290,7 @@ public class PropiedadData {
              laZona=abmZona.buscarZona(rs.getInt("idZona"));
              elLocal=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
              tipoLocal=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
-             elVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+             //elVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
              elInspector=abmInsp.buscoInspector(rs.getInt("idInspector"));
              //Armo el inmueble antes de agregarlo al listado
              elInmueble=new PropiedadInmueble();
@@ -302,7 +301,7 @@ public class PropiedadData {
              elInmueble.setDireccion(rs.getString(5));
              elInmueble.setEstadoLocal(elLocal);
              elInmueble.setPrecioTrazado(rs.getFloat(7));
-             elInmueble.setVendedor(elVendedor);
+             //elInmueble.setVendedor(elVendedor);
              elInmueble.setInspector(elInspector);
              elInmueble.setTipoLocal(tipoLocal);
              elInmueble.setZona(laZona);
@@ -324,7 +323,7 @@ public class PropiedadData {
         TipoLocal zonaTipo=null;
         EstadoLocal zonaEstado=null;
         Inspector zonainsInspector=null;
-        Vendedor zonaVendedor=null;
+        //Vendedor zonaVendedor=null;
         Zona laZona=null;
         String sqlZona="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
                 + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
@@ -333,7 +332,7 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.idZona = ?";
+                + "where pi.idZona = ?";
         try {
             PreparedStatement ps=con.prepareStatement(sqlZona);
             ps.setInt(1, idZona);
@@ -344,7 +343,7 @@ public class PropiedadData {
                 zonaTipo=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
                 zonaEstado=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
                 zonainsInspector=abmInsp.buscoInspector(rs.getInt("idInspector"));
-                zonaVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                //zonaVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                 laZona=abmZona.buscarZona(rs.getInt("idZona"));
                 //Empiezo a construir el objeto inmueble
                 zonaInmueble = new PropiedadInmueble();
@@ -355,7 +354,7 @@ public class PropiedadData {
                 zonaInmueble.setDireccion(rs.getString(5));
                 zonaInmueble.setEstadoLocal(zonaEstado);
                 zonaInmueble.setPrecioTrazado(rs.getFloat(7));
-                zonaInmueble.setVendedor(zonaVendedor);
+                //zonaInmueble.setVendedor(zonaVendedor);
                 zonaInmueble.setInspector(zonainsInspector);
                 zonaInmueble.setTipoLocal(zonaTipo);
                 zonaInmueble.setZona(laZona);
@@ -376,7 +375,7 @@ public class PropiedadData {
         TipoLocal elTipoLocal=null;
         EstadoLocal tipoEstadoLocal=null;
         Inspector tipoInspector=null;
-        Vendedor tipoVendedor=null;
+        //Vendedor tipoVendedor=null;
         Zona tipoZona=null;
         String cadena="SELECT pi.*, prop.nombre, prop.apellido, prop.domicilio, prop.telefono, "
                 + "el.nombre, ins.nombre, ins.apellido, tp.nombre, tp.superficieMinima, z.nombre, z.descripcion "
@@ -385,7 +384,7 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "JOIN vendedor v on(pi.idVendedor=v.idVendedor) where pi.idTipoLocal = ?";
+                + "where pi.idTipoLocal = ?";
         try {
             PreparedStatement ps=con.prepareStatement(cadena);
             ps.setInt(1, idTipo);
@@ -395,7 +394,7 @@ public class PropiedadData {
                 elTipoLocal=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
                 tipoEstadoLocal=abmEstadoLocal.buscoEstadoLocal(rs.getInt("idEstadoLocal"));
                 tipoInspector=abmInsp.buscoInspector(rs.getInt("idInspector"));
-                tipoVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+                //tipoVendedor=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                 tipoZona=abmZona.buscarZona(rs.getInt("idZona"));
                 tipoProp =new PropiedadInmueble();
                 tipoProp.setIdPropiedadInmueble(rs.getInt("idPropiedad"));
@@ -405,7 +404,7 @@ public class PropiedadData {
                 tipoProp.setDireccion(rs.getString("direccion"));
                 tipoProp.setEstadoLocal(tipoEstadoLocal);
                 tipoProp.setPrecioTrazado(rs.getFloat("precioTrazado"));
-                tipoProp.setVendedor(tipoVendedor);
+                //tipoProp.setVendedor(tipoVendedor);
                 tipoProp.setInspector(tipoInspector);
                 tipoProp.setTipoLocal(elTipoLocal);
                 tipoProp.setZona(tipoZona);

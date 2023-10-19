@@ -35,9 +35,9 @@ public class ContratoAlquilerData {
     }
     
     public void agregarContrato(ContratoAlquiler contrato){
-        String sql = "INSERT INTO contratoalquiler(idInquilino, "
+        String sql = "INSERT INTO contratoAlquiler(idInquilino, "
                 + "idPropiedadInmueble, fechaFinal, fechaInical, "
-                + "fechaRealizacion, marca, idVendedor) "
+                + "fechaRealizacion, marca, idVendedor,idEstadoContrato) "
                 + "VALUES (?,?,?,?,?,?,?,?)";
         
         try {
@@ -68,7 +68,7 @@ public class ContratoAlquilerData {
     }
     
     public void modificarContrato(ContratoAlquiler contrato){
-        String sql = "UPDATE contratoalquiler SET idInquilino=?,"
+        String sql = "UPDATE contratoAlquiler SET idInquilino=?,"
                 + "idPropiedadInmueble=?,fechaFinal=?,fechaInical=?,"
                 + "fechaRealizacion=?,marca=?,idVendedor`=?,idEstadoContrato=? "
                 + "WHERE idContratoAlquiler = ?";
@@ -105,7 +105,7 @@ public class ContratoAlquilerData {
         
         List<ContratoAlquiler> listado = new ArrayList<>();
         ContratoAlquiler conAlq = null;
-        String sql = "SELECT * FROM contratoalquiler";
+        String sql = "SELECT * FROM contratoAlquiler";
         Inquilino inqui = null;
         PropiedadInmueble propInmueble = null;
         Vendedor vendedor = null;
@@ -145,7 +145,7 @@ public class ContratoAlquilerData {
     
     public ContratoAlquiler buscarContratoAlquilerPorId (int id){
         ContratoAlquiler contratoAlquiler = null;
-        String sql = "SELECT * FROM contratoalquiler where idContratoAlquiler = ?";
+        String sql = "SELECT * FROM contratoAlquiler where idContratoAlquiler = ?";
         
         Inquilino inqui = null;
         PropiedadInmueble propInmueble = null;

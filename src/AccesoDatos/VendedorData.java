@@ -64,7 +64,7 @@ public class VendedorData {
     
     public List<Vendedor> listadoVendedor(){
         List<Vendedor> listado=new ArrayList();
-        String sql="SELECT * FROM vendedor";
+        String sql="SELECT * FROM vendedor where idVendedor > 1";
         Vendedor vende=null;
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class VendedorData {
     }
     
     public void actualizarCantidadVentas(int idVend){
-        String sql="SELECT COUNT(idPropiedad) FROM propiedadInmueble WHERE idVendedor = ?";
+        String sql="SELECT COUNT(idContratoAlquiler) FROM contratoAlquiler WHERE idVendedor = ?";
         String cadena="UPDATE vendedor set cantidadVentas = ? where idVendedor = ?";
         int contador = 0;
         try {

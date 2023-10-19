@@ -9,14 +9,14 @@ import AccesoDatos.InspectorData;
 import AccesoDatos.PropiedadData;
 import AccesoDatos.PropietarioData;
 import AccesoDatos.TipoLocalData;
-import AccesoDatos.VendedorData;
+//import AccesoDatos.VendedorData;
 import AccesoDatos.ZonaData;
 import Entidades.EstadoLocal;
 import Entidades.Inspector;
 import Entidades.PropiedadInmueble;
 import Entidades.Propietario;
 import Entidades.TipoLocal;
-import Entidades.Vendedor;
+//import Entidades.Vendedor;
 import Entidades.Zona;
 import java.awt.Color;
 import java.awt.Font;
@@ -75,13 +75,13 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     EstadoLocalData abmEstadoLocal = new EstadoLocalData();
     TipoLocalData abmTipoLocal = new TipoLocalData();
     InspectorData abmInspector = new InspectorData();
-    VendedorData abmVendedor = new VendedorData();
+    //VendedorData abmVendedor = new VendedorData();
     Propietario tempPropietario = null;
     Zona tempZona = null;
     EstadoLocal tempEstadoLocal = null;
     TipoLocal tempTipoLocal = null;
     Inspector temInspector = null;
-    Vendedor tempVendedor = null;
+    //Vendedor tempVendedor = null;
     PropiedadInmueble tempProp = null;
     //Creo los listados para uso de todo el fomulario
     List<Propietario> listaPropietarios = new ArrayList();
@@ -89,7 +89,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     List<EstadoLocal> listaEstadoLocal = new ArrayList();
     List<TipoLocal> listaTipoLocal = new ArrayList();
     List<Inspector> listaInspector = new ArrayList();
-    List<Vendedor> listaVendedor = new ArrayList();
+    //List<Vendedor> listaVendedor = new ArrayList();
     //Creo las listas para manejar las altas y modificaciones de los inmuebles
     List<PropiedadInmueble> listaXIDProp = new ArrayList();
     List<PropiedadInmueble> listaXZona = new ArrayList();
@@ -112,7 +112,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         comboEstadoLocal();
         comboTipoLocal();
         comboInspector();
-        comboVendedor();
+        //comboVendedor();
         combozonaXbusqueda();
         comboDisponibilidad();
         comboBusquedaxTipo();
@@ -169,8 +169,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jbtAgregar = new javax.swing.JButton();
         jbtModificar = new javax.swing.JButton();
         jbtCancelar = new javax.swing.JButton();
-        jcbVendedor = new javax.swing.JComboBox<>();
-        jlabelVendedor = new javax.swing.JLabel();
         jLabelInspector = new javax.swing.JLabel();
         jLabelZona = new javax.swing.JLabel();
         jLabelTipoLocal = new javax.swing.JLabel();
@@ -562,14 +560,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             }
         });
 
-        jcbVendedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbVendedorActionPerformed(evt);
-            }
-        });
-
-        jlabelVendedor.setText("Vendedor");
-
         jLabelInspector.setText("Inspector");
 
         jLabelZona.setText("Zona");
@@ -635,11 +625,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelInspector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcbInspector, 0, 130, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlabelVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcbVendedor, 0, 130, Short.MAX_VALUE))))
+                            .addComponent(jcbInspector, 0, 130, Short.MAX_VALUE))))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanelDatosLayout.setVerticalGroup(
@@ -647,7 +633,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabelVendedor)
                     .addComponent(jLabelInspector)
                     .addComponent(jLabelTipoLocal)
                     .addComponent(jLabelEstadoLocal)
@@ -657,7 +642,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                     .addComponent(jcbEstadoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -817,7 +801,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         temInspector = abmInspector.buscoInspector(jcbInspector.getSelectedIndex() + 1);
         tempEstadoLocal = abmEstadoLocal.buscoEstadoLocal(jcbEstadoLocal.getSelectedIndex() + 1);
         tempTipoLocal = abmTipoLocal.buscoTipoLocal(jcbTipoLocal.getSelectedIndex() + 1);
-        tempVendedor = abmVendedor.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
+        //tempVendedor = abmVendedor.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
         tempZona = abmZona.buscarZona(jcbZona.getSelectedIndex() + 1);
         boolean valor = false;
         if (jcbDisponibilidad.getSelectedIndex() == 1) {
@@ -830,17 +814,17 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         tempProp.setDireccion(jtDireccion.getText());
         tempProp.setEstadoLocal(tempEstadoLocal);
         tempProp.setPrecioTrazado(Float.valueOf(jtPrecio.getText()));
-        tempProp.setVendedor(tempVendedor);
+        //tempProp.setVendedor(tempVendedor);
         tempProp.setInspector(temInspector);
         tempProp.setTipoLocal(tempTipoLocal);
         tempProp.setZona(tempZona);
         tempProp.setDisponibilidad(valor);
         paraFila = abmPropiedad.guardarPropiedad(tempProp);
-        abmVendedor.actualizarCantidadVentas(tempVendedor.getIdVendedor());
+        //abmVendedor.actualizarCantidadVentas(tempVendedor.getIdVendedor());
         //Armo la fila nueva
         modelo.addRow(new Object[]{paraFila.getIdPropiedadInmueble(), paraFila.getZona().getNombre(), paraFila.getDireccion(),
             paraFila.getTipoLocal().getNombre(), paraFila.getPrecioTrazado(), paraFila.getEstadoLocal().getNombre(),
-            paraFila.getInspector().toString(), paraFila.getVendedor().toString(), paraFila.isDisponibilidad(),
+            paraFila.getInspector().toString(), paraFila.isDisponibilidad(),
             paraFila.getPropietario().toString(), paraFila.getCaracteristicasString(), paraFila.getAccesibilidad()});
     }//GEN-LAST:event_jbtAgregarActionPerformed
 
@@ -852,7 +836,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         temInspector = abmInspector.buscoInspector(jcbInspector.getSelectedIndex() + 1);
         tempEstadoLocal = abmEstadoLocal.buscoEstadoLocal(jcbEstadoLocal.getSelectedIndex() + 1);
         tempTipoLocal = abmTipoLocal.buscoTipoLocal(jcbTipoLocal.getSelectedIndex() + 1);
-        tempVendedor = abmVendedor.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
+        //tempVendedor = abmVendedor.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
         tempZona = abmZona.buscarZona(jcbZona.getSelectedIndex() + 1);
         boolean valor = false;
         if (jcbDisponibilidad.getSelectedIndex() == 1) {
@@ -866,7 +850,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         tempProp.setDireccion(jtDireccion.getText());
         tempProp.setEstadoLocal(tempEstadoLocal);
         tempProp.setPrecioTrazado(Float.valueOf(jtPrecio.getText()));
-        tempProp.setVendedor(tempVendedor);
+        //tempProp.setVendedor(tempVendedor);
         tempProp.setInspector(temInspector);
         tempProp.setTipoLocal(tempTipoLocal);
         tempProp.setZona(tempZona);
@@ -923,14 +907,14 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         }
         jcbInspector.setSelectedIndex(propInspectorjcb);
         //Seteo el valor el Vendedor en el combo vox
-        int propVendedorjcb = 0;
-        String propVendedorFila = String.valueOf(modelo.getValueAt(valor, 7));
-        for (Vendedor vendData : listaVendedor) {
-            if (vendData.toString().equals(propVendedorFila)) {
-                propVendedorjcb = vendData.getIdVendedor() - 1;
-            }
-        }
-        jcbVendedor.setSelectedIndex(propVendedorjcb);
+//        int propVendedorjcb = 0;
+//        String propVendedorFila = String.valueOf(modelo.getValueAt(valor, 7));
+//        for (Vendedor vendData : listaVendedor) {
+//            if (vendData.toString().equals(propVendedorFila)) {
+//                propVendedorjcb = vendData.getIdVendedor() - 1;
+//            }
+//        }
+//        jcbVendedor.setSelectedIndex(propVendedorjcb);
         //Seteo el valor de la Disponibilidad en el combo
         String valordisponibilidad = String.valueOf(modelo.getValueAt(valor, 8));
         if (valordisponibilidad.equals("Activo")) {
@@ -976,9 +960,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             if (jcbInspector.isEnabled()) {
                 jcbInspector.setEnabled(false);
             }
-            if (jcbVendedor.isEnabled()) {
-                jcbVendedor.setEnabled(false);
-            }
+//            if (jcbVendedor.isEnabled()) {
+//                jcbVendedor.setEnabled(false);
+//            }
             if (jtAccesibilidad.isEnabled()) {
                 jtAccesibilidad.setEnabled(false);
             }
@@ -1009,9 +993,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             if (jcbInspector.isEnabled()) {
                 jcbInspector.setEnabled(false);
             }
-            if (jcbVendedor.isEnabled()) {
-                jcbVendedor.setEnabled(false);
-            }
+//            if (jcbVendedor.isEnabled()) {
+//                jcbVendedor.setEnabled(false);
+//            }
             if (jtAccesibilidad.isEnabled()) {
                 jtAccesibilidad.setEnabled(false);
             }
@@ -1039,9 +1023,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             if (jbtAgregar.isEnabled()) {
                 jbtAgregar.setEnabled(false);
             }
-            if (jcbVendedor.isEnabled()) {
-                jcbVendedor.setEnabled(false);
-            }
+//            if (jcbVendedor.isEnabled()) {
+//                jcbVendedor.setEnabled(false);
+//            }
             if (jtAccesibilidad.isEnabled()) {
                 jtAccesibilidad.setEnabled(false);
             }
@@ -1063,12 +1047,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     private void jcbInspectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbInspectorActionPerformed
         // si el item elegido es mayor a 0 hebilito el campo siguiente
         if (jcbInspector.getSelectedIndex() > 0) {
-            jcbVendedor.setEnabled(true);
+            jtAccesibilidad.setEnabled(true);
         } else {
-            jcbVendedor.setEnabled(false);
-            if (jbtAgregar.isEnabled()) {
-                jbtAgregar.setEnabled(false);
-            }
             if (jtAccesibilidad.isEnabled()) {
                 jtAccesibilidad.setEnabled(false);
             }
@@ -1086,30 +1066,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jcbInspectorActionPerformed
-
-    private void jcbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbVendedorActionPerformed
-        // Si el item elgido es mayor a 0 habilito el campo siguiente
-        if (jcbVendedor.getSelectedIndex() > 0) {
-            jtAccesibilidad.setEnabled(true);
-        } else {
-            jtAccesibilidad.setEnabled(false);
-            if (jbtAgregar.isEnabled()) {
-                jbtAgregar.setEnabled(false);
-            }
-            if (jtCaracteristicas.getText().equals("Caracteristicas") && jtCaracteristicas.isEnabled()) {
-                jtCaracteristicas.setEnabled(false);
-            }
-            if (jtDireccion.getText().equals("Dirección") && jtDireccion.isEnabled()) {
-                jtDireccion.setEnabled(false);
-            }
-            if (jtPrecio.getText().equals("Precio") && jtPrecio.isEnabled()) {
-                jtPrecio.setEnabled(false);
-            }
-            if (jcbDisponibilidad.isEnabled()) {
-                jcbDisponibilidad.setEnabled(false);
-            }
-        }
-    }//GEN-LAST:event_jcbVendedorActionPerformed
 
     private void jtAccesibilidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAccesibilidadFocusGained
         // Al hacer foco borro la palbra por defecto y seteo el campo 
@@ -1337,7 +1293,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             for (PropiedadInmueble propiedaZona : listaXZona) {
                 modeloZona.addRow(new Object[]{propiedaZona.getIdPropiedadInmueble(), propiedaZona.getZona().getNombre(),
                     propiedaZona.getDireccion(), propiedaZona.getTipoLocal().getNombre(), propiedaZona.getInspector().toString(),
-                    propiedaZona.getVendedor().toString(), propiedaZona.isDisponibilidad(), propiedaZona.getPropietario().toString(),
+                    propiedaZona.isDisponibilidad(), propiedaZona.getPropietario().toString(),
                     propiedaZona.getCaracteristicasString(), propiedaZona.getAccesibilidad()});
             }
         }
@@ -1508,7 +1464,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             }
             modeloPrecio.addRow(new Object[]{inmu.getIdPropiedadInmueble(),inmu.getZona().getNombre(),inmu.getDireccion(),
                     inmu.getTipoLocal().getNombre(),inmu.getPrecioTrazado(),inmu.getEstadoLocal().getNombre(),
-                    inmu.getInspector().toString(),inmu.getVendedor().toString(),valorActivo,inmu.getPropietario().toString(),
+                    inmu.getInspector().toString(),valorActivo,inmu.getPropietario().toString(),
                     inmu.getCaracteristicasString(),inmu.getAccesibilidad()});
         }
     }//GEN-LAST:event_jbtBuscarXPrecioActionPerformed
@@ -1530,7 +1486,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             }
                modeloxTipo.addRow(new Object[]{inmu.getIdPropiedadInmueble(),inmu.getZona().getNombre(),inmu.getDireccion(),
                     inmu.getTipoLocal().getNombre(),inmu.getPrecioTrazado(),inmu.getEstadoLocal().getNombre(),
-                    inmu.getInspector().toString(),inmu.getVendedor().toString(),valorActivo,inmu.getPropietario().toString(),
+                    inmu.getInspector().toString(),valorActivo,inmu.getPropietario().toString(),
                     inmu.getCaracteristicasString(),inmu.getAccesibilidad()});  
             }
         }
@@ -1585,9 +1541,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbInspector;
     private javax.swing.JComboBox<String> jcbListaPropietarios;
     private javax.swing.JComboBox<String> jcbTipoLocal;
-    private javax.swing.JComboBox<String> jcbVendedor;
     private javax.swing.JComboBox<String> jcbZona;
-    private javax.swing.JLabel jlabelVendedor;
     private javax.swing.JTextField jtAccesibilidad;
     private javax.swing.JTextField jtCaracteristicas;
     private javax.swing.JTextField jtDireccion;
@@ -1604,11 +1558,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio"); //4
         modelo.addColumn("Estado local"); //5
         modelo.addColumn("Inspector"); //6
-        modelo.addColumn("Vendedor"); //7
-        modelo.addColumn("Disponibilidad"); //8
-        modelo.addColumn("Propietario"); //9
-        modelo.addColumn("Caracteristicas"); //10
-        modelo.addColumn("Accesibilidad"); //11
+        modelo.addColumn("Disponibilidad"); //7
+        modelo.addColumn("Propietario"); //8
+        modelo.addColumn("Caracteristicas"); //9
+        modelo.addColumn("Accesibilidad"); //10
         jTablaBusquedaProp.setModel(modelo);
     }
 
@@ -1620,11 +1573,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         modeloZona.addColumn("Precio"); //4
         modeloZona.addColumn("Estado local"); //5
         modeloZona.addColumn("Inspector"); //6
-        modeloZona.addColumn("Vendedor"); //7
-        modeloZona.addColumn("Disponibilidad"); //8
-        modeloZona.addColumn("Propietario"); //9
-        modeloZona.addColumn("Caracteristicas"); //10
-        modeloZona.addColumn("Accesibilidad"); //11
+        modeloZona.addColumn("Disponibilidad"); //7
+        modeloZona.addColumn("Propietario"); //8
+        modeloZona.addColumn("Caracteristicas"); //9
+        modeloZona.addColumn("Accesibilidad"); //10
         jTablaZonas.setModel(modeloZona);
     }
 
@@ -1636,11 +1588,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         modeloPrecio.addColumn("Precio"); //4
         modeloPrecio.addColumn("Estado local"); //5
         modeloPrecio.addColumn("Inspector"); //6
-        modeloPrecio.addColumn("Vendedor"); //7
-        modeloPrecio.addColumn("Disponibilidad"); //8
-        modeloPrecio.addColumn("Propietario"); //9
-        modeloPrecio.addColumn("Caracteristicas"); //10
-        modeloPrecio.addColumn("Accesibilidad"); //11
+        modeloPrecio.addColumn("Disponibilidad"); //7
+        modeloPrecio.addColumn("Propietario"); //8
+        modeloPrecio.addColumn("Caracteristicas"); //9
+        modeloPrecio.addColumn("Accesibilidad"); //10
         jTablaResltadoxPrecio.setModel(modeloPrecio);
     }
     
@@ -1652,11 +1603,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         modeloxTipo.addColumn("Precio"); //4
         modeloxTipo.addColumn("Estado local"); //5
         modeloxTipo.addColumn("Inspector"); //6
-        modeloxTipo.addColumn("Vendedor"); //7
-        modeloxTipo.addColumn("Disponibilidad"); //8
-        modeloxTipo.addColumn("Propietario"); //9
-        modeloxTipo.addColumn("Caracteristicas"); //10
-        modeloxTipo.addColumn("Accesibilidad"); //11
+        modeloxTipo.addColumn("Disponibilidad"); //7
+        modeloxTipo.addColumn("Propietario"); //8
+        modeloxTipo.addColumn("Caracteristicas"); //9
+        modeloxTipo.addColumn("Accesibilidad"); //10
         jTablaxTipo.setModel(modeloxTipo);
     }
 
@@ -1716,13 +1666,13 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jcbInspector.setModel(modelComboInspector);
     }
 
-    public void comboVendedor() {
-        listaVendedor = abmVendedor.listadoVendedor();
-        for (Vendedor vendedor : listaVendedor) {
-            modelComboVendedor.addElement(vendedor);
-        }
-        jcbVendedor.setModel(modelComboVendedor);
-    }
+//    public void comboVendedor() {
+////        listaVendedor = abmVendedor.listadoVendedor();
+////        for (Vendedor vendedor : listaVendedor) {
+////            modelComboVendedor.addElement(vendedor);
+////        }
+////        jcbVendedor.setModel(modelComboVendedor);
+//    }
 
     public void comboDisponibilidad() {
         jcbDisponibilidad.addItem("Seleccionar");
@@ -1744,7 +1694,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jcbTipoLocal.setEnabled(false);
         jcbEstadoLocal.setEnabled(false);
         jcbInspector.setEnabled(false);
-        jcbVendedor.setEnabled(false);
+        //jcbVendedor.setEnabled(false);
         jcbDisponibilidad.setEnabled(false);
         jbtHabiltarCampos.setEnabled(false);
         jLAdvertenciaAccesibilidad.setText("");
@@ -1759,7 +1709,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jcbTipoLocal.setEnabled(true);
         jcbEstadoLocal.setEnabled(true);
         jcbInspector.setEnabled(true);
-        jcbVendedor.setEnabled(true);
+        //jcbVendedor.setEnabled(true);
         jtAccesibilidad.setEnabled(true);
         jtCaracteristicas.setEnabled(true);
         jtDireccion.setEnabled(true);
@@ -1776,8 +1726,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         comboEstadoLocal();
         jcbInspector.removeAllItems();
         comboInspector();
-        jcbVendedor.removeAllItems();
-        comboVendedor();
+        //jcbVendedor.removeAllItems();
+        //comboVendedor();
         jcbDisponibilidad.removeAllItems();
         comboDisponibilidad();
         if (jbtAgregar.isEnabled()) {
@@ -1846,7 +1796,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                 modelo.addRow(new Object[]{inmueble.getIdPropiedadInmueble(), inmueble.getZona().getNombre(),
                     inmueble.getDireccion(), inmueble.getTipoLocal().getNombre(), inmueble.getPrecioTrazado(),
                     inmueble.getEstadoLocal().getNombre(), inmueble.getInspector().toString(),
-                    inmueble.getVendedor().toString(), valorActivo, inmueble.getPropietario().toString(),
+                    valorActivo, inmueble.getPropietario().toString(),
                     inmueble.getCaracteristicasString(), inmueble.getAccesibilidad()});
             }
         } else {
