@@ -38,7 +38,7 @@ public class PropiedadData {
     public PropiedadInmueble guardarPropiedad(PropiedadInmueble prop){
         String sql="INSERT INTO propiedadInmueble(idpropietario,accesibilidad,caracteristicas,direccion,"
                 + "idEstadoLocal,precioTrazado,idInspector,idTipoLocal,idZona,disponibilidad)"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, prop.getPropietario().getIdPropietario());
