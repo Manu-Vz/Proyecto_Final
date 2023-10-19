@@ -534,6 +534,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 if (jtfApellidoVendedor.isEnabled()) {
                     jtfApellidoVendedor.setEnabled(false);
                 }
+                break;
             }else{
                 jlCheckNombreVendedor.setEnabled(false);
                 jlCheckNombreVendedor.setText("");
@@ -562,7 +563,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
         tempVendedor = new Vendedor();
         tempVendedor.setNombre(castNombreVendedor);
         tempVendedor.setApellido(jtfApellidoVendedor.getText());
-        //tempVendedor.setCantidadVentas(WIDTH);
+        tempVendedor.getCantidadVentas();
         tempVendedor.setEstado(activo);
         abmVendedorData.agregarVendedor(tempVendedor);
         resetearCampos();
@@ -675,6 +676,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 if (jtfApellidoInspector.isEnabled()) {
                     jtfApellidoInspector.setEnabled(false);                    
                 }
+                break;
             }else{
                 jlCheckNombreInspector.setEnabled(false);
                 jlCheckNombreInspector.setText("");
@@ -896,7 +898,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     private void camposIniciales(){
         jbNuevoVendedor.setEnabled(false);
         jtfApellidoVendedor.setEnabled(false);
-        jtfApellidoInspector.setText("Apellido");
+        jtfApellidoVendedor.setText("Apellido");
         jtfApellidoVendedor.setForeground(Color.gray);
         jcbEstadoVendedor.setEnabled(false);
         jbAgregarVendedor.setEnabled(false);
@@ -940,7 +942,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
     }
     
     private void borroFilasVendedor() {
-        int num = modeloV.getRowCount() - 1;
+        int num = modeloV.getRowCount() -1;
         for (int i = num; i >= 0; i--) {
             modeloV.removeRow(i);
         }
