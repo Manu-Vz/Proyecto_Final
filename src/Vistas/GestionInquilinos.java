@@ -13,6 +13,7 @@ import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,12 +21,40 @@ import javax.swing.JOptionPane;
  */
 public class GestionInquilinos extends javax.swing.JInternalFrame {
 
+    DefaultTableModel modeloTabla = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int f, int c){
+            return false;
+        }
+        
+    };
+    
+    InquilinoData Id = new InquilinoData();
+    
     /**
      * Creates new form GestionInquilinos
      */
     public GestionInquilinos() {
         initComponents();
+        armarTabla();
+        cargarTabla();
         camposIniciales();
+        //configuro los colores de los mensajes
+        mensajeErrorNombre.setForeground(Color.RED);
+        mensajeErrorApellido.setForeground(Color.red);
+        mensajeErrorCUIT.setForeground(Color.red);
+        mensajeErrorDNIGarante.setForeground(Color.red);
+        mensajeErrorLugarTrabajo.setForeground(Color.red);
+        mensajeErrorNombreGarante.setForeground(Color.red);
+        
+        //Le deshabilito la visibilidad a los mensajes
+        mensajeErrorNombre.setVisible(false);
+        mensajeErrorApellido.setVisible(false);
+        mensajeErrorCUIT.setVisible(false);
+        mensajeErrorLugarTrabajo.setVisible(false);
+        mensajeErrorDNIGarante.setVisible(false);
+        mensajeErrorNombreGarante.setVisible(false);
+        mensajeModificando.setVisible(false);
     }
 
     int cadenaCuit = 0;
@@ -33,6 +62,8 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
     
     int cadenaDni = 0;
     String cadenaDniString;
+    
+    boolean seEstaModificando;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,16 +87,49 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         nombreGaranteInquilino = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         AgregarInquilino = new javax.swing.JButton();
-        mensajeError = new javax.swing.JLabel();
+        mensajeErrorNombre = new javax.swing.JLabel();
+        mensajeErrorApellido = new javax.swing.JLabel();
+        mensajeErrorCUIT = new javax.swing.JLabel();
+        mensajeErrorLugarTrabajo = new javax.swing.JLabel();
+        mensajeErrorDNIGarante = new javax.swing.JLabel();
+        mensajeErrorNombreGarante = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        Modificar = new javax.swing.JButton();
+        Cancelar = new javax.swing.JButton();
+        mensajeModificando = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        nombreInquilino1 = new javax.swing.JTextField();
+        apellido1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cuitInquilino1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        lugarDeTrabajoInquilino1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        dnigaranteInquilino1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        nombreGaranteInquilino1 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        AgregarInquilino1 = new javax.swing.JButton();
+        mensajeErrorNombre1 = new javax.swing.JLabel();
+        mensajeErrorApellido1 = new javax.swing.JLabel();
+        mensajeErrorCUIT1 = new javax.swing.JLabel();
+        mensajeErrorLugarTrabajo1 = new javax.swing.JLabel();
+        mensajeErrorDNIGarante1 = new javax.swing.JLabel();
+        mensajeErrorNombreGarante1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        Modificar1 = new javax.swing.JButton();
+        Cancelar1 = new javax.swing.JButton();
+        mensajeModificando1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
-        nombreInquilino.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                nombreInquilinoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nombreInquilinoFocusLost(evt);
-            }
-        });
         nombreInquilino.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nombreInquilinoKeyReleased(evt);
@@ -121,80 +185,438 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
             }
         });
 
-        mensajeError.setText("Este campo no puede estar vacio");
+        mensajeErrorNombre.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorApellido.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorCUIT.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorLugarTrabajo.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorDNIGarante.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorNombreGarante.setText("Este Campo no puede estar Vacio");
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
+
+        Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+
+        mensajeModificando.setText("Actualmente Se esta Modficando");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Gestion Inquilinos");
+
+        nombreInquilino1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nombreInquilino1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreInquilino1FocusLost(evt);
+            }
+        });
+        nombreInquilino1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nombreInquilino1KeyReleased(evt);
+            }
+        });
+
+        apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                apellido1KeyReleased(evt);
+            }
+        });
+
+        jLabel8.setText("Nombre:");
+
+        jLabel9.setText("Apeliido:");
+
+        cuitInquilino1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cuitInquilino1KeyReleased(evt);
+            }
+        });
+
+        jLabel10.setText("CUIT:");
+
+        lugarDeTrabajoInquilino1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lugarDeTrabajoInquilino1KeyReleased(evt);
+            }
+        });
+
+        jLabel11.setText("Lugar de Trabajo:");
+
+        dnigaranteInquilino1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dnigaranteInquilino1KeyReleased(evt);
+            }
+        });
+
+        jLabel12.setText("DNI garante:");
+
+        nombreGaranteInquilino1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nombreGaranteInquilino1KeyReleased(evt);
+            }
+        });
+
+        jLabel13.setText("Nombre Garante");
+
+        AgregarInquilino1.setText("Agregar Inquilino");
+        AgregarInquilino1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarInquilino1ActionPerformed(evt);
+            }
+        });
+
+        mensajeErrorNombre1.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorApellido1.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorCUIT1.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorLugarTrabajo1.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorDNIGarante1.setText("Este Campo no puede estar Vacio");
+
+        mensajeErrorNombreGarante1.setText("Este Campo no puede estar Vacio");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        Modificar1.setText("Modificar");
+
+        Cancelar1.setText("Cancelar");
+
+        mensajeModificando1.setText("Actualmente Se esta Modficando");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("Gestion Inquilinos");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 212, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8)
+                            .addComponent(nombreInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(lugarDeTrabajoInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mensajeErrorNombre1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mensajeErrorLugarTrabajo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(AgregarInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dnigaranteInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12)
+                                            .addComponent(apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(mensajeErrorApellido1))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(mensajeErrorDNIGarante1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cuitInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel13)
+                                    .addComponent(nombreGaranteInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mensajeErrorCUIT1)
+                                    .addComponent(mensajeErrorNombreGarante1))
+                                .addGap(64, 64, 64))))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Cancelar1))
+                            .addComponent(mensajeModificando1))
+                        .addContainerGap())))
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10))
+                                .addGap(7, 7, 7)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nombreInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cuitInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(mensajeErrorApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mensajeErrorCUIT1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mensajeErrorNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel12)))
+                                .addGap(9, 9, 9)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(nombreGaranteInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dnigaranteInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lugarDeTrabajoInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(mensajeErrorDNIGarante1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mensajeErrorNombreGarante1)
+                                    .addComponent(mensajeErrorLugarTrabajo1))
+                                .addGap(30, 30, 30))
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(58, 58, 58)
+                        .addComponent(AgregarInquilino1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(359, 359, 359)
+                        .addComponent(mensajeModificando1)
+                        .addGap(18, 18, 18)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(260, 260, 260)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lugarDeTrabajoInquilino, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                .addComponent(nombreInquilino)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nombreInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1))
+                                        .addComponent(mensajeErrorNombre, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel4))
+                                .addComponent(mensajeErrorLugarTrabajo, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lugarDeTrabajoInquilino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(2, 2, 2)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(nombreGaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel2)
+                                    .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mensajeErrorApellido))
+                                .addGap(20, 20, 20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(dnigaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mensajeErrorDNIGarante))
+                                .addGap(18, 18, 18)))
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(nombreGaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(57, 57, 57)
-                                        .addComponent(jLabel2)
-                                        .addGap(87, 87, 87))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(49, 49, 49)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(dnigaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5))
-                                        .addGap(6, 6, 6)))
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
                                     .addComponent(cuitInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
-                    .addComponent(mensajeError)
+                                    .addComponent(mensajeErrorCUIT)
+                                    .addComponent(jLabel6)
+                                    .addComponent(mensajeErrorNombreGarante))
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(AgregarInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 55, Short.MAX_VALUE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mensajeModificando)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Cancelar)
+                                .addGap(148, 148, 148)
+                                .addComponent(AgregarInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(171, 171, 171))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 331, Short.MAX_VALUE)
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 325, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cuitInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mensajeError)
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lugarDeTrabajoInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dnigaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreGaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(AgregarInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mensajeErrorApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dnigaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mensajeErrorDNIGarante, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nombreInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mensajeErrorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lugarDeTrabajoInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mensajeErrorLugarTrabajo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mensajeModificando))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cuitInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mensajeErrorCUIT, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nombreGaranteInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mensajeErrorNombreGarante))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AgregarInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 320, Short.MAX_VALUE)
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 320, Short.MAX_VALUE)))
         );
 
         pack();
@@ -206,7 +628,9 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         boolean condicion = true;
         if(apellido.isEnabled() && cuitInquilino.isEnabled() && 
                 lugarDeTrabajoInquilino.isEnabled() && 
-                dnigaranteInquilino.isEnabled() && nombreGaranteInquilino.isEnabled()){
+                dnigaranteInquilino.isEnabled() && 
+                nombreGaranteInquilino.isEnabled() && !seEstaModificando){
+            
             nuevo.setNombre(nombreInquilino.getText());
             nuevo.setApellido(apellido.getText());
             if (confirmarCadenaSiEsNumero(cuitInquilino.getText())){
@@ -228,7 +652,7 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
                 InquilinoData ID = new InquilinoData();
                 ID.guardarInquilino(nuevo);
             }
-            
+            limpiarCampos();
             
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar completos");
@@ -237,51 +661,42 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_AgregarInquilinoActionPerformed
 
-    private void nombreInquilinoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreInquilinoFocusGained
-        // TODO add your handling code here:    
-    }//GEN-LAST:event_nombreInquilinoFocusGained
-
-    private void nombreInquilinoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreInquilinoFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreInquilinoFocusLost
-
     private void nombreInquilinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreInquilinoKeyReleased
         // TODO add your handling code here:
-        if(nombreInquilino.getText().isEmpty()){
-            int y = nombreInquilino.getY();
-            int x = nombreInquilino.getX();
-            mensajeError.setLocation(x, y-15);
-            mensajeError.setVisible(true);
-            apellido.setEnabled(false);
-        } else {
-            mensajeError.setVisible(false);
-            apellido.setEnabled(true);
-        }
+            if(nombreInquilino.getText().isEmpty()){;
+                if(!seEstaModificando){
+                    mensajeErrorNombre.setVisible(true);
+                }
+                apellido.setEnabled(false);
+            } else {
+                mensajeErrorNombre.setVisible(false);
+                apellido.setEnabled(true);
+            }
+        
     }//GEN-LAST:event_nombreInquilinoKeyReleased
 
     private void apellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoKeyReleased
         // TODO add your handling code here:
-        if(apellido.getText().isEmpty()){
-            int y = apellido.getY();
-            int x = apellido.getX();
-            mensajeError.setLocation(x, y-15);
-            mensajeError.setVisible(true);
-            cuitInquilino.setEnabled(false);
-        } else {
-            mensajeError.setVisible(false);
-            cuitInquilino.setEnabled(true);
-        }
+            if(apellido.getText().isEmpty()){
+                mensajeErrorApellido.setVisible(true);
+                if(!seEstaModificando){
+                    cuitInquilino.setEnabled(false);
+                }
+            } else {
+                mensajeErrorApellido.setVisible(false);
+                cuitInquilino.setEnabled(true);
+            }
     }//GEN-LAST:event_apellidoKeyReleased
 
     private void cuitInquilinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cuitInquilinoKeyReleased
         // TODO add your handling code here:
         if(cuitInquilino.getText().isEmpty()){
-            int y = cuitInquilino.getY();
-            int x = cuitInquilino.getX();
-            mensajeError.setLocation(x, y);
-            mensajeError.setVisible(true);
-            lugarDeTrabajoInquilino.setEnabled(false);
+            mensajeErrorCUIT.setVisible(true);
+            if(!seEstaModificando){
+                lugarDeTrabajoInquilino.setEnabled(false);
+            }
         } else {
+            mensajeErrorCUIT.setVisible(false);
             String cadena = cuitInquilino.getText();
             String chequeo = String.valueOf(cadena.charAt(cadenaCuit));
             if (chequeo.equals("0") || chequeo.equals("6") || chequeo.equals("8") || 
@@ -300,10 +715,12 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
     private void lugarDeTrabajoInquilinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lugarDeTrabajoInquilinoKeyReleased
         // TODO add your handling code here:
         if(lugarDeTrabajoInquilino.getText().isEmpty()){
-            mensajeError.setVisible(true);
-            dnigaranteInquilino.setEnabled(false);
+            mensajeErrorLugarTrabajo.setVisible(true);
+            if(!seEstaModificando){
+               dnigaranteInquilino.setEnabled(false);
+            }
         } else {
-            mensajeError.setVisible(false);
+            mensajeErrorLugarTrabajo.setVisible(false);
             dnigaranteInquilino.setEnabled(true);
         }
     }//GEN-LAST:event_lugarDeTrabajoInquilinoKeyReleased
@@ -311,12 +728,12 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
     private void dnigaranteInquilinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dnigaranteInquilinoKeyReleased
         // TODO add your handling code here:
         if(dnigaranteInquilino.getText().isEmpty()){
-            int y = dnigaranteInquilino.getY();
-            int x = dnigaranteInquilino.getX();
-            mensajeError.setLocation(x, y-15);
-            mensajeError.setVisible(true);
-            nombreGaranteInquilino.setEnabled(false);
-        } else {
+            mensajeErrorDNIGarante.setVisible(true);
+            if(!seEstaModificando){
+                nombreGaranteInquilino.setEnabled(false);
+            }
+        } else { 
+            mensajeErrorDNIGarante.setVisible(false);
             String cadena = dnigaranteInquilino.getText();
             String chequeo = String.valueOf(cadena.charAt(cadenaDni));
             if (chequeo.matches("[0-9]*") && cadenaDni < 7) {
@@ -332,33 +749,184 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
     private void nombreGaranteInquilinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreGaranteInquilinoKeyReleased
         // TODO add your handling code here:
         if(nombreGaranteInquilino.getText().isEmpty()){
-            mensajeError.setVisible(true);
-            AgregarInquilino.setEnabled(false);
+            mensajeErrorNombreGarante.setVisible(true);
+            if(!seEstaModificando){
+                AgregarInquilino.setEnabled(false);
+            }
         } else {
-            mensajeError.setVisible(false);
+            mensajeErrorNombreGarante.setVisible(false);
             AgregarInquilino.setEnabled(true);
         }
     }//GEN-LAST:event_nombreGaranteInquilinoKeyReleased
 
+    private void nombreInquilino1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreInquilino1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreInquilino1FocusGained
+
+    private void nombreInquilino1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreInquilino1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreInquilino1FocusLost
+
+    private void nombreInquilino1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreInquilino1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreInquilino1KeyReleased
+
+    private void apellido1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apellido1KeyReleased
+
+    private void cuitInquilino1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cuitInquilino1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cuitInquilino1KeyReleased
+
+    private void lugarDeTrabajoInquilino1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lugarDeTrabajoInquilino1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lugarDeTrabajoInquilino1KeyReleased
+
+    private void dnigaranteInquilino1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dnigaranteInquilino1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dnigaranteInquilino1KeyReleased
+
+    private void nombreGaranteInquilino1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreGaranteInquilino1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreGaranteInquilino1KeyReleased
+
+    private void AgregarInquilino1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarInquilino1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AgregarInquilino1ActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+        int fila = tabla.getSelectedRow();
+        Inquilino inq = new Inquilino();
+        inq = Id.buscoInquilino((int) tabla.getValueAt(fila, 0));
+        
+        nombreInquilino.setText(inq.getNombre());
+        apellido.setText(inq.getApellido());
+        cuitInquilino.setText(inq.getCuit());
+        lugarDeTrabajoInquilino.setText(inq.getLugarTrabajo());
+        dnigaranteInquilino.setText(inq.getDniGarante()+"");
+        nombreGaranteInquilino.setText(inq.getNombreGarante());
+        
+        Modificar.setEnabled(true);
+        Cancelar.setEnabled(true);
+        mensajeModificando.setVisible(true);
+        seEstaModificando = true;
+        
+        habilitoCampos();
+        
+        
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        // TODO add your handling code here:
+        Inquilino nuevo = new Inquilino();
+        boolean condicion = true;
+        if(!apellido.getText().isEmpty() && !cuitInquilino.getText().isEmpty() && 
+                !lugarDeTrabajoInquilino.getText().isEmpty() && 
+                !dnigaranteInquilino.getText().isEmpty() && 
+                !nombreGaranteInquilino.getText().isEmpty()&& 
+                seEstaModificando){
+            
+            nuevo.setNombre(nombreInquilino.getText());
+            nuevo.setApellido(apellido.getText());
+            if (confirmarCadenaSiEsNumero(cuitInquilino.getText())){
+                nuevo.setCuit(cuitInquilino.getText());
+            } else {
+                condicion = false;
+                JOptionPane.showMessageDialog(null, "El CUIT debe contener solo numeros");
+            }
+            if (confirmarCadenaSiEsNumero(dnigaranteInquilino.getText())){
+                nuevo.setDniGarante(parseInt(dnigaranteInquilino.getText()));
+            } else {
+                condicion = false;
+                JOptionPane.showMessageDialog(null, "El DNI del garante debe contener solo numeros");
+            }
+            nuevo.setLugarTrabajo(lugarDeTrabajoInquilino.getText());
+            nuevo.setNombreGarante(nombreGaranteInquilino.getText());
+            
+            if (condicion){
+                Id.modificarInquilino(nuevo);
+            }
+            
+            limpiarCampos();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar completos");
+        }
+        
+        
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        // TODO add your handling code here:
+        seEstaModificando = false;
+        Modificar.setEnabled(false);
+        Cancelar.setEnabled(false);
+        mensajeModificando.setVisible(false);
+    }//GEN-LAST:event_CancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarInquilino;
+    private javax.swing.JButton AgregarInquilino1;
+    private javax.swing.JButton Cancelar;
+    private javax.swing.JButton Cancelar1;
+    private javax.swing.JButton Modificar;
+    private javax.swing.JButton Modificar1;
     private javax.swing.JTextField apellido;
+    private javax.swing.JTextField apellido1;
     private javax.swing.JTextField cuitInquilino;
+    private javax.swing.JTextField cuitInquilino1;
     private javax.swing.JTextField dnigaranteInquilino;
+    private javax.swing.JTextField dnigaranteInquilino1;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField lugarDeTrabajoInquilino;
-    private javax.swing.JLabel mensajeError;
+    private javax.swing.JTextField lugarDeTrabajoInquilino1;
+    private javax.swing.JLabel mensajeErrorApellido;
+    private javax.swing.JLabel mensajeErrorApellido1;
+    private javax.swing.JLabel mensajeErrorCUIT;
+    private javax.swing.JLabel mensajeErrorCUIT1;
+    private javax.swing.JLabel mensajeErrorDNIGarante;
+    private javax.swing.JLabel mensajeErrorDNIGarante1;
+    private javax.swing.JLabel mensajeErrorLugarTrabajo;
+    private javax.swing.JLabel mensajeErrorLugarTrabajo1;
+    private javax.swing.JLabel mensajeErrorNombre;
+    private javax.swing.JLabel mensajeErrorNombre1;
+    private javax.swing.JLabel mensajeErrorNombreGarante;
+    private javax.swing.JLabel mensajeErrorNombreGarante1;
+    private javax.swing.JLabel mensajeModificando;
+    private javax.swing.JLabel mensajeModificando1;
     private javax.swing.JTextField nombreGaranteInquilino;
+    private javax.swing.JTextField nombreGaranteInquilino1;
     private javax.swing.JTextField nombreInquilino;
+    private javax.swing.JTextField nombreInquilino1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 
-    private void camposIniciales() {
+    private void camposIniciales() {         
+        //Desabilito Campos
         nombreInquilino.setEnabled(true);
         apellido.setEnabled(false);
         cuitInquilino.setEnabled(false);
@@ -366,8 +934,6 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         dnigaranteInquilino.setEnabled(false);
         nombreGaranteInquilino.setEnabled(false);
         AgregarInquilino.setEnabled(false);
-        mensajeError.setForeground(Color.RED);
-        mensajeError.setVisible(false);
                 
     }
     
@@ -383,5 +949,46 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
                 }
         }
         return resultado;
+    }
+    
+    public void armarTabla(){
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("CUIT");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Apellido");
+        tabla.setModel(modeloTabla);
+    }
+
+    public void cargarTabla(){
+        List <Inquilino> lista = new ArrayList();
+        lista = Id.listarInquilino();
+        
+        for(Inquilino i : lista){
+            modeloTabla.addRow(new Object[]{i.getIdInquilino(), i.getCuit(),
+                i.getNombre(), i.getApellido()});
+        }
+    }
+    
+    public void habilitoCampos(){
+        nombreInquilino.setEnabled(true);
+        apellido.setEnabled(true);
+        cuitInquilino.setEnabled(true);
+        lugarDeTrabajoInquilino.setEnabled(true);
+        dnigaranteInquilino.setEnabled(true);
+        nombreGaranteInquilino.setEnabled(true);
+        AgregarInquilino.setEnabled(true);
+    }
+    
+    public void limpiarCampos(){
+        modeloTabla.setRowCount(0);
+        cargarTabla();
+        nombreInquilino.setText("");
+        apellido.setText("");
+        cuitInquilino.setText("");
+        lugarDeTrabajoInquilino.setText("");
+        dnigaranteInquilino.setText("");
+        nombreGaranteInquilino.setText("");
+            camposIniciales();
+        
     }
 }

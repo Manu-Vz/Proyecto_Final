@@ -54,19 +54,19 @@ public class InquilinoData {
         String sql = "UPDATE inquilino SET cuit = ?, nombre = ?, apellido = ?, lugarTrabajo = ?, dniGarante = ?,"
                 + "nombreGarante = ? WHERE idInquilino = ?";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, inqui.getCuit());
             ps.setString(2, inqui.getNombre());
             ps.setString(3, inqui.getApellido());
             ps.setString(4, inqui.getLugarTrabajo());
             ps.setInt(5, inqui.getDniGarante());
             ps.setString(6, inqui.getNombreGarante());
+            ps.setInt(7, inqui.getIdInquilino());
             int valor = ps.executeUpdate();
             if (valor>0) {
                 JOptionPane.showMessageDialog(null, "El Inquilino se actualizo");
-            } else{ 
-                JOptionPane.showMessageDialog(null, "No se puedo actualizar");
             }
+            ps.close();
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
