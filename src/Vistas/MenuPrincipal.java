@@ -33,7 +33,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmInquilinos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jItemVerContratos = new javax.swing.JMenuItem();
         jmiPropiedades = new javax.swing.JMenu();
         jMenuItemPropiedades = new javax.swing.JMenuItem();
         jmInmobiliaria = new javax.swing.JMenu();
@@ -69,8 +69,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmInquilinos.add(jMenuItem1);
 
-        jMenuItem2.setText("Ver Contrato");
-        jmInquilinos.add(jMenuItem2);
+        jItemVerContratos.setText("Ver Contratos");
+        jItemVerContratos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemVerContratosActionPerformed(evt);
+            }
+        });
+        jmInquilinos.add(jItemVerContratos);
 
         jMenuBar1.add(jmInquilinos);
 
@@ -105,22 +110,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmInmobiliaria.add(jmiDatosPropietarios);
 
         jmiDatosInquilinos.setText("Datos de Inquilinos");
-        jmiDatosInquilinos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiDatosInquilinosActionPerformed(evt);
-            }
-        });
         jmInmobiliaria.add(jmiDatosInquilinos);
 
         jmiDatosPropiedades.setText("Datos de Propiedades");
         jmInmobiliaria.add(jmiDatosPropiedades);
 
         jmiDatoZonas.setText("Datos de Zonas");
-        jmiDatoZonas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiDatoZonasActionPerformed(evt);
-            }
-        });
         jmInmobiliaria.add(jmiDatoZonas);
 
         jMenuBar1.add(jmInmobiliaria);
@@ -151,10 +146,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         vistaProp.setVisible(true);
         escritorio.add(vistaProp);
     }//GEN-LAST:event_jMenuItemPropiedadesActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jmiDatosPropietariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDatosPropietariosActionPerformed
         escritorio.removeAll();
@@ -199,6 +190,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(gz);
     }//GEN-LAST:event_jmiDatoZonasActionPerformed
 
+    private void jItemVerContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemVerContratosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaContratoAlquiler vistCont = new VistaContratoAlquiler();
+        vistCont.setVisible(true);
+        escritorio.add(vistCont);
+    }//GEN-LAST:event_jItemVerContratosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,9 +236,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jItemVerContratos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemPropiedades;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu jmInmobiliaria;

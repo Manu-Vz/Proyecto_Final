@@ -1,20 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Vistas;
 
+import AccesoDatos.ContratoAlquilerData;
+import AccesoDatos.EstadoContratoData;
+import AccesoDatos.InquilinoData;
 import AccesoDatos.PropiedadData;
+import AccesoDatos.VendedorData;
+import Entidades.ContratoAlquiler;
+import Entidades.EstadoContrato;
+import Entidades.Inquilino;
 import Entidades.PropiedadInmueble;
+import Entidades.Vendedor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author kalema
  */
-public class VistaContratoAlquiler extends javax.swing.JFrame {
+public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
     
     public DefaultTableModel modelo = new DefaultTableModel(){
         @Override
@@ -24,9 +31,20 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
     };
     
     private List<PropiedadInmueble> listaPropiedades = new ArrayList();
+    private List<Inquilino> listaInqui = new ArrayList();
+    private List<Vendedor> listaVend = new ArrayList();
+    private List<EstadoContrato> listaEstCont = new ArrayList();
     private PropiedadInmueble lasProp=null;
+    private Vendedor elVendedor = null;
+    private Inquilino elInquilino = null;
     private PropiedadData abmPropiedadData= new PropiedadData();
-    
+    private ContratoAlquilerData abmContAlquiler = new ContratoAlquilerData();
+    private VendedorData abmVend = new VendedorData();
+    private InquilinoData abmInqui = new InquilinoData();
+    private EstadoContratoData abmEstCont = new EstadoContratoData();
+    private DefaultComboBoxModel modeloInquijcb = new DefaultComboBoxModel();
+    private DefaultComboBoxModel modeloVen = new DefaultComboBoxModel();
+    private DefaultComboBoxModel modeloEstCont = new DefaultComboBoxModel();
 
     /**
      * Creates new form ContratoAlquiler
@@ -34,6 +52,9 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
     public VistaContratoAlquiler() {
         initComponents();
         armoTablaProp();
+        datosATabla();
+        armoComboInqui();
+        //this.setLocationRelativeTo(null);
     }
 
     /**
@@ -46,11 +67,6 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPanelInquilino = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPDatosInquilino = new javax.swing.JPanel();
-        jcbInquilinos = new javax.swing.JComboBox<>();
-        omitirjLabel1 = new javax.swing.JLabel();
-        jEtiquetaId = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanelContratoPropiedad = new javax.swing.JPanel();
         omitirEtiqueta2 = new javax.swing.JLabel();
@@ -63,10 +79,9 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
         omitirEtiqueta5 = new javax.swing.JLabel();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         omitirEtiqueta6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbComboVend = new javax.swing.JComboBox<>();
         omitirEtiqueta7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jcbEstadoContrado = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -76,59 +91,6 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPanelInquilino.setForeground(new java.awt.Color(153, 153, 153));
-
-        jPDatosInquilino.setBackground(new java.awt.Color(206, 238, 250));
-
-        omitirjLabel1.setText("Inquilino");
-        omitirjLabel1.setFocusable(false);
-
-        jEtiquetaId.setForeground(new java.awt.Color(153, 153, 153));
-        jEtiquetaId.setText("ID");
-        jEtiquetaId.setFocusable(false);
-
-        javax.swing.GroupLayout jPDatosInquilinoLayout = new javax.swing.GroupLayout(jPDatosInquilino);
-        jPDatosInquilino.setLayout(jPDatosInquilinoLayout);
-        jPDatosInquilinoLayout.setHorizontalGroup(
-            jPDatosInquilinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPDatosInquilinoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPDatosInquilinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(omitirjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jEtiquetaId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jcbInquilinos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(672, Short.MAX_VALUE))
-        );
-        jPDatosInquilinoLayout.setVerticalGroup(
-            jPDatosInquilinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPDatosInquilinoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPDatosInquilinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbInquilinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(omitirjLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(jEtiquetaId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPDatosInquilino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPDatosInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
-        );
-
-        jTabbedPanelInquilino.addTab("Contratos por Inquilinos", jPanel1);
 
         jPanelContratoPropiedad.setBackground(new java.awt.Color(245, 232, 232));
 
@@ -151,10 +113,8 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
         omitirEtiqueta6.setText("Vendedor");
         omitirEtiqueta6.setFocusable(false);
 
-        omitirEtiqueta7.setText("Disponibilidad");
+        omitirEtiqueta7.setText("Est. Contrato");
         omitirEtiqueta7.setFocusable(false);
-
-        jButton1.setText("Contratar");
 
         jButton2.setText("Modificar");
 
@@ -168,12 +128,6 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
-                        .addComponent(omitirEtiqueta2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbInquilinoProp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jEtiquetaID, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
                         .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
                                 .addComponent(omitirEtiqueta3)
@@ -182,30 +136,33 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
                             .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
                                 .addComponent(omitirEtiqueta6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jcbComboVend, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
                                 .addComponent(omitirEtiqueta7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcbEstadoContrado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3))
                             .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
                                 .addComponent(omitirEtiqueta4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
-                                        .addComponent(omitirEtiqueta5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton3)))))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                                .addComponent(omitirEtiqueta5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 156, Short.MAX_VALUE))))
+                    .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
+                        .addComponent(omitirEtiqueta2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jcbInquilinoProp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jEtiquetaID, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanelContratoPropiedadLayout.setVerticalGroup(
             jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,17 +181,16 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
                     .addComponent(omitirEtiqueta5)
                     .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(omitirEtiqueta6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(omitirEtiqueta7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3))
+                    .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(omitirEtiqueta6)
+                        .addComponent(jcbComboVend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(omitirEtiqueta7)
+                        .addComponent(jcbEstadoContrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jTablaSeleccionPropiedad.setModel(new javax.swing.table.DefaultTableModel(
@@ -248,6 +204,11 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablaSeleccionPropiedad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaSeleccionPropiedadMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablaSeleccionPropiedad);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -268,7 +229,7 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelContratoPropiedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -300,87 +261,111 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTablaSeleccionPropiedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaSeleccionPropiedadMouseClicked
+        // Cargo los datos de el contrato en los campos para la edición
+        int valor = jTablaSeleccionPropiedad.getSelectedRow();
+        int inquijcb = 0;
+        String tomoInqui = String.valueOf(modelo.getValueAt(valor, 1));
+        for (Inquilino unInqui : listaInqui) {
+            if(unInqui.otraForma().equals(tomoInqui)){
+                inquijcb = unInqui.getIdInquilino() -1;
+            }
+        }
+        jcbInquilinoProp.setSelectedIndex(inquijcb);
+        int vendjcb = 0;
+        String tomoVend = String.valueOf(modelo.getValueAt(valor, 6));
+        for (Vendedor esteVend : listaVend) {
+            if(esteVend.toString().equals(tomoVend)){
+                vendjcb = esteVend.getIdVendedor()-1;
+            }
+        }
+        jcbComboVend.setSelectedIndex(vendjcb);
+        int estContjcb = 0;
+        String tomoEstCon = String.valueOf(modelo.getValueAt(valor, 7));
+        for (EstadoContrato tomoEst : listaEstCont) {
+            if(tomoEst.getNombre().equals(tomoEstCon)){
+                estContjcb = tomoEst.getIdEstadoContrato() -1;
+            }
+        }
+        jcbEstadoContrado.setSelectedIndex(estContjcb);
+//        Date 
+    }//GEN-LAST:event_jTablaSeleccionPropiedadMouseClicked
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaContratoAlquiler().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(VistaContratoAlquiler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VistaContratoAlquiler().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jEtiquetaID;
-    private javax.swing.JLabel jEtiquetaId;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPDatosInquilino;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelContratoPropiedad;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPanelInquilino;
     private javax.swing.JTable jTablaSeleccionPropiedad;
+    private javax.swing.JComboBox<String> jcbComboVend;
+    private javax.swing.JComboBox<String> jcbEstadoContrado;
     private javax.swing.JComboBox<String> jcbInquilinoProp;
-    private javax.swing.JComboBox<String> jcbInquilinos;
     private javax.swing.JLabel omitirEtiqueta2;
     private javax.swing.JLabel omitirEtiqueta3;
     private javax.swing.JLabel omitirEtiqueta4;
     private javax.swing.JLabel omitirEtiqueta5;
     private javax.swing.JLabel omitirEtiqueta6;
     private javax.swing.JLabel omitirEtiqueta7;
-    private javax.swing.JLabel omitirjLabel1;
     // End of variables declaration//GEN-END:variables
 
-    private void armoTablaProp(){
-        modelo.addColumn("id"); //0
-        modelo.addColumn("Zona"); //1
-        modelo.addColumn("Dirección"); //2
-        modelo.addColumn("Tipo local"); //3
-        modelo.addColumn("Precio"); //4
-        modelo.addColumn("Estado local"); //5
-        modelo.addColumn("Inspector"); //6
-        modelo.addColumn("Vendedor"); //7
-        modelo.addColumn("Disponibilidad"); //8
-        modelo.addColumn("Propietario"); //9
-        modelo.addColumn("Caracteristicas"); //10
-        modelo.addColumn("Accesibilidad"); //11
-        jTablaSeleccionPropiedad.setModel(modelo);
-    }
+//    private void armoTablaProp(){
+//        modelo.addColumn("id"); //0
+//        modelo.addColumn("Zona"); //1
+//        modelo.addColumn("Dirección"); //2
+//        modelo.addColumn("Tipo local"); //3
+//        modelo.addColumn("Precio"); //4
+//        modelo.addColumn("Estado local"); //5
+//        modelo.addColumn("Inspector"); //6
+//        modelo.addColumn("Vendedor"); //7
+//        modelo.addColumn("Disponibilidad"); //8
+//        modelo.addColumn("Propietario"); //9
+//        modelo.addColumn("Caracteristicas"); //10
+//        modelo.addColumn("Accesibilidad"); //11
+//        jTablaSeleccionPropiedad.setModel(modelo);
+//    }
     
     private void cargoPropiedades(){
         listaPropiedades = abmPropiedadData.buscarPropiedad();
@@ -389,4 +374,53 @@ public class VistaContratoAlquiler extends javax.swing.JFrame {
         }
     }
 
+    
+    private void armoTablaProp(){
+        modelo.addColumn("ID");
+        modelo.addColumn("Inquilino");
+        modelo.addColumn("Tipo Local");
+        modelo.addColumn("Fecha de Inicio");
+        modelo.addColumn("Fecha Final");
+        modelo.addColumn("Fecha Realización");
+        modelo.addColumn("Vendedor");
+        modelo.addColumn("Estado Contrato");
+        jTablaSeleccionPropiedad.setModel(modelo);
+    }
+    
+    private void datosATabla(){
+        List<ContratoAlquiler> listar = new ArrayList();
+        listar = abmContAlquiler.listarContrato();
+        
+        for (ContratoAlquiler cont : listar) {
+            //elInquilino = abmInqui.buscoInquilino(con)
+            modelo.addRow(new Object[]{cont.getIdContratoAlquiler(),cont.getInquilino().otraForma(),
+                    cont.getPropiedadInmueble().getTipoLocal().getNombre(),cont.getFechaInicio(),
+                    cont.getFechaFinal(),cont.getFechaRealizacion(),cont.getVendedor().toString(),cont.getEstado()});
+        }
+    }
+    
+    private void armoComboInqui(){
+        listaInqui = abmInqui.listarInquilino();
+        for (Inquilino inqui : listaInqui) {
+            modeloInquijcb.addElement(inqui.otraForma());
+        }
+        jcbInquilinoProp.setModel(modeloInquijcb);
+    }
+    
+    
+    private void armoComboVend(){
+        listaVend = abmVend.listadoVendedor();
+        for (Vendedor unVend : listaVend) {
+            modeloVen.addElement(unVend.toString());
+        }
+        jcbComboVend.setModel(modeloVen);
+    }
+    
+    private void armoComboEstCont(){
+        listaEstCont = abmEstCont.listarEstadoContratos();
+        for (EstadoContrato unEst : listaEstCont) {
+            modeloEstCont.addElement(unEst);
+        }
+        jcbEstadoContrado.setModel(modeloEstCont);
+    }
 }

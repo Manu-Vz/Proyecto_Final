@@ -267,7 +267,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         valorIdProp=Integer.parseInt(tomoelId);
         MenuPrincipal.escritorio.repaint();
         ContratoAlquilerID nuevoCAID = new ContratoAlquilerID();
-        //MenuPrincipal.escritorio.add(nuevoCAID);
+        MenuPrincipal.escritorio.add(nuevoCAID);
         nuevoCAID.toFront();
         nuevoCAID.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

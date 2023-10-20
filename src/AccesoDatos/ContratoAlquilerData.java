@@ -26,8 +26,12 @@ public class ContratoAlquilerData {
     private PropiedadData abmPropiedad = new PropiedadData();
     private VendedorData abmVendedor = new VendedorData();
     private EstadoContratoData abmEstadoContrato = new EstadoContratoData();
-    
-    
+    private Inquilino inqui = null;
+    private PropiedadInmueble propInmueble = null;
+    private Vendedor vendedor = null;
+    private EstadoContrato estContrato = null;
+    private ContratoAlquiler conAlq = null;
+    //ContratoAlquiler contratoAlquiler = null;
     private Connection con = null;
     
     public ContratoAlquilerData(){
@@ -104,13 +108,7 @@ public class ContratoAlquilerData {
     public List<ContratoAlquiler> listarContrato (){
         
         List<ContratoAlquiler> listado = new ArrayList<>();
-        ContratoAlquiler conAlq = null;
         String sql = "SELECT * FROM contratoAlquiler";
-        Inquilino inqui = null;
-        PropiedadInmueble propInmueble = null;
-        Vendedor vendedor = null;
-        EstadoContrato estContrato = null;
-        
         try {
            PreparedStatement ps = con.prepareStatement(sql);
            ResultSet rs = ps.executeQuery();
@@ -120,13 +118,13 @@ public class ContratoAlquilerData {
                propInmueble = abmPropiedad.buscarPropiedadPorId(rs.getInt("idPropiedadInmueble"));
                vendedor = abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                estContrato = abmEstadoContrato.BuscarEstadoContratoPorId(rs.getInt("idEstadoContrato"));
-               LocalDate ldf = LocalDate.parse(rs.getString("fechaFinal"));
-               LocalDate ldi = LocalDate.parse(rs.getString("fechaInicial"));
-               LocalDate ldr = LocalDate.parse(rs.getString("fechaRealizacion"));
+               LocalDate ldf = LocalDate.parse(rs.getString(4));
+               LocalDate ldi = LocalDate.parse(rs.getString(5));
+               LocalDate ldr = LocalDate.parse(rs.getString(6));
                
                
                //Empezamos a construir el objeto que va al listado.
-               
+               conAlq = new ContratoAlquiler();
                conAlq.setIdContratoAlquiler(1);
                conAlq.setInquilino(inqui);
                conAlq.setPropiedadInmueble(propInmueble);
@@ -139,18 +137,19 @@ public class ContratoAlquilerData {
             }
             ps.close();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error "+e.getMessage());
         }
         return listado;
     }
     
     public ContratoAlquiler buscarContratoAlquilerPorId (int id){
-        ContratoAlquiler contratoAlquiler = null;
+        
         String sql = "SELECT * FROM contratoAlquiler where idContratoAlquiler = ?";
         
-        Inquilino inqui = null;
-        PropiedadInmueble propInmueble = null;
-        Vendedor vendedor = null;
-        EstadoContrato estContrato = null;
+//        inqui = null;
+//        propInmueble = null;
+//        vendedor = null;
+//        estContrato = null;
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -158,7 +157,6 @@ public class ContratoAlquilerData {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                
                inqui = abmInquilino.buscoInquilino(rs.getInt("idInquilino"));
                propInmueble = abmPropiedad.buscarPropiedadPorId(rs.getInt("idPropiedadInmueble"));
                vendedor = abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
@@ -166,22 +164,37 @@ public class ContratoAlquilerData {
                LocalDate ldf = LocalDate.parse(rs.getString("fechaFinal"));
                LocalDate ldi = LocalDate.parse(rs.getString("fechaInicial"));
                LocalDate ldr = LocalDate.parse(rs.getString("fechaRealizacion"));
-
-               contratoAlquiler.setIdContratoAlquiler(1);
-               contratoAlquiler.setInquilino(inqui);
-               contratoAlquiler.setPropiedadInmueble(propInmueble);
-               contratoAlquiler.setFechaFinal(ldf);
-               contratoAlquiler.setFechaInicio(ldi);
-               contratoAlquiler.setFechaRealizacion(ldr);
-               contratoAlquiler.setVendedor(vendedor);
-               contratoAlquiler.setEstado(estContrato);
+               
+               conAlq = new ContratoAlquiler();
+               conAlq.setIdContratoAlquiler(1);
+               conAlq.setInquilino(inqui);
+               conAlq.setPropiedadInmueble(propInmueble);
+               conAlq.setFechaFinal(ldf);
+               conAlq.setFechaInicio(ldi);
+               conAlq.setFechaRealizacion(ldr);
+               conAlq.setVendedor(vendedor);
+               conAlq.setEstado(estContrato);
                 
             }
             ps.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        return contratoAlquiler;
+        return conAlq;
     }
     
+    public List<ContratoAlquiler> buscarContratosRelacion(){
+        List<ContratoAlquiler> listado = new ArrayList();
+        String sql = "SELECT ca.*,inqui.nombre,inqui.apellido,pi.idTipoLocal, vend.nombre, vend.apellido, ec.nombre "
+                +"FROM contratoAlquiler ca JOIN inquilino inqui on(ca.idInquilino=inqui.idInquilino) "
+                +"JOIN propiedadInmueble pi on(ca.idPropiedadInmueble=pi.idPropiedad) "
+                +"JOIN vendedor vend on(ca.idVendedor=vend.idVendedor) "
+                +"JOIN estadoContrato ec on(ca.idEstadoContrato=ec.idEstadoContrato)";
+        try {
+            
+        } catch (Exception e) {
+        }
+        
+        return listado;
+    }
 }
