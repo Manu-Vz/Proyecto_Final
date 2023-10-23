@@ -74,11 +74,11 @@ public class ContratoAlquilerData {
     public void modificarContrato(ContratoAlquiler contrato){
         String sql = "UPDATE contratoAlquiler SET idInquilino=?,"
                 + "idPropiedadInmueble=?,fechaFinal=?,fechaInical=?,"
-                + "fechaRealizacion=?,marca=?,idVendedor`=?,idEstadoContrato=? "
+                + "fechaRealizacion=?,marca=?,idVendedor=?,idEstadoContrato=? "
                 + "WHERE idContratoAlquiler = ?";
         
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1, contrato.getInquilino().getIdInquilino());
             ps.setInt(2, contrato.getPropiedadInmueble().getIdPropiedadInmueble());
@@ -125,7 +125,7 @@ public class ContratoAlquilerData {
                
                //Empezamos a construir el objeto que va al listado.
                conAlq = new ContratoAlquiler();
-               conAlq.setIdContratoAlquiler(1);
+               conAlq.setIdContratoAlquiler(rs.getInt(1));
                conAlq.setInquilino(inqui);
                conAlq.setPropiedadInmueble(propInmueble);
                conAlq.setFechaFinal(ldf);

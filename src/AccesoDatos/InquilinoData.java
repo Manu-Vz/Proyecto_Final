@@ -54,7 +54,7 @@ public class InquilinoData {
         String sql = "UPDATE inquilino SET cuit = ?, nombre = ?, apellido = ?, lugarTrabajo = ?, dniGarante = ?,"
                 + "nombreGarante = ? WHERE idInquilino = ?";
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, inqui.getCuit());
             ps.setString(2, inqui.getNombre());
             ps.setString(3, inqui.getApellido());

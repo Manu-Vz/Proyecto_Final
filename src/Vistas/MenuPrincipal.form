@@ -73,6 +73,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Datos de Inquilinos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiDatosInquilinosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiDatosPropiedades">
               <Properties>

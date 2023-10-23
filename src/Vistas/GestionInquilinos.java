@@ -821,6 +821,9 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
         Inquilino nuevo = new Inquilino();
+        int valorId = tabla.getSelectedRow();
+        String temp = String.valueOf(modeloTabla.getValueAt(valorId, 0));
+        int idInqui = Integer.valueOf(temp);
         boolean condicion = true;
         if(!apellido.getText().isEmpty() && !cuitInquilino.getText().isEmpty() && 
                 !lugarDeTrabajoInquilino.getText().isEmpty() && 
@@ -844,7 +847,8 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
             }
             nuevo.setLugarTrabajo(lugarDeTrabajoInquilino.getText());
             nuevo.setNombreGarante(nombreGaranteInquilino.getText());
-            
+            nuevo.setIdInquilino(idInqui);
+            System.out.println("muestro el inquilino "+nuevo.getIdInquilino());
             if (condicion){
                 Id.modificarInquilino(nuevo);
             }
