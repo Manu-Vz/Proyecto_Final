@@ -78,6 +78,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         jtfValorTipo = new javax.swing.JTextField();
         jbActualizar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -135,6 +137,11 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         jLabel5.setText("Valor nuevo:");
 
         jtfValorZona.setEditable(false);
+        jtfValorZona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfValorZonaKeyReleased(evt);
+            }
+        });
 
         jbActualizar.setText("Actualizar");
 
@@ -144,6 +151,10 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                 jbCancelarActionPerformed(evt);
             }
         });
+
+        jLabel6.setText("%");
+
+        jLabel7.setText("%");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,10 +179,10 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jcbTipo, 0, 140, Short.MAX_VALUE)
                                     .addComponent(jcbZona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 427, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 384, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +192,11 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfValorTipo)
                             .addComponent(jtfValorZona, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(380, 380, 380))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(304, 304, 304))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jbActualizar)
                         .addGap(18, 18, 18)
@@ -206,11 +221,13 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jtfValorZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfValorZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jtfValorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtfValorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizar)
@@ -247,7 +264,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
             listaXZona = abmPropiedad.busquedaXZona(jcbZona.getSelectedIndex() + 1);
             for (PropiedadInmueble propiedadZona : listaXZona) {
                 modelo.addRow(new Object[]{propiedadZona.getIdPropiedadInmueble(), propiedadZona.getZona().getNombre(),
-                    propiedadZona.getDireccion(), propiedadZona.getTipoLocal().getNombre(), propiedadZona.getInspector().toString(),
+                    propiedadZona.getDireccion(), propiedadZona.getTipoLocal().getNombre(), propiedadZona.getPrecioTrazado(),
+                    propiedadZona.getEstadoLocal().getNombre(), propiedadZona.getInspector().toString(),
                     propiedadZona.isDisponibilidad(), propiedadZona.getPropietario().toString(),
                     propiedadZona.getCaracteristicasString(), propiedadZona.getAccesibilidad()});
             }
@@ -263,7 +281,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
             listaxTipo = abmPropiedad.listadoInmueblexTipo(jcbTipo.getSelectedIndex() + 1);
             for (PropiedadInmueble propiedadTipo : listaxTipo) {
                 modelo.addRow(new Object[]{ propiedadTipo.getIdPropiedadInmueble(), propiedadTipo.getZona().getNombre(),
-                    propiedadTipo.getDireccion(), propiedadTipo.getTipoLocal().getNombre(), propiedadTipo.getInspector().toString(),
+                    propiedadTipo.getDireccion(), propiedadTipo.getTipoLocal().getNombre(), propiedadTipo.getPrecioTrazado(),
+                    propiedadTipo.getEstadoLocal().getNombre(), propiedadTipo.getInspector().toString(),
                     propiedadTipo.isDisponibilidad(), propiedadTipo.getPropietario().toString(),
                     propiedadTipo.getCaracteristicasString(), propiedadTipo.getAccesibilidad()});
             }
@@ -295,6 +314,10 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
 //        jtfValorZona.setEnabled(false);
     }//GEN-LAST:event_jcbTipoMouseClicked
 
+    private void jtfValorZonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfValorZonaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfValorZonaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -302,6 +325,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbActualizar;
