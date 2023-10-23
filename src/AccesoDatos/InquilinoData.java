@@ -25,7 +25,8 @@ public class InquilinoData {
         
     }
     
-    public void guardarInquilino(Inquilino inqui){
+    public boolean guardarInquilino(Inquilino inqui){
+        boolean resultado = false;
         String sql = "INSERT INTO inquilino (cuit,nombre,apellido,lugarTrabajo,dniGarante,nombreGarante) "
                 + "VALUES (?,?,?,?,?,?)";
         try {
@@ -41,13 +42,14 @@ public class InquilinoData {
             
             if (rs.next()) {
                 inqui.setIdInquilino(rs.getInt(1));
+                resultado = true;
                 JOptionPane.showMessageDialog(null, "Se agrego el Inquilino");
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
+        return resultado;
     }
     
     public void modificarInquilino(Inquilino inqui){

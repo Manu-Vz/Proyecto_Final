@@ -7,9 +7,11 @@ package Vistas;
 
 import AccesoDatos.InquilinoData;
 import Entidades.Inquilino;
+import java.awt.AWTError;
 import java.awt.Color;
 import java.awt.Point;
 import static java.lang.Integer.parseInt;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -39,6 +41,9 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         armarTabla();
         cargarTabla();
         camposIniciales();
+        
+        limpiarMensajes();
+        
         //configuro los colores de los mensajes
         mensajeErrorNombre.setForeground(Color.RED);
         mensajeErrorApellido.setForeground(Color.red);
@@ -47,14 +52,7 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         mensajeErrorLugarTrabajo.setForeground(Color.red);
         mensajeErrorNombreGarante.setForeground(Color.red);
         
-        //Le deshabilito la visibilidad a los mensajes
-        mensajeErrorNombre.setVisible(false);
-        mensajeErrorApellido.setVisible(false);
-        mensajeErrorCUIT.setVisible(false);
-        mensajeErrorLugarTrabajo.setVisible(false);
-        mensajeErrorDNIGarante.setVisible(false);
-        mensajeErrorNombreGarante.setVisible(false);
-        mensajeModificando.setVisible(false);
+        
     }
 
     int cadenaCuit = 0;
@@ -650,12 +648,16 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
             
             if (condicion){
                 InquilinoData ID = new InquilinoData();
-                ID.guardarInquilino(nuevo);
+                if (ID.guardarInquilino(nuevo)){
+                    limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Uno de los campos esta  repetido en la tabla");
+                }
             }
-            limpiarCampos();
+            
             
         } else {
-            JOptionPane.showMessageDialog(null, "Todos los campos deben estar completos");
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar completos y No se debe estar modificando");
         }
         
         
@@ -797,6 +799,9 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
+        
+        limpiarMensajes();
+        
         int fila = tabla.getSelectedRow();
         Inquilino inq = new Inquilino();
         inq = Id.buscoInquilino((int) tabla.getValueAt(fila, 0));
@@ -814,7 +819,7 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
         seEstaModificando = true;
         
         habilitoCampos();
-        
+        AgregarInquilino.setEnabled(false);
         
     }//GEN-LAST:event_tablaMouseClicked
 
@@ -851,9 +856,11 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
             System.out.println("muestro el inquilino "+nuevo.getIdInquilino());
             if (condicion){
                 Id.modificarInquilino(nuevo);
+                    limpiarCampos();
+                
             }
             
-            limpiarCampos();
+            
             
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar completos");
@@ -864,6 +871,7 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
+        AgregarInquilino.setEnabled(true);
         seEstaModificando = false;
         Modificar.setEnabled(false);
         Cancelar.setEnabled(false);
@@ -985,14 +993,25 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
     
     public void limpiarCampos(){
         modeloTabla.setRowCount(0);
-        cargarTabla();
         nombreInquilino.setText("");
         apellido.setText("");
         cuitInquilino.setText("");
         lugarDeTrabajoInquilino.setText("");
         dnigaranteInquilino.setText("");
         nombreGaranteInquilino.setText("");
-            camposIniciales();
+        camposIniciales();
+        cargarTabla();
         
+    }
+    
+    public void limpiarMensajes(){
+        //Le deshabilito la visibilidad a los mensajes
+        mensajeErrorNombre.setVisible(false);
+        mensajeErrorApellido.setVisible(false);
+        mensajeErrorCUIT.setVisible(false);
+        mensajeErrorLugarTrabajo.setVisible(false);
+        mensajeErrorDNIGarante.setVisible(false);
+        mensajeErrorNombreGarante.setVisible(false);
+        mensajeModificando.setVisible(false);
     }
 }

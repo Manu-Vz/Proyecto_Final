@@ -295,7 +295,7 @@ public class GestionZonas extends javax.swing.JInternalFrame {
             zd.habilitarZona((int) modeloTabla.getValueAt(Indice, 0));
         }
             
-            limpiarCampos();
+        limpiarCampos();
     }//GEN-LAST:event_CambiarEstadoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -328,7 +328,7 @@ public class GestionZonas extends javax.swing.JInternalFrame {
         for(Zona z : lista){
             modeloTabla.addRow(new Object[]{z.getIdZona(), z.getNombre(),
                                             z.getDescripcion(), z.isEstado()});
-        }        
+        }
     }
 
     public void cargarTabla(List<Zona> lista){
