@@ -86,6 +86,30 @@ public class VendedorData {
         return listado;
     }
     
+    public List<Vendedor> listadoVendedorOriginal(){
+        List<Vendedor> listado=new ArrayList();
+        String sql="SELECT * FROM vendedor where idVendedor";
+        Vendedor vende=null;
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                vende=new Vendedor();
+                vende.setIdVendedor(rs.getInt(1));
+                vende.setNombre(rs.getString("nombre"));
+                vende.setApellido(rs.getString("apellido"));
+                vende.setCantidadVentas(rs.getInt(4));
+                vende.setEstado(rs.getBoolean(5));
+                listado.add(vende);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar la base de datos "+e.getMessage());
+        }
+        
+        return listado;
+    }
+    
     public Vendedor buscoVendedor(int id){
         Vendedor temp=null;
         String sql="SELECT * FROM vendedor WHERE idVendedor=?";
