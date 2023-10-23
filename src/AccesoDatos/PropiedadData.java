@@ -168,11 +168,9 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona) "
-                + "where pi.precioTRazado > ? and pi.precioTrazado < ?";
+                + "WHERE pi.precioTrazado > "+ ini +" AND pi.precioTrazado <"+ fin +"";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setFloat(1, ini);
-            ps.setFloat(2, fin);
             ResultSet rs=ps.executeQuery();
             
             while (rs.next()){
