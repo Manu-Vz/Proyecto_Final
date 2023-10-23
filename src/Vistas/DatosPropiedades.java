@@ -10,6 +10,8 @@ import AccesoDatos.ZonaData;
 import Entidades.PropiedadInmueble;
 import Entidades.TipoLocal;
 import Entidades.Zona;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -80,6 +82,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         jbCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jlAdvertenciaValorZona = new javax.swing.JLabel();
+        jlAdvertenciaValorTipo = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -136,10 +140,22 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Valor nuevo:");
 
-        jtfValorZona.setEditable(false);
+        jtfValorZona.setText("Porcentaje");
+        jtfValorZona.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfValorZonaFocusGained(evt);
+            }
+        });
         jtfValorZona.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfValorZonaKeyReleased(evt);
+            }
+        });
+
+        jtfValorTipo.setText("Porcentaje");
+        jtfValorTipo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfValorTipoKeyReleased(evt);
             }
         });
 
@@ -156,6 +172,10 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
 
         jLabel7.setText("%");
 
+        jlAdvertenciaValorZona.setText(" ");
+
+        jlAdvertenciaValorTipo.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,42 +186,42 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(195, 195, 195)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcbTipo, 0, 140, Short.MAX_VALUE)
-                                    .addComponent(jcbZona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 427, Short.MAX_VALUE)))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbTipo, 0, 140, Short.MAX_VALUE)
+                            .addComponent(jcbZona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 713, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbActualizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbCancelar)
+                        .addGap(177, 177, 177))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlAdvertenciaValorTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlAdvertenciaValorZona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtfValorTipo)
-                            .addComponent(jtfValorZona, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfValorZona, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addGap(304, 304, 304))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbActualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbCancelar)
-                        .addGap(176, 176, 176))))
+                        .addComponent(jLabel1)
+                        .addGap(313, 313, 313))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,16 +243,20 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jtfValorZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlAdvertenciaValorZona)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jtfValorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlAdvertenciaValorTipo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizar)
                     .addComponent(jbCancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -299,6 +323,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         comboBusquedaPorTipo();
         borroFilas();
         camposIniciales();
+        jlAdvertenciaValorZona.setText(" ");
+        jlAdvertenciaValorTipo.setText(" ");
         
     }//GEN-LAST:event_jbCancelarActionPerformed
 
@@ -315,8 +341,95 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbTipoMouseClicked
 
     private void jtfValorZonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfValorZonaKeyReleased
-        // TODO add your handling code here:
+        jlAdvertenciaValorZona.setFont(new Font("Liberation Sans",Font.PLAIN,13));
+        jlAdvertenciaValorZona.setForeground(Color.red.darker());
+        if (jtfValorZona.getText().isEmpty()) {
+            jlAdvertenciaValorZona.setText("No puede estar vacio");
+            if (jbActualizar.isEnabled()) {
+                jbActualizar.setEnabled(false);
+            }
+        }else{
+            jlAdvertenciaValorZona.setText("");
+            jtfValorZona.setForeground(Color.black);
+            String tomoTexto = "";
+            char[] aChar = jtfValorZona.getText().toCharArray();
+            int contador = 0;
+            for (int i = 0; i < aChar.length; i++) {
+                tomoTexto = String.valueOf(aChar[i]);
+                if (tomoTexto.equals(".")) {
+                    contador++;
+                }
+                if (contador>1) {
+                    jlAdvertenciaValorZona.setText("Solo un punto");
+                    if (jbActualizar.isEnabled()) {
+                        jbActualizar.setEnabled(false);
+                    }
+                    break;
+                } else {
+                    if (!tomoTexto.matches("[0123456789.]*")) {
+                        jlAdvertenciaValorZona.setText("Solo números Reales");
+                        if (jbActualizar.isEnabled()) {
+                            jbActualizar.setEnabled(false);
+                        }
+                        break;
+                    } else {
+                        jlAdvertenciaValorZona.setText("");
+                        jbActualizar.setEnabled(true);
+                    }
+                } 
+            }   
+        }
     }//GEN-LAST:event_jtfValorZonaKeyReleased
+
+    private void jtfValorTipoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfValorTipoKeyReleased
+        jlAdvertenciaValorTipo.setFont(new Font("Liberation Sans",Font.PLAIN,13));
+        jlAdvertenciaValorTipo.setForeground(Color.red.darker());
+        if (jtfValorTipo.getText().isEmpty()) {
+            jlAdvertenciaValorTipo.setText("No puede estar vacio");
+            if (jbActualizar.isEnabled()) {
+                jbActualizar.setEnabled(false);
+            }
+        }else{
+            jlAdvertenciaValorTipo.setText("");
+            jtfValorTipo.setForeground(Color.black);
+            String tomoTexto = "";
+            char[] aChar = jtfValorTipo.getText().toCharArray();
+            int contador = 0;
+            for (int i = 0; i < aChar.length; i++) {
+                tomoTexto = String.valueOf(aChar[i]);
+                if (tomoTexto.equals(".")) {
+                    contador++;
+                }
+                if (contador>1) {
+                    jlAdvertenciaValorTipo.setText("Solo un punto");
+                    if (jbActualizar.isEnabled()) {
+                        jbActualizar.setEnabled(false);
+                    }
+                    break;
+                } else {
+                    if (!tomoTexto.matches("[0123456789.]*")) {
+                        jlAdvertenciaValorTipo.setText("Solo números Reales");
+                        if (jbActualizar.isEnabled()) {
+                            jbActualizar.setEnabled(false);
+                        }
+                        break;
+                    } else {
+                        jlAdvertenciaValorTipo.setText("");
+                    }
+                }
+            }   
+        }
+    }//GEN-LAST:event_jtfValorTipoKeyReleased
+
+    private void jtfValorZonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfValorZonaFocusGained
+        if (jtfValorZona.getText().isEmpty()) {
+            jtfValorZona.setText("Porcentaje");
+            jtfValorZona.setForeground(Color.gray);
+        } else if( jtfValorZona.getText().equals("Porcentaje")){
+            jtfValorZona.selectAll();
+            jtfValorZona.setForeground(Color.black);            
+        }
+    }//GEN-LAST:event_jtfValorZonaFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -333,6 +446,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JComboBox<String> jcbTipo;
     private javax.swing.JComboBox<String> jcbZona;
+    private javax.swing.JLabel jlAdvertenciaValorTipo;
+    private javax.swing.JLabel jlAdvertenciaValorZona;
     private javax.swing.JTable jtTablaPropiedades;
     private javax.swing.JTextField jtfValorTipo;
     private javax.swing.JTextField jtfValorZona;
@@ -367,6 +482,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         jtfValorTipo.setEnabled(false);
         jbActualizar.setEnabled(false);
         jbCancelar.setEnabled(true);
+        jlAdvertenciaValorZona.setText(" ");
+        jlAdvertenciaValorTipo.setText(" ");
     }
     
     private void comboBusquedaPorZona() {
@@ -388,6 +505,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     private void resetearCampos(){
         jtfValorZona.setText("");
         jtfValorTipo.setText("");
+        jlAdvertenciaValorZona.setText(" ");
+        jlAdvertenciaValorTipo.setText(" ");
         borroFilas();
     }
 }
