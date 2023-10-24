@@ -369,6 +369,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         if (ComboBoxLocal.getSelectedIndex() != 0 
                 && ComboBoxPrecio.getSelectedIndex() == 0
                 && ComboBoxZonas.getSelectedIndex() == 0){
+            
             TipoLocal aux = new TipoLocal();
             aux = (TipoLocal) ComboBoxLocal.getSelectedItem();
             lista = ps.listadoInmueblexTipo(aux.getIdTipoLocal());
@@ -404,6 +405,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         } else if (ComboBoxLocal.getSelectedIndex() == 0 
                 && ComboBoxPrecio.getSelectedIndex() == 0
                 && ComboBoxZonas.getSelectedIndex() != 0){
+            
             Zona z = new Zona();
             z = (Zona) ComboBoxZonas.getSelectedItem();
             lista = ps.busquedaXZona(z.getIdZona());
@@ -448,7 +450,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
             precioMax = 999999999;
             
             Zona aux = new Zona();
-            aux = (Zona) ComboBoxLocal.getSelectedItem();
+            aux = (Zona) ComboBoxZonas.getSelectedItem();
             
             int indice = ComboBoxPrecio.getSelectedIndex();
             switch (indice){
@@ -468,9 +470,60 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
                         precioMax = 999999999;
                         break;
                 }       
-            
-            
+            lista = ps.busquedaXZonaYPrecio(precioMin, precioMax, aux.getIdZona());
+            cargarTabla(lista);
                 
+        } else if (ComboBoxLocal.getSelectedIndex() != 0 
+                && ComboBoxPrecio.getSelectedIndex() == 0
+                && ComboBoxZonas.getSelectedIndex() != 0){
+            
+            Zona auxZona = new Zona();
+            auxZona = (Zona) ComboBoxZonas.getSelectedItem();
+            
+            TipoLocal auxLocal = new TipoLocal();
+            auxLocal = (TipoLocal) ComboBoxLocal.getSelectedItem();
+            
+            lista = ps.busquedaXZonaYTipoLocal(auxZona.getIdZona(), auxLocal.getIdTipoLocal());
+            cargarTabla(lista);
+            
+        } else if ((ComboBoxLocal.getSelectedIndex() != 0 
+                && ComboBoxPrecio.getSelectedIndex() != 0
+                && ComboBoxZonas.getSelectedIndex() != 0)){
+            
+            Zona auxZona = new Zona();
+            auxZona = (Zona) ComboBoxZonas.getSelectedItem();
+            
+            TipoLocal auxLocal = new TipoLocal();
+            auxLocal = (TipoLocal) ComboBoxLocal.getSelectedItem();
+            
+            float precioMin, precioMax;
+            precioMin = 0;
+            precioMax = 999999999;
+            
+            int indice = ComboBoxPrecio.getSelectedIndex();
+            switch (indice){
+                case 1: precioMin = 0;
+                        precioMax = 100000;
+                        break;
+                case 2: precioMin = 99999;
+                        precioMax = 150000;
+                        break;
+                case 3: precioMin = 149999;
+                        precioMax = 200000;
+                        break;
+                case 4: precioMin = 199999;
+                        precioMax = 300000;
+                        break;
+                case 5: precioMin = 299999;
+                        precioMax = 999999999;
+                        break;
+                }
+            
+            lista = ps.busquedaXZona_Precio_TipoLocal(precioMin, precioMax, auxZona.getIdZona(), auxLocal.getIdTipoLocal());
+            cargarTabla(lista);
+        } else {
+            
+            cargarTablaVacia();
         }
     }
 
