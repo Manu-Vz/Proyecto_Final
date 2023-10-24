@@ -633,7 +633,7 @@ public class PropiedadData {
     }
     
     public void ActualizarPreciosPorTipoLocal(float precio, int idTipoLocal){
-        String sql = "UPDATE propideadInmueble SET precioTrazado = ? WHERE idTipoLocal = ?";
+        String sql = "UPDATE propiedadInmueble SET precioTrazado = ? WHERE idTipoLocal = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setFloat(1, precio);
@@ -649,7 +649,7 @@ public class PropiedadData {
     }
     
         public void ActualizarPreciosPorZOna(float precio, int idZona){
-        String sql = "UPDATE propideadInmueble SET precioTrazado = ? WHERE idZona = ?";
+        String sql = "UPDATE propiedadInmueble SET precioTrazado = ? WHERE idZona = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setFloat(1, precio);
