@@ -902,7 +902,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         String propInspectorFila = String.valueOf(modelo.getValueAt(valor, 6));
         for (Inspector inspData : listaInspector) {
             if (inspData.toString().equals(propInspectorFila)) {
-                propInspectorjcb = inspData.getIdInspector() - 1;
+                propInspectorjcb = inspData.getIdInspector() -1;
             }
         }
         jcbInspector.setSelectedIndex(propInspectorjcb);
@@ -916,7 +916,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 //        }
 //        jcbVendedor.setSelectedIndex(propVendedorjcb);
         //Seteo el valor de la Disponibilidad en el combo
-        String valordisponibilidad = String.valueOf(modelo.getValueAt(valor, 8));
+        String valordisponibilidad = String.valueOf(modelo.getValueAt(valor, 7));
         if (valordisponibilidad.equals("Activo")) {
             jcbDisponibilidad.setSelectedIndex(1);
         } else {
@@ -1292,9 +1292,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             listaXZona = abmPropiedad.busquedaXZona(jcbBusquedaXZona.getSelectedIndex() + 1);
             for (PropiedadInmueble propiedaZona : listaXZona) {
                 modeloZona.addRow(new Object[]{propiedaZona.getIdPropiedadInmueble(), propiedaZona.getZona().getNombre(),
-                    propiedaZona.getDireccion(), propiedaZona.getTipoLocal().getNombre(), propiedaZona.getInspector().toString(),
-                    propiedaZona.isDisponibilidad(), propiedaZona.getPropietario().toString(),
-                    propiedaZona.getCaracteristicasString(), propiedaZona.getAccesibilidad()});
+                    propiedaZona.getDireccion(), propiedaZona.getTipoLocal().getNombre(),propiedaZona.getPrecioTrazado(), 
+                    propiedaZona.getEstadoLocal().getNombre(),propiedaZona.getInspector().toString(),propiedaZona.isDisponibilidad(),
+                    propiedaZona.getPropietario().toString(),propiedaZona.getCaracteristicasString(),
+                    propiedaZona.getAccesibilidad()});
             }
         }
     }//GEN-LAST:event_jcbBusquedaXZonaActionPerformed
@@ -1656,7 +1657,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     }
 
     public void comboInspector() {
-        listaInspector = abmInspector.listadoInspectoeres();
+        listaInspector = abmInspector.listadoInspectoeresJCB();
         for (Inspector inspector : listaInspector) {
             modelComboInspector.addElement(inspector);
         }

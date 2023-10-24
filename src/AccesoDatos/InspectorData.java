@@ -86,6 +86,31 @@ public class InspectorData {
         return listado;
     }
     
+    public List<Inspector> listadoInspectoeresJCB(){
+        List<Inspector> listado=new ArrayList();
+        Inspector temp=null;
+        String sql="SELECT * FROM inspector where idInspector";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                //nombre,apellido,especialidad,estado
+                temp=new Inspector();
+                temp.setIdInspector(rs.getInt(1));
+                temp.setNombre(rs.getString("nombre"));
+                temp.setApellido(rs.getString("apellido"));
+                temp.setEspecialidad(rs.getString("especialidad"));
+                temp.setEstado(rs.getBoolean("estado"));
+                listado.add(temp);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro al acceder a la base de datos "+e.getMessage());
+        }
+        
+        return listado;
+    }
+    
     public Inspector buscoInspector(int id){
         Inspector insp=new Inspector();
         String sql="SELECT * FROM inspector WHERE idInspector = ?";
