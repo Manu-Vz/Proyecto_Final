@@ -218,12 +218,13 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
 
     private void ComboBoxZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxZonasActionPerformed
         // TODO add your handling code here:
+        cargarTablaConFiltros();
         if (ComboBoxLocal.getSelectedIndex() != 0 && 
                 ComboBoxPrecio.getSelectedIndex() != 0 &&
                 ComboBoxZonas.getSelectedIndex() != 0){
             jButton2.setEnabled(true);   
         }
-        cargarTablaConFiltros();
+        
     }//GEN-LAST:event_ComboBoxZonasActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -232,22 +233,24 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
 
     private void ComboBoxLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxLocalActionPerformed
         // TODO add your handling code here:
+        cargarTablaConFiltros();
         if (ComboBoxLocal.getSelectedIndex() != 0 && 
                 ComboBoxPrecio.getSelectedIndex() != 0 &&
                 ComboBoxZonas.getSelectedIndex() != 0){
             jButton2.setEnabled(true);    
         }
-        cargarTablaConFiltros();
+        
     }//GEN-LAST:event_ComboBoxLocalActionPerformed
 
     private void ComboBoxPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxPrecioActionPerformed
         // TODO add your handling code here:
+        cargarTablaConFiltros();
         if (ComboBoxLocal.getSelectedIndex() != 0 && 
                 ComboBoxPrecio.getSelectedIndex() != 0 &&
                 ComboBoxZonas.getSelectedIndex() != 0){
             jButton2.setEnabled(true);
         }
-        cargarTablaConFiltros();
+        
     }//GEN-LAST:event_ComboBoxPrecioActionPerformed
 
     private void ComboBoxZonasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboBoxZonasFocusLost
@@ -359,6 +362,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         tabla.setModel(modeloTabla);
     }
     
+    @SuppressWarnings("UnusedAssignment")
     private void cargarTablaConFiltros(){
         PropiedadData ps = new PropiedadData();
         List<PropiedadInmueble> lista = new ArrayList();
@@ -369,6 +373,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
             aux = (TipoLocal) ComboBoxLocal.getSelectedItem();
             lista = ps.listadoInmueblexTipo(aux.getIdTipoLocal());
             cargarTabla(lista);
+            
         } else if (ComboBoxLocal.getSelectedIndex() == 0 
                 && ComboBoxPrecio.getSelectedIndex() != 0
                 && ComboBoxZonas.getSelectedIndex() == 0){
@@ -403,6 +408,69 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
             z = (Zona) ComboBoxZonas.getSelectedItem();
             lista = ps.busquedaXZona(z.getIdZona());
             cargarTabla(lista);
+            
+        } else if (ComboBoxLocal.getSelectedIndex() != 0 
+                && ComboBoxPrecio.getSelectedIndex() != 0
+                && ComboBoxZonas.getSelectedIndex() == 0){
+            float precioMin, precioMax;
+            precioMin = 0;
+            precioMax = 999999999;
+            
+            TipoLocal aux = new TipoLocal();
+            aux = (TipoLocal) ComboBoxLocal.getSelectedItem();
+            
+            int indice = ComboBoxPrecio.getSelectedIndex();
+            switch (indice){
+                case 1: precioMin = 0;
+                        precioMax = 100000;
+                        break;
+                case 2: precioMin = 99999;
+                        precioMax = 150000;
+                        break;
+                case 3: precioMin = 149999;
+                        precioMax = 200000;
+                        break;
+                case 4: precioMin = 199999;
+                        precioMax = 300000;
+                        break;
+                case 5: precioMin = 299999;
+                        precioMax = 999999999;
+                        break;
+                }   
+            lista = ps.rangoPreciosYporTipoLocal(precioMin, precioMax, aux.getIdTipoLocal());
+            cargarTabla(lista);
+            
+            } else if (ComboBoxLocal.getSelectedIndex() == 0 
+                && ComboBoxPrecio.getSelectedIndex() != 0
+                && ComboBoxZonas.getSelectedIndex() != 0){
+            float precioMin, precioMax;
+            precioMin = 0;
+            precioMax = 999999999;
+            
+            Zona aux = new Zona();
+            aux = (Zona) ComboBoxLocal.getSelectedItem();
+            
+            int indice = ComboBoxPrecio.getSelectedIndex();
+            switch (indice){
+                case 1: precioMin = 0;
+                        precioMax = 100000;
+                        break;
+                case 2: precioMin = 99999;
+                        precioMax = 150000;
+                        break;
+                case 3: precioMin = 149999;
+                        precioMax = 200000;
+                        break;
+                case 4: precioMin = 199999;
+                        precioMax = 300000;
+                        break;
+                case 5: precioMin = 299999;
+                        precioMax = 999999999;
+                        break;
+                }       
+            
+            
+                
         }
     }
 
