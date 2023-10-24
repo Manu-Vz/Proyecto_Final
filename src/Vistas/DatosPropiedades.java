@@ -450,13 +450,14 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                 float resultadoZona = pi.getPrecioTrazado() * valorNuevoZona;
                 tempPropiedad.setPrecioTrazado(resultadoZona);
                 abmPropiedad.ActualizarPreciosPorZOna(resultadoZona, valorComboZona);
-
-                modelo.addRow(new Object[]{tempPropiedad.getIdPropiedadInmueble(), tempPropiedad.getZona().getNombre(),
-                    tempPropiedad.getDireccion(), tempPropiedad.getTipoLocal().getNombre(), tempPropiedad.getPrecioTrazado(),
-                    tempPropiedad.getEstadoLocal().getNombre(), tempPropiedad.getInspector().toString(),
-                    tempPropiedad.isDisponibilidad(), tempPropiedad.getPropietario().toString(),
-                    tempPropiedad.getCaracteristicasString(), tempPropiedad.getAccesibilidad()});
             }
+//            for (PropiedadInmueble propiedadTipo : listaxTipo) {
+//                modelo.addRow(new Object[]{propiedadTipo.getIdPropiedadInmueble(), propiedadTipo.getZona().getNombre(),
+//                    propiedadTipo.getDireccion(), propiedadTipo.getTipoLocal().getNombre(), propiedadTipo.getPrecioTrazado(),
+//                    propiedadTipo.getEstadoLocal().getNombre(), propiedadTipo.getInspector().toString(),
+//                    propiedadTipo.isDisponibilidad(), propiedadTipo.getPropietario().toString(),
+//                    propiedadTipo.getCaracteristicasString(), propiedadTipo.getAccesibilidad()});
+//            }
             resetearCampos();
 
         } else if (jcbTipo.getSelectedIndex() > 0) {
