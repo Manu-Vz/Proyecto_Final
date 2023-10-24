@@ -148,6 +148,7 @@ public class VendedorData {
             ps2.setInt(2, idVend);
             int valor = ps2.executeUpdate();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
         }
         
     }

@@ -59,7 +59,7 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel modeloVen = new DefaultComboBoxModel();
     private DefaultComboBoxModel modeloEstCont = new DefaultComboBoxModel();
     private DefaultComboBoxModel modeloTipoLocal = new DefaultComboBoxModel();
-    private String tomoVend="";
+    private int vendjcb=0;
 
     /**
      * Creates new form ContratoAlquiler
@@ -344,8 +344,8 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
             }
         }
         jcbTipoLocal.setSelectedIndex(tipolocaljcb);
-        int vendjcb = 0;
-        tomoVend = String.valueOf(modelo.getValueAt(valor, 7));
+//        int vendjcb = 0;
+         String tomoVend = String.valueOf(modelo.getValueAt(valor, 7));
         for (Vendedor esteVend : listaVend) {
             if(esteVend.toString().equals(tomoVend)){
                 vendjcb = esteVend.getIdVendedor() -1;
@@ -386,8 +386,10 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
 
     private void jbtMoficarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtMoficarContratoActionPerformed
         // Tomo los datos de los campos y actualizo la base
+        borrarFilas();
         int elValorInqui = jcbInquilinoProp.getSelectedIndex()+1;
         elInquilino = abmInqui.buscoInquilino(elValorInqui);
+        //System.out.println("Muestro el valor de tomoVend "+vendjcb);
         Date fInicial = jDiaInicio.getDate();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String castIni = formato.format(fInicial);
@@ -401,9 +403,8 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
         //Evaluo las fechas para que sean concistentes 
         if(!fechaIni.isAfter(fechaFin) && !fechaIni.isAfter(fechaReali)){
             if(!fechaFin.isAfter(fechaReali)){
-               JOptionPane.showMessageDialog(this, "la Fecha de finalización no puede ser\n posterior a la de Realización");
+               JOptionPane.showMessageDialog(this, "La Fecha de finalización no puede ser\n posterior a la de Realización");
             } else {
-                JOptionPane.showMessageDialog(this, "Actualizaría el registro");
                 elInquilino = abmInqui.buscoInquilino(jcbInquilinoProp.getSelectedIndex()+1);
                 lasProp = abmPropiedadData.buscarPropiedadPorId(Integer.parseInt(JEtiquetaIdProp.getText()));
                 elVendedor = abmVend.buscoVendedor(jcbComboVend.getSelectedIndex()+1);
@@ -422,8 +423,10 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
                 elContrato.setEstado(elEstCont);
                 abmContAlquiler.modificarContrato(elContrato);
                 abmVend.actualizarCantidadVentas(elVendedor.getIdVendedor());
-                abmVend.actualizarCantidadVentas(Integer.valueOf(tomoVend));
+                abmVend.actualizarCantidadVentas(vendjcb);
             }
+            
+            datosATabla();
         } else {
             JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "+
                     "Finalzación o Realización ");
@@ -494,6 +497,13 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
                     cont.getPropiedadInmueble().getTipoLocal().getNombre(),cont.getPropiedadInmueble().getIdPropiedadInmueble(),
                     cont.getFechaInicio(),cont.getFechaFinal(),cont.getFechaRealizacion(),cont.getVendedor().toString(),
                     cont.getEstado().getNombre()});
+        }
+    }
+    
+    private void borrarFilas(){
+        int f=modelo.getRowCount() - 1;
+        for (int i = f; i >= 0; i--) {
+            modelo.removeRow(i);
         }
     }
     

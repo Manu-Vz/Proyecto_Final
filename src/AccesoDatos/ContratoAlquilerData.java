@@ -92,9 +92,9 @@ public class ContratoAlquilerData {
             
             int rs = ps.executeUpdate();
             
-            if(rs > 0){
-                JOptionPane.showMessageDialog(null,"El Contrato de Alquiler fue modificado correctamente");
-            }
+//            if(rs > 0){
+//                JOptionPane.showMessageDialog(null,"El Contrato de Alquiler fue modificado correctamente");
+//            }
             
             ps.close();
             

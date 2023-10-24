@@ -317,12 +317,9 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         Date fRealizado = jFechaRealizado.getDate();
         String finalRealizado = formatofecha.format(fRealizado);
         LocalDate finalR = LocalDate.parse(finalRealizado);
-        if(inicialF.isAfter(finalF)){
-            JOptionPane.showMessageDialog(this, "La fecha inicial no puede ser posterior a la fecha final");
-            jFechaInicio.requestFocus();
-        } else if(finalF.isAfter(finalR)){
-                JOptionPane.showMessageDialog(this, "La fecha de Realización no puede ser anterior a la fecha final");
-                jFechaRealizado.requestFocus();
+        if(!inicialF.isAfter(finalF) && !inicialF.isAfter(finalR)){
+            if(!finalF.isAfter(finalR)){
+                JOptionPane.showMessageDialog(this, "La fehca de finalización no puede ser\n posterior a la de Realización");
             } else {
                 //Armo el Contrato Alquiler para mandarlo a la base
                 //Construyo los objetos para el contrato
@@ -342,6 +339,10 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
                 abmContratoAlquiler.agregarContrato(elContrato);
                 this.setVisible(false);
             }
+        } else {
+             JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "+
+                    "Finalzación o Realización ");
+        } 
     }//GEN-LAST:event_jbtContratarActionPerformed
 
     private void jbtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarActionPerformed
