@@ -32,7 +32,7 @@ public class PropietarioData {
             ps.setString(2, prop.getNombre());
             ps.setString(3, prop.getApellido());
             ps.setString(4, prop.getDomicilio());
-            ps.setInt(5, prop.getTelefono());
+            ps.setLong(5, prop.getTelefono());
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
@@ -54,7 +54,7 @@ public class PropietarioData {
             ps.setString(2, prop.getNombre());
             ps.setString(3, prop.getApellido());
             ps.setString(4, prop.getDomicilio());
-            ps.setInt(5, prop.getTelefono());
+            ps.setLong(5, prop.getTelefono());
             ps.setInt(6, prop.getIdPropietario());
             int valor =ps.executeUpdate();
             if(valor>0){
@@ -81,7 +81,7 @@ public class PropietarioData {
                 temp.setNombre(rs.getString("nombre"));
                 temp.setApellido(rs.getString("apellido"));
                 temp.setDomicilio(rs.getString("domicilio"));
-                temp.setTelefono(rs.getInt("telefono"));
+                temp.setTelefono(rs.getLong("telefono"));
                 listado.add(temp);
             }
             ps.close();
@@ -105,7 +105,7 @@ public class PropietarioData {
                elprop.setApellido(rs.getString("apellido"));
                elprop.setDni(rs.getInt("dni"));
                elprop.setDomicilio(rs.getString("domicilio"));
-               elprop.setTelefono(rs.getInt("telefono"));
+               elprop.setTelefono(rs.getLong("telefono"));
             }
             ps.close();
         } catch (SQLException e) {
@@ -128,9 +128,10 @@ public class PropietarioData {
                 prop.setNombre(rs.getString(3));
                 prop.setApellido(rs.getString(4));
                 prop.setDomicilio(rs.getString(5));
-                prop.setTelefono(rs.getInt(6));
+                prop.setTelefono(rs.getLong(6));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Eror "+e.getMessage());
         }
         
         return prop;

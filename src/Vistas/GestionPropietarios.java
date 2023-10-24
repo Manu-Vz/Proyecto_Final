@@ -570,12 +570,14 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
 
     private void jbtAgregarPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAgregarPropActionPerformed
         // Guardo los datos nuevos en la base de datos
+        
         temp = new Propietario();
         temp.setDni(Integer.parseInt(jTPropietarioDNI.getText()));
         temp.setNombre(jTPropietarioNombre.getText());
         temp.setApellido(jTPropietarioApellido.getText());
         temp.setDomicilio(jTPropietarioDomicilio.getText());
-        temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
+        //temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
+        temp.setTelefono(Long.parseLong(jTPropietarioTelefono.getText()));
         abmPropietario.agrearPropietario(temp);
         temp = abmPropietario.buscoxDNI(Integer.parseInt(jTPropietarioDNI.getText()));
         modeloProp.addRow(new Object[]{temp.getIdPropietario(),temp.getNombre(),temp.getApellido(),
@@ -592,7 +594,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
         temp.setApellido(jTPropietarioApellido.getText());
         temp.setDni(Integer.parseInt(jTPropietarioDNI.getText()));
         temp.setDomicilio(jTPropietarioDomicilio.getText());
-        temp.setTelefono(Integer.parseInt(jTPropietarioTelefono.getText()));
+        temp.setTelefono(Long.parseLong(jTPropietarioTelefono.getText()));
         abmPropietario.modificarPropietario(temp);
         abmPropietario.buscopPropietario(Integer.parseInt(jTPropietarioDNI.getText()));
         borroFilas();

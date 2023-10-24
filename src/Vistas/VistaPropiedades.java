@@ -923,9 +923,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             jcbDisponibilidad.setSelectedIndex(2);
         }
         //Seteo los campos de texto 
-        jtAccesibilidad.setText(String.valueOf(modelo.getValueAt(valor, 11)));
+        jtAccesibilidad.setText(String.valueOf(modelo.getValueAt(valor, 10)));
         jtAccesibilidad.setForeground(Color.black);
-        jtCaracteristicas.setText(String.valueOf(modelo.getValueAt(valor, 10)));
+        jtCaracteristicas.setText(String.valueOf(modelo.getValueAt(valor, 9)));
         jtCaracteristicas.setForeground(Color.black);
         jtDireccion.setText(String.valueOf(modelo.getValueAt(valor, 2)));
         jtDireccion.setForeground(Color.black);
@@ -1475,10 +1475,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         if(jcbBusquedaXTipo.getSelectedIndex()>0){
             listaxTipo=abmPropiedad.listadoInmueblexTipo(jcbBusquedaXTipo.getSelectedIndex() + 1);
             String valorActivo="";
-            System.out.println("muestro el valor que le estoy mandanod a procedimiento "+jcbBusquedaXTipo.getSelectedIndex());
             for (PropiedadInmueble inmu : listaxTipo) {
-                 
-              
             if(inmu.isDisponibilidad()){
                 valorActivo="Activo";
             }else{
