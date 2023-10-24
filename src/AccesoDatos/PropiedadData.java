@@ -110,7 +110,8 @@ public class PropiedadData {
                 + "JOIN estadoLocal el on(pi.idEstadoLocal=el.idEstadoLocal) "
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
-                + "JOIN zona z on(pi.idZona=z.idZona)";
+                + "JOIN zona z on(pi.idZona=z.idZona) "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -168,7 +169,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona) "
-                + "WHERE pi.precioTrazado > "+ ini +" AND pi.precioTrazado <"+ fin +"";
+                + "WHERE pi.precioTrazado > "+ ini +" AND pi.precioTrazado <"+ fin +" "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -218,7 +220,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona) "
-                + "where pi.idPropiedad = ?";
+                + "where pi.idPropiedad = ? "
+                + "ORDER BY idPropiedad";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -278,7 +281,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "where pi.idPropietario = ?";
+                + "where pi.idPropietario = ? "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, idPropietario);
@@ -330,7 +334,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "where pi.idZona = ?";
+                + "where pi.idZona = ? "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sqlZona);
             ps.setInt(1, idZona);
@@ -382,7 +387,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "where pi.idTipoLocal = ?";
+                + "where pi.idTipoLocal = ? "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(cadena);
             ps.setInt(1, idTipo);
@@ -433,7 +439,8 @@ public class PropiedadData {
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona) "
                 + "WHERE pi.precioTrazado > "+ ini +" AND pi.precioTrazado <"+ fin +" AND "
-                + "pi.idTipoLocal = "+ id +"";
+                + "pi.idTipoLocal = "+ id +" "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -484,7 +491,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "where pi.idZona = " +idZona+ " AND pi.precioTrazado > " + min + " AND pi.precioTrazado < "+max+"";
+                + "where pi.idZona = " +idZona+ " AND pi.precioTrazado > " + min + " AND pi.precioTrazado < "+max+" "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sqlZona);
             ps.setInt(1, idZona);
@@ -535,7 +543,8 @@ public class PropiedadData {
                 + "JOIN inspector ins on(pi.idInspector=ins.idInspector) "
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
-                + "WHERE pi.idZona = " +idZona+ " AND pi.idTipoLocal = "+ idTipoLocal +"";
+                + "WHERE pi.idZona = " +idZona+ " AND pi.idTipoLocal = "+ idTipoLocal +" "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sqlZona);
             ps.setInt(1, idZona);
@@ -587,7 +596,8 @@ public class PropiedadData {
                 + "JOIN tipoLocal tp on(pi.idTipoLocal=tp.idTipoLocal) "
                 + "JOIN zona z on(pi.idZona=z.idZona)"
                 + "where pi.idZona = " +idZona+ " AND pi.precioTrazado > " + min + " AND pi.precioTrazado < "+max+" "
-                + "AND pi.idTipoLocal = "+idTipoLocal+"";
+                + "AND pi.idTipoLocal = "+idTipoLocal+" "
+                + "ORDER BY idPropiedad";
         try {
             PreparedStatement ps=con.prepareStatement(sqlZona);
             ps.setInt(1, idZona);
