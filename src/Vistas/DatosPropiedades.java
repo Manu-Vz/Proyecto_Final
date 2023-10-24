@@ -30,24 +30,25 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    
+
     private DefaultComboBoxModel modelComboZona = new DefaultComboBoxModel();
     private DefaultComboBoxModel modelComboTipoLocal = new DefaultComboBoxModel();
     private DefaultComboBoxModel modelBusquedaXZona = new DefaultComboBoxModel();
     private DefaultComboBoxModel modelBusquedazTipo = new DefaultComboBoxModel();
-    
+
     ZonaData abmZona = new ZonaData();
     PropiedadData abmPropiedad = new PropiedadData();
     TipoLocalData abmTipoLocal = new TipoLocalData();
-    
+
     Zona tempZona = null;
     TipoLocal tempTipoLocal = null;
-    
+    PropiedadInmueble tempPropiedad = null;
+
     List<Zona> listaZonas = new ArrayList<>();
     List<TipoLocal> listaTipoLocal = new ArrayList();
     List<PropiedadInmueble> listaXZona = new ArrayList();
     List<PropiedadInmueble> listaxTipo = new ArrayList();
-    
+
     public DatosPropiedades() {
         initComponents();
         borroFilas();
@@ -160,6 +161,11 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jbCancelar.setText("Cancelar");
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +282,7 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbZonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcbZonaFocusGained
-        
+
     }//GEN-LAST:event_jcbZonaFocusGained
 
     private void jcbZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbZonaActionPerformed
@@ -301,16 +307,16 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         jtfValorTipo.setEnabled(true);
         jcbZona.setEnabled(false);
         jtfValorZona.setEnabled(false);
-        if (jcbTipo.getSelectedIndex()>0) {
+        if (jcbTipo.getSelectedIndex() > 0) {
             listaxTipo = abmPropiedad.listadoInmueblexTipo(jcbTipo.getSelectedIndex() + 1);
             for (PropiedadInmueble propiedadTipo : listaxTipo) {
-                modelo.addRow(new Object[]{ propiedadTipo.getIdPropiedadInmueble(), propiedadTipo.getZona().getNombre(),
+                modelo.addRow(new Object[]{propiedadTipo.getIdPropiedadInmueble(), propiedadTipo.getZona().getNombre(),
                     propiedadTipo.getDireccion(), propiedadTipo.getTipoLocal().getNombre(), propiedadTipo.getPrecioTrazado(),
                     propiedadTipo.getEstadoLocal().getNombre(), propiedadTipo.getInspector().toString(),
                     propiedadTipo.isDisponibilidad(), propiedadTipo.getPropietario().toString(),
                     propiedadTipo.getCaracteristicasString(), propiedadTipo.getAccesibilidad()});
             }
-            
+
         }
     }//GEN-LAST:event_jcbTipoActionPerformed
 
@@ -325,7 +331,7 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         camposIniciales();
         jlAdvertenciaValorZona.setText(" ");
         jlAdvertenciaValorTipo.setText(" ");
-        
+
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jcbZonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbZonaMouseClicked
@@ -341,14 +347,14 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbTipoMouseClicked
 
     private void jtfValorZonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfValorZonaKeyReleased
-        jlAdvertenciaValorZona.setFont(new Font("Liberation Sans",Font.PLAIN,13));
+        jlAdvertenciaValorZona.setFont(new Font("Liberation Sans", Font.PLAIN, 13));
         jlAdvertenciaValorZona.setForeground(Color.red.darker());
         if (jtfValorZona.getText().isEmpty()) {
             jlAdvertenciaValorZona.setText("No puede estar vacio");
             if (jbActualizar.isEnabled()) {
                 jbActualizar.setEnabled(false);
             }
-        }else{
+        } else {
             jlAdvertenciaValorZona.setText("");
             jtfValorZona.setForeground(Color.black);
             String tomoTexto = "";
@@ -359,7 +365,7 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                 if (tomoTexto.equals(".")) {
                     contador++;
                 }
-                if (contador>1) {
+                if (contador > 1) {
                     jlAdvertenciaValorZona.setText("Solo un punto");
                     if (jbActualizar.isEnabled()) {
                         jbActualizar.setEnabled(false);
@@ -376,20 +382,20 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                         jlAdvertenciaValorZona.setText("");
                         jbActualizar.setEnabled(true);
                     }
-                } 
-            }   
+                }
+            }
         }
     }//GEN-LAST:event_jtfValorZonaKeyReleased
 
     private void jtfValorTipoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfValorTipoKeyReleased
-        jlAdvertenciaValorTipo.setFont(new Font("Liberation Sans",Font.PLAIN,13));
+        jlAdvertenciaValorTipo.setFont(new Font("Liberation Sans", Font.PLAIN, 13));
         jlAdvertenciaValorTipo.setForeground(Color.red.darker());
         if (jtfValorTipo.getText().isEmpty()) {
             jlAdvertenciaValorTipo.setText("No puede estar vacio");
             if (jbActualizar.isEnabled()) {
                 jbActualizar.setEnabled(false);
             }
-        }else{
+        } else {
             jlAdvertenciaValorTipo.setText("");
             jtfValorTipo.setForeground(Color.black);
             String tomoTexto = "";
@@ -400,7 +406,7 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                 if (tomoTexto.equals(".")) {
                     contador++;
                 }
-                if (contador>1) {
+                if (contador > 1) {
                     jlAdvertenciaValorTipo.setText("Solo un punto");
                     if (jbActualizar.isEnabled()) {
                         jbActualizar.setEnabled(false);
@@ -415,9 +421,10 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
                         break;
                     } else {
                         jlAdvertenciaValorTipo.setText("");
+                        jbActualizar.setEnabled(true);
                     }
                 }
-            }   
+            }
         }
     }//GEN-LAST:event_jtfValorTipoKeyReleased
 
@@ -425,11 +432,51 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         if (jtfValorZona.getText().isEmpty()) {
             jtfValorZona.setText("Porcentaje");
             jtfValorZona.setForeground(Color.gray);
-        } else if( jtfValorZona.getText().equals("Porcentaje")){
+        } else if (jtfValorZona.getText().equals("Porcentaje")) {
             jtfValorZona.selectAll();
-            jtfValorZona.setForeground(Color.black);            
+            jtfValorZona.setForeground(Color.black);
         }
     }//GEN-LAST:event_jtfValorZonaFocusGained
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        tempPropiedad = new PropiedadInmueble();
+        borroFilas();
+
+        if (jcbZona.getSelectedIndex() > 0) {
+            int valorComboZona = jcbZona.getSelectedIndex() + 1;
+            float valorNuevoZona = Float.parseFloat(jtfValorZona.getText());
+
+            for (PropiedadInmueble pi : listaXZona) {
+                float resultadoZona = pi.getPrecioTrazado() * valorNuevoZona;
+                tempPropiedad.setPrecioTrazado(resultadoZona);
+                abmPropiedad.ActualizarPreciosPorZOna(resultadoZona, valorComboZona);
+
+                modelo.addRow(new Object[]{tempPropiedad.getIdPropiedadInmueble(), tempPropiedad.getZona().getNombre(),
+                    tempPropiedad.getDireccion(), tempPropiedad.getTipoLocal().getNombre(), tempPropiedad.getPrecioTrazado(),
+                    tempPropiedad.getEstadoLocal().getNombre(), tempPropiedad.getInspector().toString(),
+                    tempPropiedad.isDisponibilidad(), tempPropiedad.getPropietario().toString(),
+                    tempPropiedad.getCaracteristicasString(), tempPropiedad.getAccesibilidad()});
+            }
+            resetearCampos();
+
+        } else if (jcbTipo.getSelectedIndex() > 0) {
+            float valorNuevoTipo = Float.parseFloat(jtfValorTipo.getText());
+            int valorComboTipo = jcbTipo.getSelectedIndex() + 1;
+            for (PropiedadInmueble pit : listaxTipo) {
+                float resultadoTipo = pit.getPrecioTrazado() * valorNuevoTipo;
+                tempPropiedad.setPrecioTrazado(resultadoTipo);
+                abmPropiedad.ActualizarPreciosPorTipoLocal(resultadoTipo, valorComboTipo);
+
+                modelo.addRow(new Object[]{tempPropiedad.getIdPropiedadInmueble(), tempPropiedad.getZona().getNombre(),
+                    tempPropiedad.getDireccion(), tempPropiedad.getTipoLocal().getNombre(), tempPropiedad.getPrecioTrazado(),
+                    tempPropiedad.getEstadoLocal().getNombre(), tempPropiedad.getInspector().toString(),
+                    tempPropiedad.isDisponibilidad(), tempPropiedad.getPropietario().toString(),
+                    tempPropiedad.getCaracteristicasString(), tempPropiedad.getAccesibilidad()});
+            }
+            resetearCampos();
+
+        }
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -453,7 +500,7 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfValorZona;
     // End of variables declaration//GEN-END:variables
 
-    private void armarTabla (){
+    private void armarTabla() {
         modelo.addColumn("id"); //0
         modelo.addColumn("Zona"); //1
         modelo.addColumn("Dirección"); //2
@@ -466,16 +513,16 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         modelo.addColumn("Caracteristicas"); //9
         modelo.addColumn("Accesibilidad"); //10
         jtTablaPropiedades.setModel(modelo);
-}
-    
+    }
+
     private void borroFilas() {
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    
-    private void camposIniciales(){
+
+    private void camposIniciales() {
         jcbZona.setEnabled(true);
         jcbTipo.setEnabled(true);
         jtfValorZona.setEnabled(false);
@@ -485,7 +532,7 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         jlAdvertenciaValorZona.setText(" ");
         jlAdvertenciaValorTipo.setText(" ");
     }
-    
+
     private void comboBusquedaPorZona() {
         listaZonas = abmZona.listarZonas();
         for (Zona xZona : listaZonas) {
@@ -493,16 +540,16 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         }
         jcbZona.setModel(modelBusquedaXZona);
     }
-    
-    private void comboBusquedaPorTipo(){
+
+    private void comboBusquedaPorTipo() {
         listaTipoLocal = abmTipoLocal.listarTipoLocal();
         for (TipoLocal tpl : listaTipoLocal) {
             modelBusquedazTipo.addElement(tpl);
         }
         jcbTipo.setModel(modelBusquedazTipo);
     }
-    
-    private void resetearCampos(){
+
+    private void resetearCampos() {
         jtfValorZona.setText("");
         jtfValorTipo.setText("");
         jlAdvertenciaValorZona.setText(" ");
