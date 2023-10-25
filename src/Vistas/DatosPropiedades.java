@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -445,36 +446,38 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         if (jcbZona.getSelectedIndex() > 0) {
             int valorComboZona = jcbZona.getSelectedIndex() + 1;
             float valorNuevoZona = Float.parseFloat(jtfValorZona.getText());
-
-            for (PropiedadInmueble pi : listaXZona) {
-                float resultadoZona = pi.getPrecioTrazado() * valorNuevoZona;
-                tempPropiedad.setPrecioTrazado(resultadoZona);
-                abmPropiedad.ActualizarPreciosPorZOna(resultadoZona, valorComboZona);
-            }
-//            for (PropiedadInmueble propiedadTipo : listaxTipo) {
-//                modelo.addRow(new Object[]{propiedadTipo.getIdPropiedadInmueble(), propiedadTipo.getZona().getNombre(),
-//                    propiedadTipo.getDireccion(), propiedadTipo.getTipoLocal().getNombre(), propiedadTipo.getPrecioTrazado(),
-//                    propiedadTipo.getEstadoLocal().getNombre(), propiedadTipo.getInspector().toString(),
-//                    propiedadTipo.isDisponibilidad(), propiedadTipo.getPropietario().toString(),
-//                    propiedadTipo.getCaracteristicasString(), propiedadTipo.getAccesibilidad()});
-//            }
             resetearCampos();
+            for (PropiedadInmueble pi : listaXZona) {
+                float resultadoZona = (pi.getPrecioTrazado() * valorNuevoZona) / 100;
+                tempPropiedad.setPrecioTrazado(resultadoZona);
+                abmPropiedad.ActualizarPreciosPorZOna(resultadoZona, pi.getIdPropiedadInmueble());
+                
+                modelo.addRow(new Object[]{pi.getIdPropiedadInmueble(), pi.getZona().getNombre(),
+                    pi.getDireccion(), pi.getTipoLocal().getNombre(), pi.getPrecioTrazado(),
+                    pi.getEstadoLocal().getNombre(), pi.getInspector().toString(),
+                    pi.isDisponibilidad(), pi.getPropietario().toString(),
+                    pi.getCaracteristicasString(), pi.getAccesibilidad()});
+            }
+            JOptionPane.showMessageDialog(this, "Precios actualizados por Zona");
+            
+            //resetearCampos();
 
         } else if (jcbTipo.getSelectedIndex() > 0) {
-            float valorNuevoTipo = Float.parseFloat(jtfValorTipo.getText());
             int valorComboTipo = jcbTipo.getSelectedIndex() + 1;
+            float valorNuevoTipo = Float.parseFloat(jtfValorTipo.getText());
             for (PropiedadInmueble pit : listaxTipo) {
-                float resultadoTipo = pit.getPrecioTrazado() * valorNuevoTipo;
+                float resultadoTipo = (pit.getPrecioTrazado() * valorNuevoTipo) / 100;
                 tempPropiedad.setPrecioTrazado(resultadoTipo);
-                abmPropiedad.ActualizarPreciosPorTipoLocal(resultadoTipo, valorComboTipo);
-
-                modelo.addRow(new Object[]{tempPropiedad.getIdPropiedadInmueble(), tempPropiedad.getZona().getNombre(),
-                    tempPropiedad.getDireccion(), tempPropiedad.getTipoLocal().getNombre(), tempPropiedad.getPrecioTrazado(),
-                    tempPropiedad.getEstadoLocal().getNombre(), tempPropiedad.getInspector().toString(),
-                    tempPropiedad.isDisponibilidad(), tempPropiedad.getPropietario().toString(),
-                    tempPropiedad.getCaracteristicasString(), tempPropiedad.getAccesibilidad()});
+                abmPropiedad.ActualizarPreciosPorTipoLocal(resultadoTipo, pit.getIdPropiedadInmueble());
+                
+                modelo.addRow(new Object[]{pit.getIdPropiedadInmueble(), pit.getZona().getNombre(),
+                    pit.getDireccion(), pit.getTipoLocal().getNombre(), pit.getPrecioTrazado(),
+                    pit.getEstadoLocal().getNombre(), pit.getInspector().toString(),
+                    pit.isDisponibilidad(), pit.getPropietario().toString(),
+                    pit.getCaracteristicasString(), pit.getAccesibilidad()});
             }
-            resetearCampos();
+            JOptionPane.showMessageDialog(this, "Precios actualizados por Tipo");
+            //resetearCampos();
 
         }
     }//GEN-LAST:event_jbActualizarActionPerformed

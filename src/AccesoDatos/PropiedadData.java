@@ -633,15 +633,15 @@ public class PropiedadData {
     }
     
     public void ActualizarPreciosPorTipoLocal(float precio, int idTipoLocal){
-        String sql = "UPDATE propiedadInmueble SET precioTrazado = ? WHERE idTipoLocal = ?";
+        String sql = "UPDATE propiedadInmueble SET precioTrazado = ? WHERE idPropiedad = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setFloat(1, precio);
             ps.setInt(2, idTipoLocal);
             int valor=ps.executeUpdate();
-            if(valor>0){
-                JOptionPane.showMessageDialog(null, "Los precios se han actualizado correctamente");
-            }
+//            if(valor>0){
+//                JOptionPane.showMessageDialog(null, "Los precios se han actualizado correctamente");
+//            }
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
         }
@@ -649,15 +649,15 @@ public class PropiedadData {
     }
     
         public void ActualizarPreciosPorZOna(float precio, int idZona){
-        String sql = "UPDATE propiedadInmueble SET precioTrazado = ? WHERE idZona = ?";
+        String sql = "UPDATE propiedadInmueble SET precioTrazado = ? WHERE idPropiedad = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setFloat(1, precio);
             ps.setInt(2, idZona);
             int valor=ps.executeUpdate();
-            if(valor>0){
-                JOptionPane.showMessageDialog(null, "Los precios se han actualizado correctamente");
-            }
+//            if(valor>0){
+//                JOptionPane.showMessageDialog(null, "Los precios se han actualizado correctamente");
+//            }
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
         }
