@@ -857,8 +857,7 @@ public class GestionInquilinos extends javax.swing.JInternalFrame {
             System.out.println("muestro el inquilino "+nuevo.getIdInquilino());
             if (condicion){
                 Id.modificarInquilino(nuevo);
-                    limpiarCampos();
-                
+                limpiarCampos();
             }
             
             

@@ -40,6 +40,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         armarTabla();
         cargarTablaVacia();
         jButton2.setEnabled(false);
+        AlquilarPropiedad.setEnabled(false);
     }
 
     
@@ -60,7 +61,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        AlquilarPropiedad = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setClosable(true);
@@ -120,12 +121,17 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
-        jButton1.setText("Alquilar Propiedad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        AlquilarPropiedad.setText("Alquilar Propiedad");
+        AlquilarPropiedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AlquilarPropiedadActionPerformed(evt);
             }
         });
 
@@ -147,7 +153,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AlquilarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -159,7 +165,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AlquilarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -219,6 +225,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
     private void ComboBoxZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxZonasActionPerformed
         // TODO add your handling code here:
         cargarTablaConFiltros();
+        AlquilarPropiedad.setEnabled(false);
         if (ComboBoxLocal.getSelectedIndex() != 0 && 
                 ComboBoxPrecio.getSelectedIndex() != 0 &&
                 ComboBoxZonas.getSelectedIndex() != 0){
@@ -234,6 +241,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
     private void ComboBoxLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxLocalActionPerformed
         // TODO add your handling code here:
         cargarTablaConFiltros();
+        AlquilarPropiedad.setEnabled(false);
         if (ComboBoxLocal.getSelectedIndex() != 0 && 
                 ComboBoxPrecio.getSelectedIndex() != 0 &&
                 ComboBoxZonas.getSelectedIndex() != 0){
@@ -245,6 +253,7 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
     private void ComboBoxPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxPrecioActionPerformed
         // TODO add your handling code here:
         cargarTablaConFiltros();
+        AlquilarPropiedad.setEnabled(false);
         if (ComboBoxLocal.getSelectedIndex() != 0 && 
                 ComboBoxPrecio.getSelectedIndex() != 0 &&
                 ComboBoxZonas.getSelectedIndex() != 0){
@@ -265,9 +274,10 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         ComboBoxPrecio.setSelectedIndex(0);
         ComboBoxZonas.setSelectedIndex(0);
         jButton2.setEnabled(false);
+        AlquilarPropiedad.setEnabled(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AlquilarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlquilarPropiedadActionPerformed
         // Tomo el id de la propiedad seleccionada para manejar el contrato de alquiler
         int valorFila=tabla.getSelectedRow();
        
@@ -278,14 +288,19 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         MenuPrincipal.escritorio.add(nuevoCAID);
         nuevoCAID.toFront();
         nuevoCAID.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AlquilarPropiedadActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+        AlquilarPropiedad.setEnabled(true);
+    }//GEN-LAST:event_tablaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AlquilarPropiedad;
     private javax.swing.JComboBox<String> ComboBoxLocal;
     private javax.swing.JComboBox<String> ComboBoxPrecio;
     private javax.swing.JComboBox<String> ComboBoxZonas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -301,7 +316,9 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         ZonaData zonaD = new ZonaData();
         zonas = zonaD.listarZonas();
         for(Zona z : zonas){
-            modeloComboBoxZona.addElement(z);
+            if(z.isEstado()){
+                modeloComboBoxZona.addElement(z);
+            }
         }
         ComboBoxZonas.setModel(modeloComboBoxZona);
     }
