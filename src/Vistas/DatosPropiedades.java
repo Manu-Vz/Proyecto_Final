@@ -448,8 +448,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
             float valorNuevoZona = Float.parseFloat(jtfValorZona.getText());
             resetearCampos();
             for (PropiedadInmueble pi : listaXZona) {
-                float resultadoZona = (pi.getPrecioTrazado() * valorNuevoZona) / 100;
-                tempPropiedad.setPrecioTrazado(resultadoZona);
+                float resultadoZona = pi.getPrecioTrazado() + (pi.getPrecioTrazado() * valorNuevoZona) / 100;
+                pi.setPrecioTrazado(resultadoZona);
                 abmPropiedad.ActualizarPreciosPorZOna(resultadoZona, pi.getIdPropiedadInmueble());
                 
                 modelo.addRow(new Object[]{pi.getIdPropiedadInmueble(), pi.getZona().getNombre(),
@@ -466,8 +466,8 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
             int valorComboTipo = jcbTipo.getSelectedIndex() + 1;
             float valorNuevoTipo = Float.parseFloat(jtfValorTipo.getText());
             for (PropiedadInmueble pit : listaxTipo) {
-                float resultadoTipo = (pit.getPrecioTrazado() * valorNuevoTipo) / 100;
-                tempPropiedad.setPrecioTrazado(resultadoTipo);
+                float resultadoTipo = pit.getPrecioTrazado() + (pit.getPrecioTrazado() * valorNuevoTipo) / 100;
+                pit.setPrecioTrazado(resultadoTipo);
                 abmPropiedad.ActualizarPreciosPorTipoLocal(resultadoTipo, pit.getIdPropiedadInmueble());
                 
                 modelo.addRow(new Object[]{pit.getIdPropiedadInmueble(), pit.getZona().getNombre(),
