@@ -361,20 +361,24 @@ public class PropiedadesInquilinos extends javax.swing.JInternalFrame {
         listPi = pd.buscarPropiedad();
         
         for(PropiedadInmueble p : listPi){
-            modeloTabla.addRow(new Object[]{p.getIdPropiedadInmueble(), 
-                p.getTipoLocal().getNombre(), 
-                p.getDireccion(), p.getZona().getNombre(),
-                p.getEstadoLocal().getNombre(), p.getPrecioTrazado() });
+            if (p.getZona().isEstado()){
+                modeloTabla.addRow(new Object[]{p.getIdPropiedadInmueble(), 
+                    p.getTipoLocal().getNombre(), 
+                    p.getDireccion(), p.getZona().getNombre(),
+                    p.getEstadoLocal().getNombre(), p.getPrecioTrazado() });
+            }
         }
     }
     
     private void cargarTabla(List<PropiedadInmueble> lista){
         modeloTabla.setRowCount(0);
         for(PropiedadInmueble p : lista){
-            modeloTabla.addRow(new Object[]{p.getIdPropiedadInmueble(), 
-                p.getTipoLocal().getNombre(), 
-                p.getDireccion(), p.getZona().getNombre(),
-                p.getEstadoLocal().getNombre(), p.getPrecioTrazado() });
+            if (p.getZona().isEstado()){
+                modeloTabla.addRow(new Object[]{p.getIdPropiedadInmueble(), 
+                    p.getTipoLocal().getNombre(), 
+                    p.getDireccion(), p.getZona().getNombre(),
+                    p.getEstadoLocal().getNombre(), p.getPrecioTrazado() });
+            }
         }
         tabla.setModel(modeloTabla);
     }

@@ -422,7 +422,7 @@ public class PropiedadData {
         return laLista;
     }
     
-    public List<PropiedadInmueble> rangoPreciosYporTipoLocal(float ini,float fin, int id){
+    public List<PropiedadInmueble> rangoPreciosYporTipoLocal(float ini, float fin, int id){
         List<PropiedadInmueble> elListado = new ArrayList();
         PropiedadInmueble rangoProp = null;
         Propietario rangoPropietario = null;
