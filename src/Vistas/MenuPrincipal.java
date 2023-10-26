@@ -118,6 +118,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmInmobiliaria.add(jmiDatosInquilinos);
 
         jmiDatosPropiedades.setText("Datos de Propiedades");
+        jmiDatosPropiedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDatosPropiedadesActionPerformed(evt);
+            }
+        });
         jmInmobiliaria.add(jmiDatosPropiedades);
 
         jmiDatoZonas.setText("Datos de Zonas");
