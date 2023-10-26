@@ -445,20 +445,26 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
                 elVendedor = abmVend.buscoVendedor(jcbComboVend.getSelectedIndex() + 1);
                 elEstCont = abmEstCont.BuscarEstadoContratoPorId(jcbEstadoContrado.getSelectedIndex() + 1);
 
-                //Construyo el Contrato Alquiler para actualizar
-                elContrato = new ContratoAlquiler();
-                elContrato.setIdContratoAlquiler(Integer.parseInt(jEtiquetaIDCont.getText()));
-                elContrato.setInquilino(elInquilino);
-                elContrato.setPropiedadInmueble(lasProp);
-                elContrato.setFechaInicio(fechaIni);
-                elContrato.setFechaFinal(fechaFin);
-                elContrato.setFechaRealizacion(fechaReali);
-                elContrato.getMarca();
-                elContrato.setVendedor(elVendedor);
-                elContrato.setEstado(elEstCont);
-                abmContAlquiler.modificarContrato(elContrato);
-                abmVend.actualizarCantidadVentas(elVendedor.getIdVendedor());
-                abmVend.actualizarCantidadVentas(vendjcb);
+                //Verifico si la zona de la propiedad esta activa
+                if(lasProp.getZona().isEstado()){
+                    //Construyo el Contrato Alquiler para actualizar
+                    elContrato = new ContratoAlquiler();
+                    elContrato.setIdContratoAlquiler(Integer.parseInt(jEtiquetaIDCont.getText()));
+                    elContrato.setInquilino(elInquilino);
+                    elContrato.setPropiedadInmueble(lasProp);
+                    elContrato.setFechaInicio(fechaIni);
+                    elContrato.setFechaFinal(fechaFin);
+                    elContrato.setFechaRealizacion(fechaReali);
+                    elContrato.getMarca();
+                    elContrato.setVendedor(elVendedor);
+                    elContrato.setEstado(elEstCont);
+                    abmContAlquiler.modificarContrato(elContrato);
+                    abmVend.actualizarCantidadVentas(elVendedor.getIdVendedor());
+                    abmVend.actualizarCantidadVentas(vendjcb);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Este Contrato No Se Puede Modificar.\n"
+                            + " La Zona En La Que Se Encuentra Esta dada De Baja");
+                }
             }
 
             datosATabla();

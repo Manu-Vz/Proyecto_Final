@@ -1,5 +1,6 @@
 package AccesoDatos;
 
+import Entidades.PropiedadInmueble;
 import Entidades.Zona;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -219,7 +220,6 @@ public class ZonaData {
     
     public void darDeBaja(int id){
         String sql = "UPDATE zona SET estado = 0 WHERE idZona = "+ id +"";
-        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -234,6 +234,22 @@ public class ZonaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al dar de Baja la zona "+ ex.getMessage());
         }
+        //Busco Todas Las Propiedades Que Se encuentren En Esta Zona
+        PropiedadData pd = new PropiedadData();
+        List<PropiedadInmueble> listaProp = new ArrayList();
+        listaProp = pd.busquedaXZona(id);
+        
+        ContratoAlquilerData cd = new ContratoAlquilerData();
+        
+        for(PropiedadInmueble p : listaProp){
+            cd.AnularContrato(p.getIdPropiedadInmueble());
+        }
+        JOptionPane.showMessageDialog(null, "Se Han Anulado Los contratos asociados con esta Zona.\n"
+                + "Para Volver a Modificarlos se Debera Volver A Habilitar Esta Zona");
+        
+        
+        
+        
     }
     
     public void habilitarZona(int id){

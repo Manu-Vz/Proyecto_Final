@@ -197,4 +197,21 @@ public class ContratoAlquilerData {
         
         return listado;
     }
+    
+    public void AnularContrato (int idPropiedad){
+        
+        String sql = "UPDATE contratoalquiler SET idEstadoContrato = 4 WHERE idPropiedadInmueble = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, idPropiedad);
+            
+            int rs = ps.executeUpdate();
+            
+        } catch (SQLException e){
+            
+        }
+        
+    }
+    
 }
