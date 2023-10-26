@@ -89,7 +89,7 @@ public class InspectorData {
     public List<Inspector> listadoInspectoeresJCB(){
         List<Inspector> listado=new ArrayList();
         Inspector temp=null;
-        String sql="SELECT * FROM inspector where idInspector";
+        String sql="SELECT * FROM inspector";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();

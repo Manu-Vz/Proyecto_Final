@@ -118,6 +118,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         comboBusquedaxTipo();
         camposInicialTabAgregar();
         camposInicioxTipo();
+        ZonaDeBaja.setVisible(false);
     }
 
     /**
@@ -135,6 +136,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jTablaZonas = new javax.swing.JTable();
         jcbBusquedaXZona = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        ZonaDeBaja = new javax.swing.JLabel();
         jPanelxPrecio = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jtPrecioInicial = new javax.swing.JTextField();
@@ -209,6 +211,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jLabel2.setText("Elija la zona preferida");
         jLabel2.setFocusable(false);
 
+        ZonaDeBaja.setForeground(new java.awt.Color(255, 51, 51));
+        ZonaDeBaja.setText("Esta Zona esta dada De Baja");
+
         javax.swing.GroupLayout jPanelxZonaLayout = new javax.swing.GroupLayout(jPanelxZona);
         jPanelxZona.setLayout(jPanelxZonaLayout);
         jPanelxZonaLayout.setHorizontalGroup(
@@ -218,7 +223,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jcbBusquedaXZona, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(720, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(ZonaDeBaja)
+                .addContainerGap(553, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
         );
         jPanelxZonaLayout.setVerticalGroup(
@@ -227,7 +234,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanelxZonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbBusquedaXZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbBusquedaXZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ZonaDeBaja))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1287,9 +1295,17 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     private void jcbBusquedaXZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBusquedaXZonaActionPerformed
         // Busco las propiedades por la zona seleccionada
         borroFilasZona();
-        if (jcbBusquedaXZona.getSelectedIndex() > 0) {
-
-            listaXZona = abmPropiedad.busquedaXZona(jcbBusquedaXZona.getSelectedIndex() + 1);
+        Zona z = new Zona();
+        z = (Zona) jcbBusquedaXZona.getSelectedItem();
+        if (z.isEstado()){
+            ZonaDeBaja.setVisible(false);
+        } else {
+            ZonaDeBaja.setVisible(true);
+        }
+        
+        if (jcbBusquedaXZona.getSelectedIndex() > 0){
+            
+            listaXZona = abmPropiedad.busquedaXZona(z.getIdZona());
             for (PropiedadInmueble propiedaZona : listaXZona) {
                 modeloZona.addRow(new Object[]{propiedaZona.getIdPropiedadInmueble(), propiedaZona.getZona().getNombre(),
                     propiedaZona.getDireccion(), propiedaZona.getTipoLocal().getNombre(),propiedaZona.getPrecioTrazado(), 
@@ -1492,6 +1508,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ZonaDeBaja;
     private javax.swing.JTabbedPane jCapasPanelBusquedas;
     private javax.swing.JLabel jErrorBotonBuscar;
     private javax.swing.JLabel jErrorEtiquetaPrecioFinal;
@@ -1627,9 +1644,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     public void combozonaXbusqueda() {
         listaZonas = abmZona.listarZonas();
         for (Zona xZona : listaZonas) {
-            if(xZona.isEstado()){
                 modelBusquedaXZona.addElement(xZona);
-            }
         }    
         jcbBusquedaXZona.setModel(modelBusquedaXZona);
     }

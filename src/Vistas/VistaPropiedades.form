@@ -77,7 +77,9 @@
                       <Component id="jLabel2" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jcbBusquedaXZona" min="-2" pref="223" max="-2" attributes="0"/>
-                      <EmptySpace pref="720" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="ZonaDeBaja" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="553" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" pref="1117" max="32767" attributes="0"/>
               </Group>
@@ -89,6 +91,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jcbBusquedaXZona" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ZonaDeBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="109" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="246" max="-2" attributes="0"/>
@@ -136,6 +139,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Elija la zona preferida"/>
                 <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ZonaDeBaja">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Esta Zona esta dada De Baja"/>
               </Properties>
             </Component>
           </SubComponents>
