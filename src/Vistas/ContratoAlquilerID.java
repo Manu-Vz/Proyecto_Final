@@ -437,7 +437,7 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         jcbNombreInquilino.setModel(modeloCB);
         jtTipoLocal.setText(laProp.getTipoLocal().getNombre());
         jtTipoLocal.setEnabled(false);
-        listaVend = abmVendData.listadoVendedor();
+        listaVend = abmVendData.listadoVendedorOriginal();
         for (Vendedor vendedor : listaVend) {
             modelocbVend.addElement(vendedor.toString());
         }

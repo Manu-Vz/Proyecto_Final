@@ -507,6 +507,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
                 jbtAgregarProp.setEnabled(false);
             }
         } else {
+            jLabelTelefono.setText("");
             String cadenaTEl = jTPropietarioTelefono.getText();
             char[] vectorTel = cadenaTEl.toCharArray();
             String evaluar = "";
@@ -519,7 +520,7 @@ public class GestionPropietarios extends javax.swing.JInternalFrame {
                         jbtAgregarProp.setEnabled(false);
                     }
                     break;
-                } else if (vectorTel.length > 7) {
+                } else if (vectorTel.length > 7 && modeloProp.getRowCount()==0) {
                     jbtAgregarProp.setEnabled(true);
                 }
             }

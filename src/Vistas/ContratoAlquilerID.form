@@ -280,10 +280,19 @@
         <Component class="javax.swing.JLabel" name="jEtiquetaFechaRealizado">
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jFechaInicio">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jFechaFin">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jFechaRealizado">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
