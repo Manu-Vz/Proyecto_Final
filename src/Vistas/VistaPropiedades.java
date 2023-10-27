@@ -1803,6 +1803,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             for (PropiedadInmueble inmueble : listaXIDProp) {
                 //System.out.println("Muesto algo "+inmueble.getVendedor().toString());
                 String valorActivo = "";
+                System.out.println("que tare el valor lógico de disponibilidad "+inmueble.isDisponibilidad());
                 if (inmueble.isDisponibilidad()) {
                     valorActivo = "Activo";
                 } else {
