@@ -436,8 +436,8 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
         String castReal = formato.format(fRealizado);
         LocalDate fechaReali = LocalDate.parse(castReal);
         //Evaluo las fechas para que sean concistentes 
-        if (!fechaIni.isAfter(fechaFin) && !fechaIni.isAfter(fechaReali)) {
-            if (!fechaFin.isAfter(fechaReali)) {
+        if (!fechaIni.isAfter(fechaFin) || !fechaIni.equals(fechaReali)) {
+            if (!fechaFin.isAfter(fechaReali) || fechaFin.equals(fechaReali)) {
                 JOptionPane.showMessageDialog(this, "La Fecha de finalización no puede ser\n posterior a la de Realización");
             } else {
                 elInquilino = abmInqui.buscoInquilino(jcbInquilinoProp.getSelectedIndex() + 1);
@@ -470,7 +470,7 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
             datosATabla();
         } else {
             JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "
-                    + "Finalzación o Realización ");
+                    + "Finalzación ");
         }
     }//GEN-LAST:event_jbtMoficarContratoActionPerformed
 
