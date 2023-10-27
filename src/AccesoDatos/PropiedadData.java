@@ -241,7 +241,7 @@ public class PropiedadData {
                 elTipo=abmTipoLocal.buscoTipoLocal(rs.getInt("idTipoLocal"));
                 //ven=abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
                 insp=abmInsp.buscoInspector(rs.getInt("idInspector"));
-                
+               
                 //Empiezo armar el la propiedad inmuelble
                 
                 temp.setIdPropiedadInmueble(rs.getInt("idPropiedad"));
@@ -307,7 +307,7 @@ public class PropiedadData {
              elInmueble.setInspector(elInspector);
              elInmueble.setTipoLocal(tipoLocal);
              elInmueble.setZona(laZona);
-             elInmueble.setDisponibilidad(rs.getBoolean(12));
+             elInmueble.setDisponibilidad(rs.getBoolean(11));
              listado.add(elInmueble);
             }
             ps.close();
@@ -361,7 +361,7 @@ public class PropiedadData {
                 zonaInmueble.setInspector(zonainsInspector);
                 zonaInmueble.setTipoLocal(zonaTipo);
                 zonaInmueble.setZona(laZona);
-                zonaInmueble.setDisponibilidad(rs.getBoolean(12));
+                zonaInmueble.setDisponibilidad(rs.getBoolean(11));
                 listaXZona.add(zonaInmueble);
             }
         } catch (SQLException e) {
@@ -518,7 +518,7 @@ public class PropiedadData {
                 zonaInmueble.setInspector(zonainsInspector);
                 zonaInmueble.setTipoLocal(zonaTipo);
                 zonaInmueble.setZona(laZona);
-                zonaInmueble.setDisponibilidad(rs.getBoolean(12));
+                zonaInmueble.setDisponibilidad(rs.getBoolean(11));
                 listaXZona.add(zonaInmueble);
             }
         } catch (SQLException e) {
@@ -570,7 +570,7 @@ public class PropiedadData {
                 zonaInmueble.setInspector(zonainsInspector);
                 zonaInmueble.setTipoLocal(zonaTipo);
                 zonaInmueble.setZona(laZona);
-                zonaInmueble.setDisponibilidad(rs.getBoolean(12));
+                zonaInmueble.setDisponibilidad(rs.getBoolean(11));
                 listaXZona.add(zonaInmueble);
             }
         } catch (SQLException e) {
@@ -623,7 +623,7 @@ public class PropiedadData {
                 zonaInmueble.setInspector(zonainsInspector);
                 zonaInmueble.setTipoLocal(zonaTipo);
                 zonaInmueble.setZona(laZona);
-                zonaInmueble.setDisponibilidad(rs.getBoolean(12));
+                zonaInmueble.setDisponibilidad(rs.getBoolean(11));
                 listaXZona.add(zonaInmueble);
             }
         } catch (SQLException e) {
