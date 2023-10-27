@@ -141,6 +141,12 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
 
         jtTipoLocal.setFocusable(false);
 
+        jFechaInicio.setDateFormatString("yyyy-MM-dd");
+
+        jFechaFin.setDateFormatString("yyyy-MM-dd");
+
+        jFechaRealizado.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -326,7 +332,7 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         LocalDate finalR = LocalDate.parse(finalRealizado);
         if(!inicialF.isAfter(finalF) || !inicialF.equals(finalF)){
             if(!finalF.isAfter(finalR) || !finalF.equals(finalR)){
-                JOptionPane.showMessageDialog(this, "La fehca de finalización no puede ser\n posterior a la de Realización");
+                JOptionPane.showMessageDialog(this, "La fehca de Realización no puede ser\n posterior a la de Finalización");
             } else {
                 //Armo el Contrato Alquiler para mandarlo a la base
                 //Construyo los objetos para el contrato
