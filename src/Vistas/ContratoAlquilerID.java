@@ -139,6 +139,12 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbNombreInquilino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbNombreInquilinoActionPerformed(evt);
+            }
+        });
+
         jtTipoLocal.setFocusable(false);
 
         jFechaInicio.setDateFormatString("yyyy-MM-dd");
@@ -308,12 +314,11 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
 
     private void jcbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbVendedorActionPerformed
         // TODO add your handling code here:
-        if(jcbVendedor.getSelectedIndex() > 0){
+        if(jcbVendedor.getSelectedIndex()==0){
+            jbtContratar.setEnabled(false);
+            jcbComboEstado.setEnabled(false);
+        } else {
             jcbComboEstado.setEnabled(true);
-        }else{
-            if(jbtContratar.isEnabled()){
-                jbtContratar.setEnabled(false);
-            }
         }
     }//GEN-LAST:event_jcbVendedorActionPerformed
 
@@ -363,41 +368,19 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jbtCancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ContratoAlquilerID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ContratoAlquilerID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ContratoAlquilerID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ContratoAlquilerID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ContratoAlquilerID().setVisible(true);
-//            }
-//        });
-//    }
+    private void jcbNombreInquilinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNombreInquilinoActionPerformed
+        // TODO add your handling code here:
+        if(jcbNombreInquilino.getSelectedIndex()==0){
+            camposInicial();
+        } else {
+            jFechaInicio.setEnabled(true);
+            jFechaFin.setEnabled(true);
+            jFechaRealizado.setEnabled(true);
+            jcbVendedor.setEnabled(true);
+        }
+    }//GEN-LAST:event_jcbNombreInquilinoActionPerformed
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jEtiquetaFechaFinal;
@@ -450,9 +433,10 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
     }
     
     private void camposInicial(){
-        //jFechaFin.setEnabled(false);
-        //jFechaRealizado.setEnabled(false);
-        //jcbVendedor.setEnabled(false);
+        jFechaInicio.setEnabled(false);
+        jFechaFin.setEnabled(false);
+        jFechaRealizado.setEnabled(false);
+        jcbVendedor.setEnabled(false);
         jcbComboEstado.setEnabled(false);
         jbtContratar.setEnabled(false);
     }

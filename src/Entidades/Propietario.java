@@ -92,4 +92,8 @@ public class Propietario {
     public String toString() {
         return nombre + " " + apellido;
     }
+    
+    public String toStringApellido(){
+        return apellido + ", " + nombre;
+    }
 }

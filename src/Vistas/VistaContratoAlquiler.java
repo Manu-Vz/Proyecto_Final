@@ -111,6 +111,7 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
         jEtiquetaTipoLocal = new javax.swing.JLabel();
         jEtiquetaVnededor = new javax.swing.JLabel();
         jEtiquetaEstadoContrato = new javax.swing.JLabel();
+        jEtiquetaInquilino = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaSeleccionPropiedad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -123,6 +124,12 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
 
         omitirEtiqueta2.setText("Inquilino");
         omitirEtiqueta2.setFocusable(false);
+
+        jcbInquilinoProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbInquilinoPropActionPerformed(evt);
+            }
+        });
 
         jEtiquetaIDCont.setFocusable(false);
 
@@ -218,35 +225,35 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
                         .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(omitirEtiqueta7)
                             .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(omitirEtiqueta2)
-                                .addComponent(omitirEtiqueta4)))
+                                .addComponent(omitirEtiqueta4)
+                                .addComponent(omitirEtiqueta2)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
-                                .addComponent(jcbEstadoContrado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtMoficarContrato)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbtCancelarTodo))
-                            .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
-                                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jcbInquilinoProp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDiaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
-                                        .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(omitirEtiqueta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jcbTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jDiaRealizado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jEtiquetaTipoLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jcbEstadoContrado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtMoficarContrato)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbtCancelarTodo))
                     .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
                         .addComponent(jEtiquetaEstadoContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(418, 418, 418)))
+                        .addGap(418, 418, 418))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelContratoPropiedadLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jcbInquilinoProp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDiaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jEtiquetaInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelContratoPropiedadLayout.createSequentialGroup()
+                                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(omitirEtiqueta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDiaRealizado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jEtiquetaTipoLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelContratoPropiedadLayout.setVerticalGroup(
@@ -264,7 +271,8 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
                 .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlOmitirIdContrato)
                     .addComponent(jlOmitirIdProp)
-                    .addComponent(jEtiquetaTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jEtiquetaTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jEtiquetaInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelContratoPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(omitirEtiqueta3)
@@ -468,6 +476,7 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
             }
 
             datosATabla();
+            camposInicio();
         } else {
             JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "
                     + "Finalzación ");
@@ -550,6 +559,31 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jcbEstadoContradoActionPerformed
 
+    private void jcbInquilinoPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbInquilinoPropActionPerformed
+        // chequeo que se seleccione una opción válida
+        if(jcbInquilinoProp.getSelectedIndex()==0){
+            jEtiquetaInquilino.setText("Debe seleccionar una opción");
+            jEtiquetaInquilino.setFont(new Font("Liberation Sans",Font.PLAIN,13));
+            jEtiquetaInquilino.setForeground(Color.red.darker());
+            jcbTipoLocal.setEnabled(false);
+            jDiaInicio.setEnabled(false);
+            jDiaFinal.setEnabled(false);
+            jDiaRealizado.setEnabled(false);
+            jcbComboVend.setEnabled(false);
+            jcbEstadoContrado.setEnabled(false);
+            jbtMoficarContrato.setEnabled(false);
+        } else {
+            jEtiquetaInquilino.setText("");
+            jcbTipoLocal.setEnabled(true);
+            jDiaInicio.setEnabled(true);
+            jDiaFinal.setEnabled(true);
+            jDiaRealizado.setEnabled(true);
+            jcbComboVend.setEnabled(true);
+            jcbEstadoContrado.setEnabled(true);
+            jbtMoficarContrato.setEnabled(true);
+        }
+    }//GEN-LAST:event_jcbInquilinoPropActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JEtiquetaIdProp;
@@ -559,6 +593,7 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jEtiquetaEstadoContrato;
     private javax.swing.JLabel jEtiquetaIDCont;
     private javax.swing.JLabel jEtiquetaInicio;
+    private javax.swing.JLabel jEtiquetaInquilino;
     private javax.swing.JLabel jEtiquetaTipoLocal;
     private javax.swing.JLabel jEtiquetaVnededor;
     private javax.swing.JLabel jLabel1;

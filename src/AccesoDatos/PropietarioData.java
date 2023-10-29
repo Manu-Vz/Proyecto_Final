@@ -92,6 +92,32 @@ public class PropietarioData {
         return listado;
     }
     
+    public List<Propietario> listarPropietarioOrdenado(){
+        List<Propietario> listado=new ArrayList();
+        Propietario temp=null;
+        String sql="SELECT * FROM propietario order by apellido";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                //dni,nombre,apellido,domucilio,telefono
+                temp=new Propietario();
+                temp.setIdPropietario(rs.getInt(1));
+                temp.setDni(rs.getInt(2));
+                temp.setNombre(rs.getString("nombre"));
+                temp.setApellido(rs.getString("apellido"));
+                temp.setDomicilio(rs.getString("domicilio"));
+                temp.setTelefono(rs.getLong("telefono"));
+                listado.add(temp);
+            }
+            ps.close();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro al acceder a la base de datos "+e.getMessage());
+        }
+        return listado;
+    }
+    
     public Propietario buscopPropietario(int id){
         Propietario elprop=new Propietario();
         String sql="SELECT * FROM propietario WHERE idPropietario=?";

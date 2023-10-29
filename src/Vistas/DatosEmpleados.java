@@ -530,7 +530,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
                 jlCheckNombreVendedor.setText("No puede estar vacio");
                 jlCheckNombreVendedor.setForeground(Color.red.darker());
                 borroFilasVendedor();
-                camposIniciales();
+                //camposIniciales();
                 if (jtfApellidoVendedor.isEnabled()) {
                     jtfApellidoVendedor.setEnabled(false);
                 }
