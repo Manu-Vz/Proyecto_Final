@@ -311,11 +311,13 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
         if (jcbTipo.getSelectedIndex() > 0) {
             listaxTipo = abmPropiedad.listadoInmueblexTipo(jcbTipo.getSelectedIndex() + 1);
             for (PropiedadInmueble propiedadTipo : listaxTipo) {
+                if(propiedadTipo.getZona().isEstado()){
                 modelo.addRow(new Object[]{propiedadTipo.getIdPropiedadInmueble(), propiedadTipo.getZona().getNombre(),
                     propiedadTipo.getDireccion(), propiedadTipo.getTipoLocal().getNombre(), propiedadTipo.getPrecioTrazado(),
                     propiedadTipo.getEstadoLocal().getNombre(), propiedadTipo.getInspector().toString(),
                     propiedadTipo.isDisponibilidad(), propiedadTipo.getPropietario().toString(),
                     propiedadTipo.getCaracteristicasString(), propiedadTipo.getAccesibilidad()});
+                }
             }
 
         }
