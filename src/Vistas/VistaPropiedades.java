@@ -1636,7 +1636,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     public void comboZonas() {
         listaZonas = abmZona.listarZonas();
         for (Zona zona : listaZonas) {
-            modelComboZona.addElement(zona);
+            if(zona.isEstado()){
+                modelComboZona.addElement(zona);
+            }
         }
         jcbZona.setModel(modelComboZona);
     }
