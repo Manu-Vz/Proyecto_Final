@@ -214,4 +214,28 @@ public class ContratoAlquilerData {
         
     }
     
+    public boolean verificarSiLaPropiedadEstaOcupada(ContratoAlquiler contrato){
+        boolean condicion = false;
+        String sql = "SELECT * FROM contratoalquiler WHERE ((idPropiedadInmueble = ?)"
+                    + " AND ((fechaInical > ?) OR (fechaFinal < ?)))";
+        
+        try {
+           PreparedStatement ps = con.prepareStatement(sql);
+           
+           ps.setInt(1, contrato.getPropiedadInmueble().getIdPropiedadInmueble());
+           ps.setDate(2, Date.valueOf(contrato.getFechaFinal()));
+           ps.setDate(3, Date.valueOf(contrato.getFechaInicio()));
+           
+           ResultSet rs = ps.executeQuery();
+
+           if (rs.next()) {
+               condicion = true;
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error "+e.getMessage());
+        }
+        return condicion;
+    }
+    
 }

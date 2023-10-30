@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.AmbientLight;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -354,8 +355,13 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
                 elContrato.getMarca();
                 elContrato.setVendedor(elVendedor);
                 elContrato.setEstado(estadocontrado);
-                abmContratoAlquiler.agregarContrato(elContrato);
-                this.setVisible(false);
+                if(abmContratoAlquiler.verificarSiLaPropiedadEstaOcupada(elContrato)){
+                    JOptionPane.showMessageDialog(null, "La propiedad esta Ocupada en ese lapso de Tiempo. \n"
+                            + "Se le pide que Eliga otra fecha para su alquiler.");
+                } else {
+                    abmContratoAlquiler.agregarContrato(elContrato);
+                    this.setVisible(false);
+                }                        
             }
         } else {
              JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "+
