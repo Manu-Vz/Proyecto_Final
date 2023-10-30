@@ -42,6 +42,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmiDatosInquilinos = new javax.swing.JMenuItem();
         jmiDatosPropiedades = new javax.swing.JMenuItem();
         jmiDatoZonas = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -125,13 +126,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmInmobiliaria.add(jmiDatosPropiedades);
 
-        jmiDatoZonas.setText("Datos de Zonas");
+        jmiDatoZonas.setText("Gestion Zonas");
         jmiDatoZonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiDatoZonasActionPerformed(evt);
             }
         });
         jmInmobiliaria.add(jmiDatoZonas);
+
+        jMenuItem2.setText("Estado Y Tipo Local");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jmInmobiliaria.add(jMenuItem2);
 
         jMenuBar1.add(jmInmobiliaria);
 
@@ -223,6 +232,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(gz);
     }//GEN-LAST:event_jmiDatoZonasActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+         escritorio.repaint();
+         EstadoYTipoLocal etl = new EstadoYTipoLocal();
+         etl.setVisible(true);
+         escritorio.add(etl);
+        
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,6 +283,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jItemVerContratos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemPropiedades;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu jmInmobiliaria;
