@@ -422,12 +422,14 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         jtTipoLocal.setEnabled(false);
         listaVend = abmVendData.listadoVendedorOriginal();
         for (Vendedor vendedor : listaVend) {
-            modelocbVend.addElement(vendedor.toString());
+            if (vendedor.isEstado()){
+                modelocbVend.addElement(vendedor.toString());
+            }
         }
         jcbVendedor.setModel(modelocbVend);
         listaEstadoContrato = abmEstadoContrato.listarEstadoContratos();
         for (EstadoContrato estadoContrato : listaEstadoContrato) {
-            modelocbEstado.addElement(estadoContrato.getNombre());
+                modelocbEstado.addElement(estadoContrato.getNombre());
         }
         jcbComboEstado.setModel(modelocbEstado);
     }

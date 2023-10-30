@@ -540,7 +540,9 @@ public class DatosPropiedades extends javax.swing.JInternalFrame {
     private void comboBusquedaPorZona() {
         listaZonas = abmZona.listarZonas();
         for (Zona xZona : listaZonas) {
-            modelBusquedaXZona.addElement(xZona);
+            if(xZona.isEstado()){
+                modelBusquedaXZona.addElement(xZona);
+            }
         }
         jcbZona.setModel(modelBusquedaXZona);
     }
