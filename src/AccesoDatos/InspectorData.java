@@ -51,6 +51,7 @@ public class InspectorData {
             ps.setString(2, insp.getApellido());
             ps.setString(3, insp.getEspecialidad());
             ps.setBoolean(4, insp.isEstado());
+            ps.setInt(5, insp.getIdInspector());
             int valor=ps.executeUpdate();
             if(valor>0){
                 JOptionPane.showMessageDialog(null, "Se ha modificado el inspector correctamente");

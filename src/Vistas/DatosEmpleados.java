@@ -720,6 +720,7 @@ public class DatosEmpleados extends javax.swing.JInternalFrame {
             tempInspector.setIdInspector(idInspector);
             tempInspector.setNombre(jtfNombreInspector.getText());
             tempInspector.setApellido(jtfApellidoInspector.getText());
+            tempInspector.setEspecialidad(jtfEspecialidadInspector.getText());
             int valorEstadoInspector = jcbEstadoInspector.getSelectedIndex();
             boolean activo = false;
             if (valorEstadoInspector==0) {

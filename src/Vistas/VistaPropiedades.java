@@ -1678,7 +1678,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     public void comboInspector() {
         listaInspector = abmInspector.listadoInspectoeresJCB();
         for (Inspector inspector : listaInspector) {
-            modelComboInspector.addElement(inspector);
+            if(inspector.isEstado()){
+                modelComboInspector.addElement(inspector);
+            }
         }
         jcbInspector.setModel(modelComboInspector);
     }
