@@ -1108,7 +1108,7 @@ public class VistaContratoAlquiler extends javax.swing.JInternalFrame {
                 modeloBusqueda.addRow(new Object[]{listContrato.getIdContratoAlquiler(), listContrato.getInquilino().otraForma(),
                     listContrato.getPropiedadInmueble().getTipoLocal().getNombre(), listContrato.getPropiedadInmueble().getIdPropiedadInmueble(),
                     listContrato.getFechaInicio(), listContrato.getFechaFinal(), listContrato.getFechaRealizacion(), listContrato.getVendedor().toString(),
-                    listContrato.getEstado().getNombre()});
+                    listContrato.getEstado().getNombre(), listContrato.getPropiedadInmueble().getZona().getNombre()});
             }
         }
     }//GEN-LAST:event_jbtBusquedaModificarActionPerformed
