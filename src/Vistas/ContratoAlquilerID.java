@@ -369,8 +369,8 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
                     elContrato.getMarca();
                     elContrato.setVendedor(elVendedor);
                     elContrato.setEstado(estadocontrado);
-                    //abmContratoAlquiler.agregarContrato(elContrato);
-                    //this.setVisible(false);
+                    abmContratoAlquiler.agregarContrato(elContrato);
+                    this.setVisible(false);
                 }
 
             }
