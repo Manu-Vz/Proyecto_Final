@@ -228,7 +228,8 @@ public class ZonaData {
             if(rs > 0){
                 JOptionPane.showMessageDialog(null, "La Zona se ha dado de baja");
             }
-            
+            JOptionPane.showMessageDialog(null, "Se Han Anulado Los contratos asociados con esta Zona.\n"
+                + "Para Volver a Modificarlos se Debera Volver A Habilitar Esta Zona");
             ps.close();
             
         } catch (SQLException ex) {
@@ -244,9 +245,7 @@ public class ZonaData {
         for(PropiedadInmueble p : listaProp){
             cd.AnularContrato(p.getIdPropiedadInmueble());
         }
-        JOptionPane.showMessageDialog(null, "Se Han Anulado Los contratos asociados con esta Zona.\n"
-                + "Para Volver a Modificarlos se Debera Volver A Habilitar Esta Zona");
-        
+
         
         
         
