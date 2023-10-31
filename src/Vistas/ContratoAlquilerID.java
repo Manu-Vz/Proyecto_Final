@@ -31,11 +31,11 @@ import javax.swing.JOptionPane;
  */
 public class ContratoAlquilerID extends javax.swing.JInternalFrame {
 
-    private PropiedadInmueble laProp =  null;
+    private PropiedadInmueble laProp = null;
     private PropiedadData abmPropiedadData = new PropiedadData();
     private Inquilino elInquilino = null;
     private InquilinoData abmInquilino = new InquilinoData();
-    private Vendedor elVendedor =null;
+    private Vendedor elVendedor = null;
     private VendedorData abmVendData = new VendedorData();
     private EstadoContrato estadocontrado = null;
     private EstadoContratoData abmEstadoContrato = new EstadoContratoData();
@@ -44,12 +44,14 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
     private List<Inquilino> listaInquilino = new ArrayList();
     private List<Vendedor> listaVend = new ArrayList();
     private List<EstadoContrato> listaEstadoContrato = new ArrayList();
+    private List<ContratoAlquiler> listaContratoAlquiler = new ArrayList();
     private DefaultComboBoxModel modeloCB = new DefaultComboBoxModel();
     private DefaultComboBoxModel modelocbVend = new DefaultComboBoxModel();
     private DefaultComboBoxModel modelocbEstado = new DefaultComboBoxModel();
-    public int valorId=PropiedadesInquilinos.valorIdProp;
+    public int valorId = PropiedadesInquilinos.valorIdProp;
+    Date fechaTestigoIni = new Date();
     //public int valorId=5;
-    
+
     /**
      * Creates new form ContratoAlquiler
      */
@@ -58,7 +60,7 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         traigoPropiedad();
         asignoDatos();
         camposInicial();
-        
+
     }
 
     /**
@@ -279,33 +281,33 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
 
     private void jcbVendedorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcbVendedorFocusGained
         // Chequeo que las fechas esten completas
-       if(jFechaInicio.getCalendar()!=null && jFechaFin.getCalendar()!=null && jFechaRealizado.getCalendar()!=null){
-           jEtiquetaFechaInicio.setText("");
-           jEtiquetaFechaFinal.setText("");
-           jEtiquetaFechaRealizado.setText("");
-       } else {
-           if(jFechaInicio.getCalendar()==null){
-               jEtiquetaFechaInicio.setText("Completar las fechas");
-               jEtiquetaFechaInicio.setFont(new Font("Liberation Sans",Font.PLAIN,13));
-               jEtiquetaFechaInicio.setForeground(Color.red.darker());
-               jFechaInicio.requestFocus();
-           } else if(jFechaFin.getCalendar()==null){
-               jEtiquetaFechaFinal.setText("Completar las fechas");
-               jEtiquetaFechaFinal.setFont(new Font("Liberation Sans",Font.PLAIN,13));
-               jEtiquetaFechaFinal.setForeground(Color.red.darker());
-               jFechaFin.requestFocus();
-           } else if(jFechaRealizado.getCalendar()==null){
-               jEtiquetaFechaRealizado.setText("Completar las fechas");
-               jEtiquetaFechaRealizado.setFont(new Font("Liberation Sans",Font.PLAIN,13));
-               jEtiquetaFechaRealizado.setForeground(Color.red.darker());
-               jEtiquetaFechaRealizado.requestFocus();
-           }
-       }
+        if (jFechaInicio.getCalendar() != null && jFechaFin.getCalendar() != null && jFechaRealizado.getCalendar() != null) {
+            jEtiquetaFechaInicio.setText("");
+            jEtiquetaFechaFinal.setText("");
+            jEtiquetaFechaRealizado.setText("");
+        } else {
+            if (jFechaInicio.getCalendar() == null) {
+                jEtiquetaFechaInicio.setText("Completar las fechas");
+                jEtiquetaFechaInicio.setFont(new Font("Liberation Sans", Font.PLAIN, 13));
+                jEtiquetaFechaInicio.setForeground(Color.red.darker());
+                jFechaInicio.requestFocus();
+            } else if (jFechaFin.getCalendar() == null) {
+                jEtiquetaFechaFinal.setText("Completar las fechas");
+                jEtiquetaFechaFinal.setFont(new Font("Liberation Sans", Font.PLAIN, 13));
+                jEtiquetaFechaFinal.setForeground(Color.red.darker());
+                jFechaFin.requestFocus();
+            } else if (jFechaRealizado.getCalendar() == null) {
+                jEtiquetaFechaRealizado.setText("Completar las fechas");
+                jEtiquetaFechaRealizado.setFont(new Font("Liberation Sans", Font.PLAIN, 13));
+                jEtiquetaFechaRealizado.setForeground(Color.red.darker());
+                jEtiquetaFechaRealizado.requestFocus();
+            }
+        }
     }//GEN-LAST:event_jcbVendedorFocusGained
 
     private void jcbComboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbComboEstadoActionPerformed
         // TODO add your handling code here:
-        if(jcbComboEstado.getSelectedIndex() > 0){
+        if (jcbComboEstado.getSelectedIndex() > 0) {
             jbtContratar.setEnabled(true);
         } else {
             jbtContratar.setEnabled(false);
@@ -314,7 +316,7 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
 
     private void jcbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbVendedorActionPerformed
         // TODO add your handling code here:
-        if(jcbVendedor.getSelectedIndex()==0){
+        if (jcbVendedor.getSelectedIndex() == 0) {
             jbtContratar.setEnabled(false);
             jcbComboEstado.setEnabled(false);
         } else {
@@ -325,47 +327,57 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
     private void jbtContratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtContratarActionPerformed
         // Chequeo los datos y si todo está ok guardo el contrato
         // Contruyo las fechas
+        boolean valido = false;
         Date fInicio = jFechaInicio.getDate();
         SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
         String castInicio = formatofecha.format(fInicio);
-        LocalDate inicialF = LocalDate.parse(castInicio); 
+        LocalDate inicialF = LocalDate.parse(castInicio);
         Date fFinal = jFechaFin.getDate();
         String castfinal = formatofecha.format(fFinal);
         LocalDate finalF = LocalDate.parse(castfinal);
         Date fRealizado = jFechaRealizado.getDate();
         String finalRealizado = formatofecha.format(fRealizado);
         LocalDate finalR = LocalDate.parse(finalRealizado);
-        if(!inicialF.isAfter(finalF) || !inicialF.equals(finalF)){
-            if(!finalF.isAfter(finalR)){
+        if (!inicialF.isAfter(finalF) || !inicialF.equals(finalF)) {
+            if (!finalF.isAfter(finalR)) {
                 JOptionPane.showMessageDialog(this, "La fehca de Realización no puede ser\n posterior a la de Finalización");
             } else {
                 //Armo el Contrato Alquiler para mandarlo a la base
                 //Construyo los objetos para el contrato
-                laProp = abmPropiedadData.buscarPropiedadPorId(Integer.parseInt(jEtiquetaIdPropiedad.getText()));
-                elInquilino = abmInquilino.buscoInquilino(jcbNombreInquilino.getSelectedIndex() + 1);
-                elVendedor = abmVendData.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
-                estadocontrado = abmEstadoContrato.BuscarEstadoContratoPorId(jcbComboEstado.getSelectedIndex() + 1);
-                elContrato = new ContratoAlquiler();
-                elContrato.setInquilino(elInquilino);
-                elContrato.setPropiedadInmueble(laProp);
-                elContrato.setFechaInicio(inicialF);
-                elContrato.setFechaFinal(finalF);
-                elContrato.setFechaRealizacion(finalR);
-                elContrato.getMarca();
-                elContrato.setVendedor(elVendedor);
-                elContrato.setEstado(estadocontrado);
-                if(abmContratoAlquiler.verificarSiLaPropiedadEstaOcupada(elContrato)){
-                    JOptionPane.showMessageDialog(null, "La propiedad esta Ocupada en ese lapso de Tiempo. \n"
-                            + "Se le pide que Eliga otra fecha para su alquiler.");
+                //laProp = abmPropiedadData.buscarPropiedadPorId(Integer.parseInt(jEtiquetaIdPropiedad.getText()));
+                for (ContratoAlquiler ctAlquiler : listaContratoAlquiler) {
+                    if (inicialF.isAfter(ctAlquiler.getFechaInicio()) && inicialF.isBefore(ctAlquiler.getFechaFinal())) {
+                        valido = true;
+                        break;
+                    } else if(finalF.isBefore(ctAlquiler.getFechaFinal())){
+                        valido = true;
+                        break;
+                    }
+                }
+                if (valido) {
+                    JOptionPane.showMessageDialog(this, "Ya existe un contrato en esas fechas");
                 } else {
-                    abmContratoAlquiler.agregarContrato(elContrato);
-                    this.setVisible(false);
-                }                        
+                    elInquilino = abmInquilino.buscoInquilino(jcbNombreInquilino.getSelectedIndex() + 1);
+                    elVendedor = abmVendData.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
+                    estadocontrado = abmEstadoContrato.BuscarEstadoContratoPorId(jcbComboEstado.getSelectedIndex() + 1);
+                    elContrato = new ContratoAlquiler();
+                    elContrato.setInquilino(elInquilino);
+                    elContrato.setPropiedadInmueble(laProp);
+                    elContrato.setFechaInicio(inicialF);
+                    elContrato.setFechaFinal(finalF);
+                    elContrato.setFechaRealizacion(finalR);
+                    elContrato.getMarca();
+                    elContrato.setVendedor(elVendedor);
+                    elContrato.setEstado(estadocontrado);
+                    //abmContratoAlquiler.agregarContrato(elContrato);
+                    //this.setVisible(false);
+                }
+
             }
         } else {
-             JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "+
-                    "Finalzación");
-        } 
+            JOptionPane.showMessageDialog(this, "La fecha de Inicio no puede ser posterior\n a la de "
+                    + "Finalzación");
+        }
     }//GEN-LAST:event_jbtContratarActionPerformed
 
     private void jbtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarActionPerformed
@@ -375,7 +387,7 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
 
     private void jcbNombreInquilinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNombreInquilinoActionPerformed
         // TODO add your handling code here:
-        if(jcbNombreInquilino.getSelectedIndex()==0){
+        if (jcbNombreInquilino.getSelectedIndex() == 0) {
             camposInicial();
         } else {
             jFechaInicio.setEnabled(true);
@@ -385,7 +397,6 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jcbNombreInquilinoActionPerformed
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jEtiquetaFechaFinal;
@@ -410,13 +421,13 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbVendedor;
     private javax.swing.JTextField jtTipoLocal;
     // End of variables declaration//GEN-END:variables
-    
-    
-    public void traigoPropiedad(){
+
+    public void traigoPropiedad() {
         laProp = abmPropiedadData.buscarPropiedadPorId(valorId);
+        listaContratoAlquiler = abmContratoAlquiler.listarContratoxIDProp(laProp.getIdPropiedadInmueble());
     }
-    
-    public void asignoDatos(){
+
+    public void asignoDatos() {
         jEtiquetaIdPropiedad.setText(String.valueOf(laProp.getIdPropiedadInmueble()));
         listaInquilino = abmInquilino.listarInquilino();
         for (Inquilino inquilino : listaInquilino) {
@@ -427,19 +438,19 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         jtTipoLocal.setEnabled(false);
         listaVend = abmVendData.listadoVendedorOriginal();
         for (Vendedor vendedor : listaVend) {
-            if (vendedor.isEstado()){
+            if (vendedor.isEstado()) {
                 modelocbVend.addElement(vendedor.toString());
             }
         }
         jcbVendedor.setModel(modelocbVend);
         listaEstadoContrato = abmEstadoContrato.listarEstadoContratos();
         for (EstadoContrato estadoContrato : listaEstadoContrato) {
-                modelocbEstado.addElement(estadoContrato.getNombre());
+            modelocbEstado.addElement(estadoContrato.getNombre());
         }
         jcbComboEstado.setModel(modelocbEstado);
     }
-    
-    private void camposInicial(){
+
+    private void camposInicial() {
         jFechaInicio.setEnabled(false);
         jFechaFin.setEnabled(false);
         jFechaRealizado.setEnabled(false);
@@ -447,5 +458,5 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         jcbComboEstado.setEnabled(false);
         jbtContratar.setEnabled(false);
     }
-    
+
 }

@@ -53,10 +53,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    
-    public DefaultTableModel modeloxTipo = new DefaultTableModel(){
+
+    public DefaultTableModel modeloxTipo = new DefaultTableModel() {
         @Override
-        public boolean isCellEditable(int f,int c){
+        public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
@@ -94,9 +94,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     List<PropiedadInmueble> listaXIDProp = new ArrayList();
     List<PropiedadInmueble> listaXZona = new ArrayList();
     List<PropiedadInmueble> listaxTipo = new ArrayList();
-    
 
     boolean control = false;
+    boolean controlBaja = false;
 
     /**
      * Creates new form VistaPropiedades
@@ -181,6 +181,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jLAdvertenciaCaracteristicas = new javax.swing.JLabel();
         jLAdvertenciaDireccion = new javax.swing.JLabel();
         jLAdvertenciaPrecio = new javax.swing.JLabel();
+        jLabelZonaInactiva = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaBusquedaProp = new javax.swing.JTable();
         jbtHabiltarCampos = new javax.swing.JButton();
@@ -582,6 +583,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 
         jLAdvertenciaAccesibilidad.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
+        jLabelZonaInactiva.setForeground(new java.awt.Color(153, 0, 51));
+
         javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
         jPanelDatos.setLayout(jPanelDatosLayout);
         jPanelDatosLayout.setHorizontalGroup(
@@ -619,9 +622,10 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jcbDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanelDatosLayout.createSequentialGroup()
-                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcbZona, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelZona, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelZonaInactiva, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbZona, javax.swing.GroupLayout.Alignment.LEADING, 0, 130, Short.MAX_VALUE)
+                            .addComponent(jLabelZona, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelTipoLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -634,7 +638,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                         .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelInspector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbInspector, 0, 130, Short.MAX_VALUE))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         jPanelDatosLayout.setVerticalGroup(
             jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -651,7 +655,9 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
                     .addComponent(jcbTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbInspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelZonaInactiva, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtAccesibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -838,36 +844,43 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 
     private void jbtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtModificarActionPerformed
         // Construyo los objetos para el objeto inmueble
-        jLabelOcultaFilaNum.setVisible(false);
-        tempProp = new PropiedadInmueble();
-        tempPropietario = abmProp.buscopPropietario(jcbListaPropietarios.getSelectedIndex() + 1);
-        temInspector = abmInspector.buscoInspector(jcbInspector.getSelectedIndex() + 1);
-        tempEstadoLocal = abmEstadoLocal.buscoEstadoLocal(jcbEstadoLocal.getSelectedIndex() + 1);
-        tempTipoLocal = abmTipoLocal.buscoTipoLocal(jcbTipoLocal.getSelectedIndex() + 1);
-        //tempVendedor = abmVendedor.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
-        tempZona = abmZona.buscarZona(jcbZona.getSelectedIndex() + 1);
+        controlBaja = abmPropiedad.estaAlquilada(Integer.parseInt(jLIdPropiedad.getText()));
         boolean valor = false;
-        if (jcbDisponibilidad.getSelectedIndex() == 1) {
-            valor = true;
+            if (jcbDisponibilidad.getSelectedIndex() == 1) {
+                valor = true;
+            }
+        if (controlBaja && valor==false) {
+            JOptionPane.showMessageDialog(this, "La propiedad está alquilada\n no se puede dar de baja");
+        } else {
+            jLabelOcultaFilaNum.setVisible(false);
+            tempProp = new PropiedadInmueble();
+            tempPropietario = abmProp.buscopPropietario(jcbListaPropietarios.getSelectedIndex() + 1);
+            temInspector = abmInspector.buscoInspector(jcbInspector.getSelectedIndex() + 1);
+            tempEstadoLocal = abmEstadoLocal.buscoEstadoLocal(jcbEstadoLocal.getSelectedIndex() + 1);
+            tempTipoLocal = abmTipoLocal.buscoTipoLocal(jcbTipoLocal.getSelectedIndex() + 1);
+            //tempVendedor = abmVendedor.buscoVendedor(jcbVendedor.getSelectedIndex() + 1);
+            tempZona = abmZona.buscarZona(jcbZona.getSelectedIndex() + 1);
+            
+            //Construyo el inmueble para modificarlo en la base
+            tempProp.setIdPropiedadInmueble(Integer.parseInt(jLIdPropiedad.getText()));
+            tempProp.setPropietario(tempPropietario);
+            tempProp.setAccesibilidad(jtAccesibilidad.getText());
+            tempProp.setCaracteristicasString(jtCaracteristicas.getText());
+            tempProp.setDireccion(jtDireccion.getText());
+            tempProp.setEstadoLocal(tempEstadoLocal);
+            tempProp.setPrecioTrazado(Float.valueOf(jtPrecio.getText()));
+            //tempProp.setVendedor(tempVendedor);
+            tempProp.setInspector(temInspector);
+            tempProp.setTipoLocal(tempTipoLocal);
+            tempProp.setZona(tempZona);
+            tempProp.setDisponibilidad(valor);
+            abmPropiedad.modificarpropiedad(tempProp);
+            //int fila=Integer.parseInt(jLabelOcultaFilaNum.getText());
+            //modelo.removeRow(Integer.parseInt(jLabelOcultaFilaNum.getText()));
+            //modelo.addRow(new Object[fila]);
+            filasTablaResultadoXPropietario();
         }
-        //Construyo el inmueble para modificarlo en la base
-        tempProp.setIdPropiedadInmueble(Integer.parseInt(jLIdPropiedad.getText()));
-        tempProp.setPropietario(tempPropietario);
-        tempProp.setAccesibilidad(jtAccesibilidad.getText());
-        tempProp.setCaracteristicasString(jtCaracteristicas.getText());
-        tempProp.setDireccion(jtDireccion.getText());
-        tempProp.setEstadoLocal(tempEstadoLocal);
-        tempProp.setPrecioTrazado(Float.valueOf(jtPrecio.getText()));
-        //tempProp.setVendedor(tempVendedor);
-        tempProp.setInspector(temInspector);
-        tempProp.setTipoLocal(tempTipoLocal);
-        tempProp.setZona(tempZona);
-        tempProp.setDisponibilidad(valor);
-        abmPropiedad.modificarpropiedad(tempProp);
-        //int fila=Integer.parseInt(jLabelOcultaFilaNum.getText());
-        //modelo.removeRow(Integer.parseInt(jLabelOcultaFilaNum.getText()));
-        //modelo.addRow(new Object[fila]);
-        filasTablaResultadoXPropietario();
+
     }//GEN-LAST:event_jbtModificarActionPerformed
 
     private void jTablaBusquedaPropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaBusquedaPropMouseClicked
@@ -910,19 +923,11 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         String propInspectorFila = String.valueOf(modelo.getValueAt(valor, 6));
         for (Inspector inspData : listaInspector) {
             if (inspData.toString().equals(propInspectorFila)) {
-                propInspectorjcb = inspData.getIdInspector() -1;
+                propInspectorjcb = inspData.getIdInspector() - 1;
             }
         }
         jcbInspector.setSelectedIndex(propInspectorjcb);
-        //Seteo el valor el Vendedor en el combo vox
-//        int propVendedorjcb = 0;
-//        String propVendedorFila = String.valueOf(modelo.getValueAt(valor, 7));
-//        for (Vendedor vendData : listaVendedor) {
-//            if (vendData.toString().equals(propVendedorFila)) {
-//                propVendedorjcb = vendData.getIdVendedor() - 1;
-//            }
-//        }
-//        jcbVendedor.setSelectedIndex(propVendedorjcb);
+
         //Seteo el valor de la Disponibilidad en el combo
         String valordisponibilidad = String.valueOf(modelo.getValueAt(valor, 7));
         if (valordisponibilidad.equals("Activo")) {
@@ -955,8 +960,25 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 
     private void jcbZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbZonaActionPerformed
         // Si el item elegido es mayor a 0 habilito el campo siguiente
+        
         if (jcbZona.getSelectedIndex() > 0) {
-            jcbTipoLocal.setEnabled(true);
+            tempZona = abmZona.buscarZona(jcbZona.getSelectedIndex()+1);
+            if(tempZona.isEstado()){
+                jcbTipoLocal.setEnabled(true);
+                jLabelZonaInactiva.setText("");
+            }else{
+                jLabelZonaInactiva.setText("Desactivada");
+                jcbTipoLocal.setEnabled(false);
+                jcbEstadoLocal.setEnabled(false);
+                jcbInspector.setEnabled(false);
+                jtAccesibilidad.setEnabled(false);
+                jtCaracteristicas.setEnabled(false);
+                jtDireccion.setEnabled(false);
+                jtPrecio.setEnabled(false);
+                jcbDisponibilidad.setEnabled(false);
+                jbtAgregar.setEnabled(false);
+                jbtModificar.setEnabled(false);
+            }
         } else {
             jcbTipoLocal.setEnabled(false);
             if (jbtAgregar.isEnabled()) {
@@ -968,9 +990,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             if (jcbInspector.isEnabled()) {
                 jcbInspector.setEnabled(false);
             }
-//            if (jcbVendedor.isEnabled()) {
-//                jcbVendedor.setEnabled(false);
-//            }
             if (jtAccesibilidad.isEnabled()) {
                 jtAccesibilidad.setEnabled(false);
             }
@@ -1297,20 +1316,20 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         borroFilasZona();
         Zona z = new Zona();
         z = (Zona) jcbBusquedaXZona.getSelectedItem();
-        if (z.isEstado()){
+        if (z.isEstado()) {
             ZonaDeBaja.setVisible(false);
         } else {
             ZonaDeBaja.setVisible(true);
         }
-        
-        if (jcbBusquedaXZona.getSelectedIndex() > 0){
-            
+
+        if (jcbBusquedaXZona.getSelectedIndex() > 0) {
+
             listaXZona = abmPropiedad.busquedaXZona(z.getIdZona());
             for (PropiedadInmueble propiedaZona : listaXZona) {
                 modeloZona.addRow(new Object[]{propiedaZona.getIdPropiedadInmueble(), propiedaZona.getZona().getNombre(),
-                    propiedaZona.getDireccion(), propiedaZona.getTipoLocal().getNombre(),propiedaZona.getPrecioTrazado(), 
-                    propiedaZona.getEstadoLocal().getNombre(),propiedaZona.getInspector().toString(),propiedaZona.isDisponibilidad(),
-                    propiedaZona.getPropietario().toString(),propiedaZona.getCaracteristicasString(),
+                    propiedaZona.getDireccion(), propiedaZona.getTipoLocal().getNombre(), propiedaZona.getPrecioTrazado(),
+                    propiedaZona.getEstadoLocal().getNombre(), propiedaZona.getInspector().toString(), propiedaZona.isDisponibilidad(),
+                    propiedaZona.getPropietario().toString(), propiedaZona.getCaracteristicasString(),
                     propiedaZona.getAccesibilidad()});
             }
         }
@@ -1446,14 +1465,14 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 
     private void jbtBuscarXPrecioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jbtBuscarXPrecioFocusGained
         // Chequeo que el valor inicial sea menor que el final
-        String creoInicial = jtPrecioInicial.getText()+"f";
-        String creoFinal= jtPrecioFinal.getText()+"f";
+        String creoInicial = jtPrecioInicial.getText() + "f";
+        String creoFinal = jtPrecioFinal.getText() + "f";
         float valorInicia = Float.parseFloat(creoInicial);
         float valorFinal = Float.parseFloat(creoFinal);
-        float resultado = valorFinal-valorInicia;
-        if(resultado<0){
+        float resultado = valorFinal - valorInicia;
+        if (resultado < 0) {
             jErrorBotonBuscar.setText("El valor inicial no puede ser mayor al final");
-            jErrorBotonBuscar.setFont(new Font("Liberation Sans",Font.PLAIN,13));
+            jErrorBotonBuscar.setFont(new Font("Liberation Sans", Font.PLAIN, 13));
             jErrorBotonBuscar.setForeground(Color.red.darker());
             jtPrecioInicial.requestFocus();
             jbtBuscarXPrecio.setEnabled(false);
@@ -1465,43 +1484,43 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     private void jbtBuscarXPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarXPrecioActionPerformed
         // Salgo a buscar las propiedades que se encuentren en el rango de precios
         borroFilaPrecio();
-        String tomoInicio = jtPrecioInicial.getText()+"f";
-        String tomoFinal = jtPrecioFinal.getText()+"f";
+        String tomoInicio = jtPrecioInicial.getText() + "f";
+        String tomoFinal = jtPrecioFinal.getText() + "f";
         float vInicial = Float.parseFloat(tomoInicio);
         float vFinal = Float.parseFloat(tomoFinal);
         List<PropiedadInmueble> listaPrecio = new ArrayList();
-        listaPrecio=abmPropiedad.rangoPrecios(vInicial, vFinal);
+        listaPrecio = abmPropiedad.rangoPrecios(vInicial, vFinal);
         for (PropiedadInmueble inmu : listaPrecio) {
-            
-            String valorActivo="";
-            if(inmu.isDisponibilidad()){
-                valorActivo="Activo";
-            }else{
-                valorActivo="Inactivo";
+
+            String valorActivo = "";
+            if (inmu.isDisponibilidad()) {
+                valorActivo = "Activo";
+            } else {
+                valorActivo = "Inactivo";
             }
-            modeloPrecio.addRow(new Object[]{inmu.getIdPropiedadInmueble(),inmu.getZona().getNombre(),inmu.getDireccion(),
-                    inmu.getTipoLocal().getNombre(),inmu.getPrecioTrazado(),inmu.getEstadoLocal().getNombre(),
-                    inmu.getInspector().toString(),valorActivo,inmu.getPropietario().toString(),
-                    inmu.getCaracteristicasString(),inmu.getAccesibilidad()});
+            modeloPrecio.addRow(new Object[]{inmu.getIdPropiedadInmueble(), inmu.getZona().getNombre(), inmu.getDireccion(),
+                inmu.getTipoLocal().getNombre(), inmu.getPrecioTrazado(), inmu.getEstadoLocal().getNombre(),
+                inmu.getInspector().toString(), valorActivo, inmu.getPropietario().toString(),
+                inmu.getCaracteristicasString(), inmu.getAccesibilidad()});
         }
     }//GEN-LAST:event_jbtBuscarXPrecioActionPerformed
 
     private void jcbBusquedaXTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBusquedaXTipoActionPerformed
         // Armo el combox para los Tipos
         borroFilaxTipo();
-        if(jcbBusquedaXTipo.getSelectedIndex()>0){
-            listaxTipo=abmPropiedad.listadoInmueblexTipo(jcbBusquedaXTipo.getSelectedIndex() + 1);
-            String valorActivo="";
+        if (jcbBusquedaXTipo.getSelectedIndex() > 0) {
+            listaxTipo = abmPropiedad.listadoInmueblexTipo(jcbBusquedaXTipo.getSelectedIndex() + 1);
+            String valorActivo = "";
             for (PropiedadInmueble inmu : listaxTipo) {
-            if(inmu.isDisponibilidad()){
-                valorActivo="Activo";
-            }else{
-                valorActivo="Inactivo";
-            }
-               modeloxTipo.addRow(new Object[]{inmu.getIdPropiedadInmueble(),inmu.getZona().getNombre(),inmu.getDireccion(),
-                    inmu.getTipoLocal().getNombre(),inmu.getPrecioTrazado(),inmu.getEstadoLocal().getNombre(),
-                    inmu.getInspector().toString(),valorActivo,inmu.getPropietario().toString(),
-                    inmu.getCaracteristicasString(),inmu.getAccesibilidad()});  
+                if (inmu.isDisponibilidad()) {
+                    valorActivo = "Activo";
+                } else {
+                    valorActivo = "Inactivo";
+                }
+                modeloxTipo.addRow(new Object[]{inmu.getIdPropiedadInmueble(), inmu.getZona().getNombre(), inmu.getDireccion(),
+                    inmu.getTipoLocal().getNombre(), inmu.getPrecioTrazado(), inmu.getEstadoLocal().getNombre(),
+                    inmu.getInspector().toString(), valorActivo, inmu.getPropietario().toString(),
+                    inmu.getCaracteristicasString(), inmu.getAccesibilidad()});
             }
         }
     }//GEN-LAST:event_jcbBusquedaXTipoActionPerformed
@@ -1529,6 +1548,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelOcultaFilaNum;
     private javax.swing.JLabel jLabelTipoLocal;
     private javax.swing.JLabel jLabelZona;
+    private javax.swing.JLabel jLabelZonaInactiva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAgregar;
     private javax.swing.JPanel jPanelDatos;
@@ -1609,8 +1629,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         modeloPrecio.addColumn("Accesibilidad"); //10
         jTablaResltadoxPrecio.setModel(modeloPrecio);
     }
-    
-    public void armoTablaxTipo(){
+
+    public void armoTablaxTipo() {
         modeloxTipo.addColumn("id"); //0
         modeloxTipo.addColumn("Zona"); //1
         modeloxTipo.addColumn("Dirección"); //2
@@ -1636,9 +1656,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     public void comboZonas() {
         listaZonas = abmZona.listarZonas();
         for (Zona zona : listaZonas) {
-            if(zona.isEstado()){
                 modelComboZona.addElement(zona);
-            }
         }
         jcbZona.setModel(modelComboZona);
     }
@@ -1646,12 +1664,12 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     public void combozonaXbusqueda() {
         listaZonas = abmZona.listarZonas();
         for (Zona xZona : listaZonas) {
-                modelBusquedaXZona.addElement(xZona);
-        }    
+            modelBusquedaXZona.addElement(xZona);
+        }
         jcbBusquedaXZona.setModel(modelBusquedaXZona);
     }
-    
-    public void comboBusquedaxTipo(){
+
+    public void comboBusquedaxTipo() {
         listaTipoLocal = abmTipoLocal.listarTipoLocal();
         for (TipoLocal tpl : listaTipoLocal) {
             modelBusquedazTipo.addElement(tpl);
@@ -1678,7 +1696,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
     public void comboInspector() {
         listaInspector = abmInspector.listadoInspectoeresJCB();
         for (Inspector inspector : listaInspector) {
-            if(inspector.isEstado()){
+            if (inspector.isEstado()) {
                 modelComboInspector.addElement(inspector);
             }
         }
@@ -1692,7 +1710,6 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
 ////        }
 ////        jcbVendedor.setModel(modelComboVendedor);
 //    }
-
     public void comboDisponibilidad() {
         jcbDisponibilidad.addItem("Seleccionar");
         jcbDisponibilidad.addItem("Activo");
@@ -1765,8 +1782,8 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         jLIdPropiedad.setText("Identificador");
         jtPrecio.setForeground(Color.gray);
     }
-    
-    private void camposInicioxTipo(){
+
+    private void camposInicioxTipo() {
         jtPrecioFinal.setEnabled(false);
         jbtBuscarXPrecio.setEnabled(false);
     }
@@ -1777,22 +1794,22 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
-    
-    private void borroFilasZona(){
+
+    private void borroFilasZona() {
         int fil = modeloZona.getRowCount() - 1;
         for (int i = fil; i >= 0; i--) {
             modeloZona.removeRow(i);
         }
     }
-    
-    private void borroFilaPrecio(){
+
+    private void borroFilaPrecio() {
         int f = modeloPrecio.getRowCount() - 1;
         for (int i = f; i >= 0; i--) {
             modeloPrecio.removeRow(i);
         }
     }
-    
-    private void borroFilaxTipo(){
+
+    private void borroFilaxTipo() {
         int laF = modeloxTipo.getRowCount() - 1;
         for (int i = laF; i >= 0; i--) {
             modeloxTipo.removeRow(i);
@@ -1803,7 +1820,7 @@ public class VistaPropiedades extends javax.swing.JInternalFrame {
         borroFilas();
         if (jcbListaPropietarios.getSelectedIndex() > 0) {
             jbtHabiltarCampos.setEnabled(true);
-            listaXIDProp = abmPropiedad.buscarxPropietario(jcbListaPropietarios.getSelectedIndex() + 1);
+            listaXIDProp = abmPropiedad.buscarxPropietarioZonaFiltrada(jcbListaPropietarios.getSelectedIndex() + 1);
             for (PropiedadInmueble inmueble : listaXIDProp) {
                 //System.out.println("Muesto algo "+inmueble.getVendedor().toString());
                 String valorActivo = "";

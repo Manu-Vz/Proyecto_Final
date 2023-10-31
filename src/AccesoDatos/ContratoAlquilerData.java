@@ -142,6 +142,45 @@ public class ContratoAlquilerData {
         return listado;
     }
     
+    public List<ContratoAlquiler> listarContratoxIDProp (int idProp){
+        
+        List<ContratoAlquiler> listado = new ArrayList<>();
+        String sql = "SELECT * FROM contratoAlquiler where idPropiedadInmueble = ?";
+        try {
+           PreparedStatement ps = con.prepareStatement(sql);
+           ps.setInt(1, idProp);
+           ResultSet rs = ps.executeQuery();
+           
+            while (rs.next()) {
+               inqui = abmInquilino.buscoInquilino(rs.getInt("idInquilino"));
+               propInmueble = abmPropiedad.buscarPropiedadPorId(rs.getInt("idPropiedadInmueble"));
+               vendedor = abmVendedor.buscoVendedor(rs.getInt("idVendedor"));
+               estContrato = abmEstadoContrato.BuscarEstadoContratoPorId(rs.getInt("idEstadoContrato"));
+               LocalDate ldf = LocalDate.parse(rs.getString(4));
+               LocalDate ldi = LocalDate.parse(rs.getString(5));
+               LocalDate ldr = LocalDate.parse(rs.getString(6));
+               
+               
+               //Empezamos a construir el objeto que va al listado.
+               conAlq = new ContratoAlquiler();
+               conAlq.setIdContratoAlquiler(rs.getInt(1));
+               conAlq.setInquilino(inqui);
+               conAlq.setPropiedadInmueble(propInmueble);
+               conAlq.setFechaFinal(ldf);
+               conAlq.setFechaInicio(ldi);
+               conAlq.setFechaRealizacion(ldr);
+               conAlq.setVendedor(vendedor);
+               conAlq.setEstado(estContrato);
+               listado.add(conAlq);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error "+e.getMessage());
+        }
+        return listado;
+    }
+    
+    
     public ContratoAlquiler buscarContratoAlquilerPorId (int id){
         
         String sql = "SELECT * FROM contratoAlquiler where idContratoAlquiler = ?";
@@ -200,7 +239,7 @@ public class ContratoAlquilerData {
     
     public void AnularContrato (int idPropiedad){
         
-        String sql = "UPDATE contratoalquiler SET idEstadoContrato = 4 WHERE idPropiedadInmueble = ?";
+        String sql = "UPDATE contratoAlquiler SET idEstadoContrato = 4 WHERE idPropiedadInmueble = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -216,7 +255,7 @@ public class ContratoAlquilerData {
     
     public boolean verificarSiLaPropiedadEstaOcupada(ContratoAlquiler contrato){
         boolean condicion = false;
-        String sql = "SELECT * FROM contratoalquiler WHERE ((idPropiedadInmueble = ?)"
+        String sql = "SELECT * FROM contratoAlquiler WHERE ((idPropiedadInmueble = ?)"
                     + " AND ((fechaInical > ?) OR (fechaFinal < ?)))";
         
         try {
