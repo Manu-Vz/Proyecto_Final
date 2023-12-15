@@ -338,7 +338,7 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
         Date fRealizado = jFechaRealizado.getDate();
         String finalRealizado = formatofecha.format(fRealizado);
         LocalDate finalR = LocalDate.parse(finalRealizado);
-        if (!inicialF.isAfter(finalF) || !inicialF.equals(finalF)) {
+        if (finalF.isAfter(inicialF)) {
             if (!finalF.isAfter(finalR)) {
                 JOptionPane.showMessageDialog(this, "La fehca de Realización no puede ser\n posterior a la de Finalización");
             } else {
@@ -347,9 +347,6 @@ public class ContratoAlquilerID extends javax.swing.JInternalFrame {
                 //laProp = abmPropiedadData.buscarPropiedadPorId(Integer.parseInt(jEtiquetaIdPropiedad.getText()));
                 for (ContratoAlquiler ctAlquiler : listaContratoAlquiler) {
                     if (inicialF.isAfter(ctAlquiler.getFechaInicio()) && inicialF.isBefore(ctAlquiler.getFechaFinal())) {
-                        valido = true;
-                        break;
-                    } else if(finalF.isBefore(ctAlquiler.getFechaFinal())){
                         valido = true;
                         break;
                     }
