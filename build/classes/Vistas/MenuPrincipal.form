@@ -81,11 +81,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Datos de Propiedades"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiDatosPropiedadesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiDatoZonas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Datos de Zonas"/>
+                <Property name="text" type="java.lang.String" value="Gestion Zonas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiDatoZonasActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

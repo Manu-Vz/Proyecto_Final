@@ -77,7 +77,9 @@
                       <Component id="jLabel2" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jcbBusquedaXZona" min="-2" pref="223" max="-2" attributes="0"/>
-                      <EmptySpace pref="720" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="ZonaDeBaja" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="553" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" pref="1117" max="32767" attributes="0"/>
               </Group>
@@ -89,6 +91,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jcbBusquedaXZona" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ZonaDeBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="109" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="246" max="-2" attributes="0"/>
@@ -136,6 +139,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Elija la zona preferida"/>
                 <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ZonaDeBaja">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Esta Zona esta dada De Baja"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -544,9 +555,10 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jcbZona" min="-2" pref="130" max="-2" attributes="0"/>
-                                      <Component id="jLabelZona" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jLabelZonaInactiva" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jcbZona" alignment="0" pref="130" max="32767" attributes="0"/>
+                                      <Component id="jLabelZona" alignment="0" pref="130" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -565,7 +577,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="152" max="32767" attributes="0"/>
+                          <EmptySpace pref="206" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -586,7 +598,9 @@
                               <Component id="jcbInspector" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcbZona" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabelZonaInactiva" min="-2" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtAccesibilidad" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jtCaracteristicas" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -815,6 +829,13 @@
                 <Component class="javax.swing.JLabel" name="jLAdvertenciaDireccion">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLAdvertenciaPrecio">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelZonaInactiva">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="0" red="99" type="rgb"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
